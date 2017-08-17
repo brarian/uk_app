@@ -18,5 +18,5 @@ Project to assist users in keeping up with Kentucky sports news and current and 
 - As a user I should be able to filter topics between football, basketball, recruiting, and pro sports. 
 
 ## Summary 
-
+An app about ....
 
