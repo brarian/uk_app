@@ -3,7 +3,7 @@
 ## Capstone 2 
 A University of Kentucky sports ticker. 
 
-## Overview of Capstone 2 
+## Overview
 Project to assist users in keeping up with Kentucky sports news and current and former atheletes. 
 
 ## User Stories 
