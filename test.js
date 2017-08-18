@@ -8,6 +8,13 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('/', () => {
+    before(function() {
+        return runServer();
+    });
+
+    after(function() {
+        return closeServer();
+    });
     it('should return a status of 200', () => {
         return chai.request(app)
             .get('/')
