@@ -19,7 +19,7 @@ const env = {
 };
 
 app.use(express.static(__dirname + '/public'));
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 3000);
 
 
 // app.get('/', function(req, res) {
@@ -190,15 +190,15 @@ function runServer() {
 
 function closeServer() {
     return new Promise((resolve, reject) => {
-            console.log('Closing server');
-            server.close(err => {
-                    if (err) {
-                        reject(err);
-                        return;
-                    }
-                    resolve();
-                )
-            });
+        console.log('Closing server');
+        server.close(err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve();
+
+        });
     });
 }
 
