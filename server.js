@@ -14,20 +14,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 dotenv.load();
 
+const env = {
+    AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+};
+
 app.use(express.static(__dirname + '/public'));
 app.listen(process.env.PORT || 8080);
 
 
-app.get('/', function(req, res) {
-    res.render('/public');
-});
+// app.get('/', function(req, res) {
+//     res.render('/public');
+// });
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
         domain: process.env.AUTH0_DOMAIN,
         clientID: process.env.AUTH0_CLIENT_ID,
         clientSecret: process.env.AUTH0_CLIENT_SECRET,
-        callbackURL: process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
+        callbackURL: process.env.AUTH0_CALLBACK_URL || 'http://localhost:8080/callback'
     },
     function(accessToken, refreshToken, extraParams, profile, done) {
         // accessToken is the token to call Auth0 API (not needed in the most cases)
@@ -49,11 +53,11 @@ passport.deserializeUser(function(user, done) {
 });
 
 // view engine setup
-var engines = require('consolidate');
+// var engines = require('consolidate');
 
-app.set('views', __dirname + '/views');
-app.engine('html', engines.mustache);
-app.set('view engine', 'html');
+// app.set('views', __dirname + '/views');
+// app.engine('html', engines.mustache);
+// app.set('view engine', 'html');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -93,8 +97,48 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/', routes);
-app.use('/user', user);
+// app.use('/', routes);
+// app.use('/user', user);
+// need to move when making my routes 
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+app.get('/', ensureLoggedIn, function(req, res, next) {
+    console.log(req.user);
+    res.send(`hello ${req.user.displayName}`);
+});
+
+app.get('/login', passport.authenticate('auth0', {
+        responseType: 'code',
+        audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
+        scope: 'openid profile'
+    }),
+    function(req, res) {
+        res.redirect("/");
+    });
+
+app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
+app.get('/callback',
+    passport.authenticate('auth0', {
+        failureRedirect: '/failure'
+    }),
+    function(req, res) {
+        res.redirect(req.session.returnTo || '/user');
+    }
+);
+
+app.get('/failure', function(req, res) {
+    var error = req.flash("error");
+    var error_description = req.flash("error_description");
+    req.logout();
+    res.render('failure', {
+        error: error[0],
+        error_description: error_description[0],
+    });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
