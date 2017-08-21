@@ -1,0 +1,30 @@
+$(document).ready(function() {
+    console.log('action');
+    var service_url = 'https://newsapi.org/v1/articles?';
+    var params = {
+        status: "ok",
+        source: "techcrunch",
+        sortBy: "latest",
+        key: '3abe22b4968b4610833e2fdff4e3e47b'
+    }
+    $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key), function(response) {
+        for (var i = 0; i < response.articles.length; i++) {
+            const author = (response.articles[i].author);
+            const title = (response.articles[i].title);
+            const url = (response.articles[i].url);
+            const desc = (response.articles[i].description);
+            var pic = ("<img src=" + response.articles[i].urlToImage + "></img>");
+            $('.section').append(`<div class="card">
+            <div class="text">
+                <div class="writer"> ${author} </div>
+                <div class=" name">${title}</div>
+                <div class="desc">${desc}</div>
+            </div>
+            <div class="image">${pic}</div>
+        </div>
+        `);
+        }
+
+    });
+
+});

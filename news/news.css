@@ -1,0 +1,25 @@
+.image {
+    width: 410px;
+}
+
+.image img {
+    width: 400px;
+    height: 300px;
+}
+
+.text {
+    margin-left: 420px;
+}
+
+body {
+    font-size: 10px;
+}
+
+.card {
+    display: -webkit-flex;
+    display: flex;
+    border: 3px solid red;
+    border-radius: 5px;
+    margin-bottom: 7px;
+    height: 325px;
+}
