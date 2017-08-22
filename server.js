@@ -10,7 +10,7 @@ const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const flash = require('connect-flash');
 const app = express();
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'views')));
 
 dotenv.load();
 
@@ -18,13 +18,13 @@ const env = {
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 };
 
-app.use(express.static(__dirname + '/public'));
-app.listen(process.env.PORT || 3000);
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/views'));
 
 
-// app.get('/', function(req, res) {
-//     res.render('/public');
-// });
+app.get('/', function(req, res) {
+    res.render('/public/hello');
+});
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
@@ -103,7 +103,7 @@ app.use(function(req, res, next) {
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 app.get('/', ensureLoggedIn, function(req, res, next) {
     console.log(req.user);
-    res.send(`hello ${req.user.displayName}`);
+    res.render('/public/hello');
 });
 
 app.get('/login', passport.authenticate('auth0', {
@@ -156,8 +156,10 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err
+            error: {}
         });
+        // res.render('/public/hello');
+
     });
 }
 
@@ -166,13 +168,14 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+
+// app.use(function(err, req, res, next) {
+//     res.status(err.status || 500);
+//     res.render('error', {
+//         message: err.message,
+//         error: {}
+//     });
+// });
 
 let server;
 
