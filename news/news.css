@@ -44,7 +44,7 @@ body {
     width: 1000px;
     display: inline-block;
     margin-left: 5px;
-    padding-top: 50px;
+    padding-top: 45px;
     padding-left: 30px;
 }
 
@@ -62,7 +62,7 @@ a:hover {
 }
 
 .section {
-    margin-left: 16%;
+    margin-left: 8%;
 }
 
 ul {
@@ -97,3 +97,46 @@ li a {
     position: absolute;
     margin-bottom: 15px;
 }
+
+.add {
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    right: 14%;
+    position: absolute;
+    border-radius: 25px;
+    width: 125px;
+    background-color: #0073b9;
+}
+
+.left {
+    float: right
+}
+
+
+/* .card {
+    display: -webkit-flex;
+    display: flex;
+    border: 3px solid red;
+    border-radius: 5px;
+    margin-bottom: 7px;
+    height: 325px;
+    width: 75%
+} */
+
+
+/* .img {
+    width: 60px;
+    float: right;
+} */
+
+
+/* 
+.text {
+    margin-left: 430px;
+    color: #404040;
+} */
