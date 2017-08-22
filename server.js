@@ -23,7 +23,7 @@ app.use(express.static(__dirname + '/views'));
 
 
 app.get('/', function(req, res) {
-    res.render('/public/hello');
+    res.send("hello");
 });
 
 // This will configure Passport to use Auth0
