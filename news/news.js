@@ -22,7 +22,6 @@ $(document).ready(function() {
                 <div class="image"><a target="_blank" href="${url}">${pic}</a></div>
                 <div class="desc">${desc}</div>
             </div>
-            <button class="add"> ADD </button> 
         </div>
         `);
         }

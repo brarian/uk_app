@@ -89,6 +89,9 @@ li a {
     color: white;
 }
 
+
+/* need to add a media query for nav bar  */
+
 .nav {
     top: 0;
     left: 0;
