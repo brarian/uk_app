@@ -1,3 +1,7 @@
+var express = require('express');
+const app = express();
+
+
 app.get('/', ensureLoggedIn, function(req, res, next) {
     console.log(req.user);
     res.send(`hello ${req.user.displayName}`);
@@ -43,3 +47,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+module.exports = app
