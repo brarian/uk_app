@@ -1,3 +1,7 @@
+[![Heroku](https://heroku-badge.herokuapp.com/?app=boiling-reef-90813)]
+
+[![Build Status](https://travis-ci.org/brarian/uk_app.svg?branch=master)](https://travis-ci.org/brarian/uk_app)
+
 # UK Sports App
 
 ## Capstone 2 
