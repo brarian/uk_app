@@ -7,66 +7,69 @@ $(document).ready(function() {
         key: '3abe22b4968b4610833e2fdff4e3e47b'
     }
     $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key), function(response) {
-        for (var i = 0; i < response.articles.length; i++) {
-            const author = (response.articles[i].author);
-            const title = (response.articles[i].title);
-            const url = (response.articles[i].url);
-            const desc = (response.articles[i].description);
-            const date = (response.articles[i].publishedAt);
-            const pic = ("<img src=" + response.articles[i].urlToImage + "></img>");
-            renderArticles(response, i);
-        };
 
-        function generateArticles(response, i) {
-            // console.log("I " + i);
-            // console.log("res " + response);
-            return `${response.articles[i].author}, ${response.articles[i].title}`;
-            // console.log(`${author}`);
-        };
-
-        function renderArticles(response, i) {
-            console.log(generateArticles(response, i));
-            const articleGeneration = generateArticles(response, i);
-            //insert html into DOM 
-            $('.main').html(articleGeneration);
-        };
-
+        STORE.articles = response.articles;
+        render();
     });
-
-
-
-
-
-    // var service_url = 'https://newsapi.org/v1/articles?';
-    // var params = {
-    //     status: "ok",
-    //     source: "ars-technica",
-    //     sortBy: "top",
-    //     key: '3abe22b4968b4610833e2fdff4e3e47b'
-    // }
-    // $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key), function(response) {
-    //     for (var i = 0; i < response.articles.length; i++) {
-    //         const author = (response.articles[i].author);
-    //         const title = (response.articles[i].title);
-    //         const url = (response.articles[i].url);
-    //         const desc = (response.articles[i].description);
-    //         var pic = ("<img src=" + response.articles[i].urlToImage + "></img>");
-    //         $('.section').append(` < div class = "card" >
-    //             <div class="text">
-    //                 <div class=" name"><a target="_blank" href="${url}">${title}</a></div>
-    //                 <div class="writer"> ${author}</div>
-    //                 <div class="image"><a target="_blank" href="${url}">${pic}</a></div>
-    //                 <div class="desc">${desc}</div>
-    //             </div>
-    //             <button class="add"> ADD </button> 
-
-    //         </div>
-    //         `);
-    //     }
-
-    // });
-
 });
+
+const STORE = {};
+
+function generateArticles(article) {
+    return `<div class="card"> <div class="text">
+                        <div class=" name"><a target="_blank" href="${article.url}">${article.title}</a></div>
+                        <div class="writer"> ${article.author}</div>
+                        <div class="image"><a target="_blank" href="${article.url}"><img src="${article.urlToImage}"></img></a></div>
+                        <div class="desc">${article.description}</div>
+                        <button class="add">
+                        ADD
+                    </button>
+                    </div></div>`;
+};
+
+function renderArticles(articles) {
+    const insideHTML = articles.map(generateArticles).join();
+    $('.inner').html(insideHTML);
+
+};
+
+function render() {
+    renderArticles(STORE.articles);
+
+};
+
+
+
+// var service_url = 'https://newsapi.org/v1/articles?';
+// var params = {
+//     status: "ok",
+//     source: "ars-technica",
+//     sortBy: "top",
+//     key: '3abe22b4968b4610833e2fdff4e3e47b'
+// }
+// $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key), function(response) {
+//     for (var i = 0; i < response.articles.length; i++) {
+//         const author = (response.articles[i].author);
+//         const title = (response.articles[i].title);
+//         const url = (response.articles[i].url);
+//         const desc = (response.articles[i].description);
+//         var pic = ("<img src=" + response.articles[i].urlToImage + "></img>");
+//         $('.section').append(` < div class = "card" >
+//             <div class="text">
+//                 <div class=" name"><a target="_blank" href="${url}">${title}</a></div>
+//                 <div class="writer"> ${author}</div>
+//                 <div class="image"><a target="_blank" href="${url}">${pic}</a></div>
+//                 <div class="desc">${desc}</div>
+//             </div>
+//             <button class="add"> ADD </button> 
+
+//         </div>
+//         `);
+//     }
+
+// });
+
+
 
 //add Engadget technology / en
 //Hacker News technology / en
