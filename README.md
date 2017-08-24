@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/brarian/uk_app.svg?branch=master)](https://travis-ci.org/brarian/uk_app)
 
 
-[![Heroku](http://heroku-badge.herokuapp.com/?app=stormy-journey-57689&root=/hello.html)]
 
 
 # UK Sports App
