@@ -11,12 +11,6 @@ $(document).ready(function() {
         STORE.articles = response.articles;
         console.log(STORE.articles);
         render();
-
-        $('.text').click(function() {
-            console.log($('.add').index(this));
-            $(this).clone().appendTo('.personal-feed');
-        });
-
     });
 });
 
@@ -35,20 +29,29 @@ function generateArticles(article) {
                     </button>
                     </div></div>`;
 
-
 };
 
 function renderArticles(articles) {
     const insideHTML = articles.map(generateArticles).join();
     $('.inner').html(insideHTML);
 
+    $('.text').click(function() {
+        console.log($('.add').index(this));
+        $(this).clone().appendTo('.personal-feed');
+    });
 };
-
 
 function render() {
     renderArticles(STORE.articles);
 
+    $('.personal-feed').click('.add', function() {
+        event.preventDefault();
+        // $('.add').index(this);
+        $(event.target.parentElement).empty();
+    });
 };
+
+
 
 
 // var service_url = 'https://newsapi.org/v1/articles?';
