@@ -13,10 +13,9 @@ $(document).ready(function() {
         render();
 
         $('.text').click(function() {
-            console.log($('.card').index(this));
+            console.log($('.add').index(this));
             $(this).clone().appendTo('.personal-feed');
         });
-
 
     });
 });
