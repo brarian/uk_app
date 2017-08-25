@@ -9,7 +9,15 @@ $(document).ready(function() {
     $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key), function(response) {
 
         STORE.articles = response.articles;
+        console.log(STORE.articles);
         render();
+
+        $('.text').click(function() {
+            console.log($('.card').index(this));
+            $(this).clone().appendTo('.personal-feed');
+        });
+
+
     });
 });
 
@@ -19,12 +27,16 @@ function generateArticles(article) {
     return `<div class="card"> <div class="text">
                         <div class=" name"><a target="_blank" href="${article.url}">${article.title}</a></div>
                         <div class="writer"> ${article.author}</div>
-                        <div class="image"><a target="_blank" href="${article.url}"><img src="${article.urlToImage}"></img></a></div>
+                        <div class="image">
+                        <a target="_blank" href="${article.url}">
+                        <img src="${article.urlToImage}"></img></a></div>
                         <div class="desc">${article.description}</div>
                         <button class="add">
                         ADD
                     </button>
                     </div></div>`;
+
+
 };
 
 function renderArticles(articles) {
@@ -33,11 +45,11 @@ function renderArticles(articles) {
 
 };
 
+
 function render() {
     renderArticles(STORE.articles);
 
 };
-
 
 
 // var service_url = 'https://newsapi.org/v1/articles?';
