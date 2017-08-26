@@ -11,13 +11,16 @@ $(document).ready(function() {
         STORE.articles = response.articles;
         console.log(STORE.articles);
         render();
+        addArticleToSaved();
+        handleNewSaved();
+
     });
 });
 
 const STORE = {};
 
-function generateArticles(article) {
-    return `<div class="card"> <div class="text">
+function generateArticles(article, articleIndex) {
+    return `<div class="card"> <div class="text" data-item-index="${articleIndex}">
                         <div class=" name"><a target="_blank" href="${article.url}">${article.title}</a></div>
                         <div class="writer"> ${article.author}</div>
                         <div class="image">
@@ -34,25 +37,41 @@ function generateArticles(article) {
 function renderArticles(articles) {
     const insideHTML = articles.map(generateArticles).join();
     $('.inner').html(insideHTML);
+    //  CHANGE THIS
+    // $('.text').click(function() {
+    //     console.log($('.add').index(this));
+    //     $(this).clone().appendTo('.personal-feed');
+    // });
 
-    $('.text').click(function() {
-        console.log($('.add').index(this));
-        $(this).clone().appendTo('.personal-feed');
-    });
+
 };
 
 function render() {
     renderArticles(STORE.articles);
 
-    $('.personal-feed').click('.add', function() {
-        event.preventDefault();
-        // $('.add').index(this);
-        $(event.target.parentElement).empty();
-    });
+    //CHANGE THIS
+    // $('.personal-feed').click('.add', function() {
+    //     event.preventDefault();
+    //     // $('.add').index(this);
+    //     $(event.target.parentElement).empty();
+    // });
 };
 
+function addArticleToSaved(article) {
+    console.log(`Adding "${article.url}" to saved`);
+    const newArticle = STORE.push({ article });
+};
 
-
+function handleNewSaved() {
+    $('.add').submit(function(event) {
+        event.preventDefault();
+        console.log('`handleNewSaved` ran');
+        const newItemName = newArticle;
+        $('.js-shopping-list-entry').val('');
+        addArticleToSaved(newItemName);
+        renderShoppingList();
+    });
+};
 
 // var service_url = 'https://newsapi.org/v1/articles?';
 // var params = {
