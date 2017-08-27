@@ -12,15 +12,14 @@ $(document).ready(function() {
         console.log(STORE.articles);
         render();
         addArticleToSaved();
-        handleNewSaved();
-
+        deleteArticleFromSaved();
     });
 });
 
 const STORE = {};
 
-function generateArticles(article, articleIndex) {
-    return `<div class="card"> <div class="text" data-item-index="${articleIndex}">
+function generateArticles(article, itemIndex) {
+    return `<div class="card"> <div class="text" data-item-index="${itemIndex}">
                         <div class=" name"><a target="_blank" href="${article.url}">${article.title}</a></div>
                         <div class="writer"> ${article.author}</div>
                         <div class="image">
@@ -37,41 +36,60 @@ function generateArticles(article, articleIndex) {
 function renderArticles(articles) {
     const insideHTML = articles.map(generateArticles).join();
     $('.inner').html(insideHTML);
-    //  CHANGE THIS
-    // $('.text').click(function() {
-    //     console.log($('.add').index(this));
-    //     $(this).clone().appendTo('.personal-feed');
-    // });
-
 
 };
 
 function render() {
     renderArticles(STORE.articles);
 
-    //CHANGE THIS
-    // $('.personal-feed').click('.add', function() {
-    //     event.preventDefault();
-    //     // $('.add').index(this);
-    //     $(event.target.parentElement).empty();
-    // });
 };
 
-function addArticleToSaved(article) {
-    console.log(`Adding "${article.url}" to saved`);
-    const newArticle = STORE.push({ article });
-};
-
-function handleNewSaved() {
-    $('.add').submit(function(event) {
-        event.preventDefault();
-        console.log('`handleNewSaved` ran');
-        const newItemName = newArticle;
-        $('.js-shopping-list-entry').val('');
-        addArticleToSaved(newItemName);
-        renderShoppingList();
+function addArticleToSaved() {
+    $('.add').click(function() {
+        $(this).html('faved');
+        console.log("`add` clicked");
+        const newSavedArticle = $(this).append().parent().clone();
+        $('.personal-feed').html(newSavedArticle);
     });
 };
+
+function deleteOneArticle(newArticleSaved) {
+    console.log(`Delete item`);
+    STORE.splice(articles, 1);
+}
+
+function deleteArticleFromSaved() {
+    $('.js-shopping-list').on("click", '.add', event => {
+        const deleteArticle = newArticleSaved(event.currentTarget);
+        deleteOneArticle(deleteArticle);
+    });
+};
+
+function commentUnderArticle() {
+    console.log('`addArticlesSaved` ran');
+}
+
+//  CHANGE THIS
+// $('.text').click(function() {
+//     console.log($('.add').index(this));
+//     $(this).clone().appendTo('.personal-feed');
+// });
+//CHANGE THIS
+// $('.personal-feed').click('.add', function() {
+//     event.preventDefault();
+//     // $('.add').index(this);
+//     $(event.target.parentElement).empty();
+// });
+// function handleNewSaved() {
+//     $('.add').submit(function(event) {
+//         event.preventDefault();
+//         console.log('`handleNewSaved` ran');
+//         const newItemName = newArticle;
+//         $('.js-shopping-list-entry').val('');
+//         addArticleToSaved(newItemName);
+//         renderShoppingList();
+//     });
+// };
 
 // var service_url = 'https://newsapi.org/v1/articles?';
 // var params = {
