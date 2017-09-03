@@ -14,7 +14,7 @@ const app = express()
 dotenv.load()
 
 const env = {
-  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+    AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 }
 
 app.listen(process.env.PORT || 3000)
@@ -22,9 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'public'))
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'ejs')
-// ejs npm install ejs --save
-// jade
-// pug
+    // ejs npm install ejs --save
+    // jade
+    // pug
 
 
 
@@ -48,7 +48,7 @@ passport.use(strategy);
 
 // you can use this section to keep a smaller payload
 passport.serializeUser(function(user, done) {
-  done(null, user)
+    done(null, user)
 });
 
 passport.deserializeUser(function(user, done) {
@@ -115,8 +115,8 @@ app.get('/newsfeed', (req, res) => {
 });
 
 //route to the user's personal feed page
-app.get('/favorites', () => {
-    res.render('./personal-feed');
+app.get('/favorites', (req, res) => {
+    res.render('./personal-feed.html');
 });
 
 app.get('/login', passport.authenticate('auth0', {
@@ -154,38 +154,38 @@ app.get('/failure', function(req, res) {
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+// app.use(function(req, res, next) {
+//     const err = new Error('Not Found');
+//     err.status = 404;
+//     next(err);
+// });
 
-// error handlers
+// // error handlers
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
+// // development error handler
+// // will print stacktrace
+// if (app.get('env') === 'development') {
+//     app.use(function(err, req, res, next) {
+//         res.status(err.status || 500);
+//         res.render('error', {
+//             message: err.message,
+//             error: err
+//         });
+//     });
+// }
 
 
 
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+// app.use(function(err, req, res, next) {
+//     res.status(err.status || 500);
+//     res.render('error', {
+//         message: err.message,
+//         error: {}
+//     });
+// });
 
 let server;
 
