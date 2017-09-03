@@ -8,18 +8,23 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
-const flash = require('connect-flash');
-const app = express();
-app.use(express.static(path.join(__dirname, 'public')));
+const flash = require('connect-flash')
+const app = express()
 
-dotenv.load();
+dotenv.load()
 
 const env = {
-    AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
-};
+  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+}
 
-app.use(express.static(__dirname + 'views/public'));
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000)
+app.use(express.static(path.join(__dirname, 'public')))
+app.set('views', path.join(__dirname, 'public'))
+app.engine('html', require('ejs').renderFile)
+app.set('view engine', 'ejs')
+// ejs npm install ejs --save
+// jade
+// pug
 
 
 
@@ -43,7 +48,7 @@ passport.use(strategy);
 
 // you can use this section to keep a smaller payload
 passport.serializeUser(function(user, done) {
-    done(null, user);
+  done(null, user)
 });
 
 passport.deserializeUser(function(user, done) {
@@ -97,19 +102,19 @@ app.use(function(req, res, next) {
 
 // app.use('/', routes);
 // app.use('/user', user);
-// need to move when making my routes 
+// need to move when making my routes
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 app.get('/', ensureLoggedIn, function(req, res, next) {
     console.log(req.user);
-    res.redirect('./newsfeed.html');
+    res.redirect('./newsfeed');
 });
 
 //route to newsfeed
 app.get('/newsfeed', (req, res) => {
-    res.render('./newsfeed.html');
+    res.render('newsfeed.html')
 });
 
-//route to the user's personal feed page 
+//route to the user's personal feed page
 app.get('/favorites', () => {
     res.render('./personal-feed');
 });
