@@ -14,7 +14,7 @@ const app = express()
 dotenv.load()
 
 const env = {
-  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+    AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 }
 
 app.listen(process.env.PORT || 3000)
@@ -22,12 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'public'))
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'ejs')
-// ejs npm install ejs --save
-// jade
-// pug
-
-
-
+    // ejs npm install ejs --save
+    // jade
+    // pug
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
@@ -48,7 +45,7 @@ passport.use(strategy);
 
 // you can use this section to keep a smaller payload
 passport.serializeUser(function(user, done) {
-  done(null, user)
+    done(null, user)
 });
 
 passport.deserializeUser(function(user, done) {
