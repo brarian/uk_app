@@ -13,36 +13,63 @@ $(document).ready(function() {
         }
         STORE.articles = response.articles;
         render();
+        addArticleToSaved();
     });
-});
 
-const STORE = {
-    articles: [],
-}
 
-function generateArticles(articles, articleIndex, template) {
-    return `<div class="card" data-item-index=${articleIndex}> 
+    const STORE = {
+        articles: [],
+    }
+
+    function generateArticles(articles, articleIndex, template) {
+        return `<div class="card" data-item-index="${articleIndex}"> 
     <div class=" name"><a target="_blank" href="${articles.url}">${articles.title}</a></div>
     <div class="writer"> ${articles.author}</div>
     <div class="image">
     <a target="_blank" href="${articles.url}">
     <img src="${articles.urlToImage}"></img></a></div>
     <div class="desc">${articles.description}</div>
-    <button class="add article-toggle"> ADD </button>
+    <button class="add"> ADD </button>
+    <button class="delete"> delete </button>
 </div></div>`;
 
-}
 
-console.log("STORE.articles  ", STORE);
+    }
 
-function renderArticles(articles) {
-    const items = articles.map(generateArticles).join();
-    $('.section').html(items);
-};
+    function generateArticlesString(articles) {
+        const items = STORE.articles.map((article, index) => generateArticles(article, index));
+        return items.join();
+    };
 
-function render() {
-    renderArticles(STORE.articles);
-};
+    function renderArticles() {
+        console.log('rendering articles');
+        const articlesList = generateArticlesString(STORE);
+        $('.section').html(articlesList);
+    }
+
+    function render() {
+        renderArticles(STORE.articles);
+    };
+
+    function addArticleToSaved() {
+        $('.add').one('click', function() {
+            console.log('adding article to saved')
+            $(this).parent().clone().appendTo('.saved');
+            deleteFromSaved()
+        });
+    };
+
+    function deleteFromSaved() {
+        $('.delete').on('click', function() {
+            console.log('deleteing article');
+            event.preventDefault();
+            console.log('delteing article');
+            $(this).parent().remove();
+        });
+    };
+
+});
+
 
 //add Engadget technology / en
 //Hacker News technology / en
