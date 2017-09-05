@@ -15,14 +15,14 @@ $(document).ready(function() {
         render();
         addArticleToSaved();
     });
+});
 
+const STORE = {
+    articles: [],
+}
 
-    const STORE = {
-        articles: [],
-    }
-
-    function generateArticles(articles, articleIndex, template) {
-        return `<div class="card" data-item-index="${articleIndex}"> 
+function generateArticles(articles, articleIndex, template) {
+    return `<div class="card" data-item-index="${articleIndex}"> 
     <div class=" name"><a target="_blank" href="${articles.url}">${articles.title}</a></div>
     <div class="writer"> ${articles.author}</div>
     <div class="image">
@@ -34,41 +34,38 @@ $(document).ready(function() {
 </div></div>`;
 
 
-    }
+}
 
-    function generateArticlesString(articles) {
-        const items = STORE.articles.map((article, index) => generateArticles(article, index));
-        return items.join();
-    };
+function generateArticlesString(articles) {
+    const items = STORE.articles.map((article, index) => generateArticles(article, index));
+    return items.join();
+};
 
-    function renderArticles() {
-        console.log('rendering articles');
-        const articlesList = generateArticlesString(STORE);
-        $('.section').html(articlesList);
-    }
+function renderArticles() {
+    console.log('rendering articles');
+    const articlesList = generateArticlesString(STORE);
+    $('.section').html(articlesList);
+}
 
-    function render() {
-        renderArticles(STORE.articles);
-    };
+function render() {
+    renderArticles(STORE.articles);
+};
 
-    function addArticleToSaved() {
-        $('.add').one('click', function() {
-            console.log('adding article to saved')
-            $(this).parent().clone().appendTo('.saved');
-            deleteFromSaved()
-        });
-    };
+function addArticleToSaved() {
+    $('.add').one('click', function() {
+        $(this).append().parent().clone().appendTo('.saved');
+        deleteFromSaved()
+    });
+};
 
-    function deleteFromSaved() {
-        $('.delete').on('click', function() {
-            console.log('deleteing article');
-            event.preventDefault();
-            console.log('delteing article');
-            $(this).parent().remove();
-        });
-    };
+function deleteFromSaved() {
+    $('.delete').on('click', function() {
+        event.preventDefault();
+        console.log('delteing article');
+        $(this).parent().remove();
+    });
+};
 
-});
 
 
 //add Engadget technology / en

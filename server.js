@@ -113,8 +113,13 @@ app.get('/newsfeed', (req, res) => {
 
 //route to the user's personal feed page
 app.get('/favorites', (req, res) => {
-    res.render('personal-feed.html');
+    res.render('favorites.html');
 });
+
+//post to favorites on click add 
+
+
+//delete from favorites on post 
 
 app.get('/login', passport.authenticate('auth0', {
         responseType: 'code',
