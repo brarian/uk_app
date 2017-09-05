@@ -123,7 +123,10 @@ app.get('/favorites', (req, res) => {
 });
 
 //post to favorites on click add 
+app.post('/favorites', (req, res, next) => {
+    const article = req.body.article;
 
+})
 
 //delete from favorites on post 
 

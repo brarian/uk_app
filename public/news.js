@@ -53,7 +53,19 @@ function render() {
 
 function addArticleToSaved() {
     $('.add').one('click', function() {
-        $(this).append().parent().clone().appendTo('.saved');
+        // $(this).append().parent().clone().appendTo('.saved');
+        const article = $(this).parent();
+        $.ajax({
+            method: 'POST',
+            url: "/favorites",
+            data: { "article": article },
+            success: function(result) {
+                // incorrect
+                if (database = +1) {
+                    location.reload();
+                }
+            }
+        });
         deleteFromSaved()
     });
 };
