@@ -17,6 +17,12 @@ const env = {
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 }
 
+//connect database 
+mongoose.connect(process.env.DATABASE);
+mongoose.Promise = global.Promise;
+require('./models/Article');
+
+
 app.listen(process.env.PORT || 3000)
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'public'))
@@ -217,5 +223,7 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
+
+
 
 module.exports = { app, runServer, closeServer };
