@@ -17,6 +17,12 @@ const env = {
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 }
 
+//connect database 
+mongoose.connect(process.env.DATABASE);
+mongoose.Promise = global.Promise;
+require('./models/Article');
+
+
 app.listen(process.env.PORT || 3000)
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'public'))
@@ -25,9 +31,12 @@ app.set('view engine', 'ejs')
     // ejs npm install ejs --save
     // jade
     // pug
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> master
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
@@ -116,8 +125,20 @@ app.get('/newsfeed', (req, res) => {
 
 //route to the user's personal feed page
 app.get('/favorites', (req, res) => {
+<<<<<<< HEAD
     res.render('./personal-feed.html');
+=======
+    res.render('favorites.html');
+>>>>>>> master
 });
+
+//post to favorites on click add 
+app.post('/favorites', (req, res, next) => {
+    const article = req.body.article;
+
+})
+
+//delete from favorites on post 
 
 app.get('/login', passport.authenticate('auth0', {
         responseType: 'code',
@@ -162,8 +183,13 @@ app.get('/failure', function(req, res) {
 
 // // error handlers
 
+<<<<<<< HEAD
 // // development error handler
 // // will print stacktrace
+=======
+// development error handler
+// will print stacktrace
+>>>>>>> master
 // if (app.get('env') === 'development') {
 //     app.use(function(err, req, res, next) {
 //         res.status(err.status || 500);
@@ -174,11 +200,16 @@ app.get('/failure', function(req, res) {
 //     });
 // }
 
+<<<<<<< HEAD
 
 
 
 // production error handler
 // no stacktraces leaked to user
+=======
+// // production error handler
+// // no stacktraces leaked to user
+>>>>>>> master
 // app.use(function(err, req, res, next) {
 //     res.status(err.status || 500);
 //     res.render('error', {
@@ -218,5 +249,7 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
+
+
 
 module.exports = { app, runServer, closeServer };
