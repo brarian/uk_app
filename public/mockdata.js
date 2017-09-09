@@ -1,4 +1,4 @@
-const MOCK_NEWSFEED = {
+const mockNewsfeed = {
     "articles": [{
             author: "Sarah Buhr",
             description: "Twitter is making some minor changes to its terms of service (ToS) for users outside of the U.S. this October and a lot of people are rather upset about..",
@@ -82,7 +82,7 @@ const MOCK_NEWSFEED = {
     ]
 };
 
-const MOCK_FAVORITES = {
+const mockFavorites = {
     "articles": [{
             author: "Sarah Buhr",
             description: "Twitter is making some minor changes to its terms of service (ToS) for users outside of the U.S. this October and a lot of people are rather upset about..",
@@ -114,4 +114,17 @@ const MOCK_FAVORITES = {
             deleted: true
         }
     ]
+};
+
+
+function getArticles() {
+    var service_url = 'https://newsapi.org/v1/articles?';
+    var params = {
+        status: "ok",
+        source: "techcrunch",
+        sortBy: "latest",
+        key: '3abe22b4968b4610833e2fdff4e3e47b'
+    }
+    const articlePromise = $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key));
+    return Promise.resolve(articlePromise);
 };

@@ -33,13 +33,5 @@
         "path-parse": "^1.0.5",
         "path-to-regexp": "^1.7.0",
         "serve-favicon": "^2.4.3"
-<<<<<<< HEAD
-    },
-    "dependencies": {
-        "body-parser": "^1.17.2",
-        "jade": "^1.11.0",
-        "mustache": "^2.3.0"
-=======
->>>>>>> master
     }
 }
