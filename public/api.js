@@ -116,6 +116,7 @@ const mockFavorites = {
     ]
 };
 
+//display mock data for newsfeed 
 function getMockData(callbackFn) {
     setTimeout(function() {
         callbackFn(mockNewsfeed)
@@ -142,7 +143,7 @@ function getandDisplayData() {
 }
 
 
-/////
+//displaying favorites Mock Data 
 
 function getMockFavoritesData(callbackFn) {
     setTimeout(function() {
@@ -159,9 +160,11 @@ function displayFavoritesMockArticles(data) {
     <a target="_blank" href="${data.articles[index].url}">
     <img src="${data.articles[index].urlToImage}"></img></a></div>
     <div class="desc">${data.articles[index].description}</div>
-    <button class="add"> ADD </button>
-    <button class="delete"> delete </button>
-</div></div>`);
+    <button class="delete"> DELETE </button>
+    <ul id="new-Note"></ul>
+    <form id="form-for-notes"> <label for="label-for-notes"> Add Notes </label>
+    <input type="text-area" class="text-area" placeholder="New Note">
+    <button class="submitNewNote"> Add Note</button> </form>`);
     }
 }
 
@@ -172,3 +175,15 @@ function getandDisplayFavoritesData() {
 getandDisplayData();
 
 getandDisplayFavoritesData();
+
+addNote();
+
+function addNote() {
+    $('.form-for-note').submit(function(e) {
+        e.preventDefault();
+        const note = $('.text-area').val();
+        console.log(note);
+        $('#new-Note').append('<li>' + note + '</li>');
+        $('.text-area').val("");
+    });
+}

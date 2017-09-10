@@ -65,7 +65,7 @@ a:hover {
     margin-left: 8%;
 }
 
-ul {
+.bar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -101,7 +101,7 @@ li a {
     margin-bottom: 15px;
 }
 
-.add {
+.delete {
     border: none;
     color: black;
     padding: 15px 32px;
@@ -114,9 +114,14 @@ li a {
     left: 830px;
     border-radius: 25px;
     width: 125px;
-    background-color: #0073b9;
+    background-color: red;
+    font-weight: bold;
 }
 
 .left {
     float: right
+}
+
+.textarea-box {
+    color: blue;
 }
