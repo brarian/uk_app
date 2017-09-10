@@ -72,22 +72,24 @@ a:hover {
     overflow: hidden;
     background-color: #333;
     height: 60px;
-    color: white;
+    color: black;
 }
 
-li {
+
+/* li {
     float: left;
-    color: white;
-}
+    color: black;
+} */
 
-li a {
+
+/* li a {
     display: block;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 16pt;
-    color: white;
-}
+    color: black;
+} */
 
 
 /* need to add a media query for nav bar  */
@@ -96,7 +98,7 @@ li a {
     top: 0;
     left: 0;
     width: 100%;
-    font: white;
+    font: black;
     position: absolute;
     margin-bottom: 15px;
 }
