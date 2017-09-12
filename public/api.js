@@ -10,7 +10,7 @@ function getArticles() {
     return Promise.resolve(articlePromise);
 };
 
-//display mock data for newsfeed 
+//display data for newsfeed 
 function getData(callbackFn) {
     return Promise.resolve(mockNewsfeed);
 }
@@ -22,15 +22,15 @@ function getandDisplayData() {
 getandDisplayData();
 
 
-// function getFavoritesData(callbackFn) {
-//     return Promise.resolve(mockFavorites);
-// }
+function getFavoritesData(callbackFn) {
+    return Promise.resolve(mockFavorites);
+}
 
-// function getandDisplayFavoritesData() {
-//     displayFavoriteArticles(getFavoritesData);
-// }
+function getandDisplayFavoritesData() {
+    displayFavoriteArticles(getFavoritesData);
+}
 
-// getandDisplayFavoritesData();
+getandDisplayFavoritesData();
 
 function addnote() {
     $('.newnote').on('click', function() {

@@ -6,8 +6,6 @@ const mockNewsfeed = {
             title: "Twitter’s terms of service are making people mad — but they’re not new",
             url: "https://techcrunch.com/2017/09/02/twitters-terms-of-service-are-suddenly-making-people-freak-out-but-theyre-not-new/",
             urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/05/gettyimages-471561053.jpg",
-            favorite: false,
-            deleted: false
         },
         {
             author: "Megan Rose Dickey",
@@ -16,8 +14,6 @@ const mockNewsfeed = {
             title: "GrubHub trial could have major implications for the gig economy",
             url: "https://techcrunch.com/2017/09/02/grubhub-trial-could-have-major-implications-for-the-gig-economy/",
             urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-634145872.jpg",
-            favorite: false,
-            deleted: false
         },
         {
             author: "Brian Heater",
@@ -119,3 +115,13 @@ const mockFavorites = {
 function getArticles() {
     return Promise.resolve(mockNewsfeed);
 }
+
+function saveArticle(newArticle) {
+    // Retrieve the object from storage
+    var retrievedArticles = JSON.parse(localStorage.getItem('savedArticlesCollection')) || [];
+    retrievedArticles.push(newArticle);
+    localStorage.setItem('savedArticlesCollection', JSON.stringify(retrievedArticles));
+    return Promise.resolve(retrievedArticles);
+}
+
+//need getSAved articles, which is a call from favorites to display saved articles

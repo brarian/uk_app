@@ -3,7 +3,7 @@ $(document).ready(function() {
         STORE.articles = response.articles;
         console.log(STORE);
         render();
-        addArticleToSaved();
+        handleAddArticleToSaved();
 
     });
 });
@@ -11,7 +11,7 @@ $(document).ready(function() {
 const STORE = [];
 
 function generateArticles(articles, articleIndex, template) {
-    return `<div class="card" data-item-index=""> 
+    return `<div class="card" data-item-index="${articleIndex}"> 
     <div class=" name"><a target="_blank" href="${articles.url}">${articles.title}</a></div>
     <div class="writer"> ${articles.author}</div>
     <div class="image">
@@ -38,12 +38,15 @@ function render() {
     renderArticles(STORE.articles);
 };
 
-function addArticleToSaved() {
+function handleAddArticleToSaved() {
     $('.add').one('click', function() {
-        $(this).append().parent().clone().appendTo('.saved');
-        const article = $(this).parent();
+        const index = $(this).parent().data('item-index');
+        console.log(index);
+        const newArticle = STORE.articles[index];
         //put item in local storage 
-        localStorage.setItem('article', JSON.stringify(this));
+
+
+        localStorage.setItem('article', JSON.stringify(newArticle));
         // Retrieve the object from storage
         var retrievedArticle = localStorage.getItem('article');
         console.log('article', JSON.parse(retrievedArticle));
@@ -59,7 +62,7 @@ function addArticleToSaved() {
         //         }
         //     }
         // });
-        deleteFromSaved()
+        handleDeleteFromSaved()
     });
 };
 
@@ -80,7 +83,7 @@ function addArticleToSaved() {
 
 // getArticlesFromLocalStorage();
 
-function deleteFromSaved() {
+function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
         event.preventDefault();
         console.log('delteing article');
