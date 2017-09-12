@@ -1,19 +1,7 @@
 $(document).ready(function() {
-    var service_url = 'https://newsapi.org/v1/articles?';
-    var params = {
-        status: "ok",
-        source: "techcrunch",
-        sortBy: "latest",
-        key: '3abe22b4968b4610833e2fdff4e3e47b'
-    }
-    $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key), function(response) {
-        for (var i = 0; i < response.articles.length; i++) {
-            response.articles[i].faved = false;
-            response.articles[i].deleted = false;
-        }
+    getArticles().then(function(response) {
         STORE.articles = response.articles;
         render();
-        addArticleToSaved();
     });
 });
 
@@ -22,7 +10,7 @@ const STORE = {
 }
 
 function generateArticles(articles, articleIndex, template) {
-    return `<div class="card" data-item-index="${articleIndex}"> 
+    return `<div class="card" data-item-index=""> 
     <div class=" name"><a target="_blank" href="${articles.url}">${articles.title}</a></div>
     <div class="writer"> ${articles.author}</div>
     <div class="image">
@@ -32,8 +20,6 @@ function generateArticles(articles, articleIndex, template) {
     <button class="add"> ADD </button>
     <button class="delete"> delete </button>
 </div></div>`;
-
-
 }
 
 function generateArticlesString(articles) {
@@ -77,8 +63,6 @@ function deleteFromSaved() {
         $(this).parent().remove();
     });
 };
-
-
 
 //add Engadget technology / en
 //Hacker News technology / en

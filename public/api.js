@@ -11,51 +11,20 @@ function getArticles() {
 };
 
 //display mock data for newsfeed 
-function getMockData(callbackFn) {
-    setTimeout(function() {
-        callbackFn(mockNewsfeed)
-    }, 100);
-}
-
-function displayMockArticles(data) {
-    for (index in data.articles) {
-        $('.saved').append(`<div class="card" data-item-index=""> 
-    <div class=" name"><a target="_blank" href="${data.articles[index].url}">${data.articles[index].title}</a></div>
-    <div class="writer"> ${data.articles[index].author}</div>
-    <div class="image">
-    <a target="_blank" href="${data.articles[index].url}">
-    <img src="${data.articles[index].urlToImage}"></img></a></div>
-    <div class="desc">${data.articles[index].description}</div>
-    <button class="add"> ADD </button>
-    <button class="delete"> delete </button>
-</div></div>`);
-    }
+function getData(callbackFn) {
+    return Promise.resolve(mockNewsfeed);
 }
 
 //displaying favorites Mock Data 
 function getandDisplayData() {
-    getMockData(displayMockArticles);
+    getData(generateArticles);
 }
+
+getandDisplayData();
+
 
 function getMockFavoritesData(callbackFn) {
-    setTimeout(function() {
-        callbackFn(mockFavorites)
-    }, 100);
-}
-
-function displayFavoritesMockArticles(data) {
-    for (index in data.articles) {
-        $('.faved').append(`<div class="card" data-item-index=""> 
-    <div class=" name"><a target="_blank" href="${data.articles[index].url}">${data.articles[index].title}</a></div>
-    <div class="writer"> ${data.articles[index].author}</div>
-    <div class="image">
-    <a target="_blank" href="${data.articles[index].url}">
-    <img src="${data.articles[index].urlToImage}"></img></a></div>
-    <div class="desc">${data.articles[index].description}</div>
-    <button class="delete"> DELETE </button>
-    <button class = "newnote"> 
-    `);
-    }
+    return Promise.resolve(mockFavorites);
 }
 
 function getandDisplayFavoritesData() {
@@ -63,7 +32,6 @@ function getandDisplayFavoritesData() {
 }
 
 addnote();
-getandDisplayData();
 
 getandDisplayFavoritesData();
 

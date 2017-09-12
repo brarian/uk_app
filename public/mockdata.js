@@ -115,3 +115,7 @@ const mockFavorites = {
         }
     ]
 };
+
+function getArticles() {
+    return Promise.resolve(mockNewsfeed);
+}
