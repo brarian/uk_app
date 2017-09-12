@@ -1,13 +1,14 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
         STORE.articles = response.articles;
+        console.log(STORE);
         render();
+        addArticleToSaved();
+
     });
 });
 
-const STORE = {
-    articles: [],
-}
+const STORE = [];
 
 function generateArticles(articles, articleIndex, template) {
     return `<div class="card" data-item-index=""> 
@@ -39,22 +40,45 @@ function render() {
 
 function addArticleToSaved() {
     $('.add').one('click', function() {
-        // $(this).append().parent().clone().appendTo('.saved');
+        $(this).append().parent().clone().appendTo('.saved');
         const article = $(this).parent();
-        $.ajax({
-            method: 'POST',
-            url: "/favorites",
-            data: { "article": article },
-            success: function(result) {
-                // incorrect
-                if (database = +1) {
-                    location.reload();
-                }
-            }
-        });
+        //put item in local storage 
+        localStorage.setItem('article', JSON.stringify(this));
+        // Retrieve the object from storage
+        var retrievedArticle = localStorage.getItem('article');
+        console.log('article', JSON.parse(retrievedArticle));
+        // saveArticlesToLocalStorage()
+        // $.ajax({
+        //     method: 'POST',
+        //     url: "/favorites",
+        //     data: { "article": article },
+        //     success: function(result) {
+        //         // incorrect
+        //         if (database = +1) {
+        //             location.reload();
+        //         }
+        //     }
+        // });
         deleteFromSaved()
     });
 };
+
+//save data to local storage
+// function saveArticlesToLocalStorage() {
+//     const str = JSON.stringify(article);
+//     localStorage.setItem('article', str)
+// }
+
+//get data from local storage
+// function getArticlesFromLocalStorage() {
+//     const str = localStorage.getItem('article')
+//     article = JSON.parse(str);
+//     if (!article) {
+//         article = []
+//     };
+// }
+
+// getArticlesFromLocalStorage();
 
 function deleteFromSaved() {
     $('.delete').on('click', function() {

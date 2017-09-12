@@ -1,4 +1,4 @@
-function displayFavoritesMockArticles(data) {
+function displayFavoriteArticles(data) {
     return `<div class="card" data-item-index=""> 
     <div class=" name"><a target="_blank" href="${data.articles[index].url}">${data.articles[index].title}</a></div>
     <div class="writer"> ${data.articles[index].author}</div>

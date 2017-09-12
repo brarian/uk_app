@@ -15,28 +15,27 @@ function getData(callbackFn) {
     return Promise.resolve(mockNewsfeed);
 }
 
-//displaying favorites Mock Data 
 function getandDisplayData() {
-    getData(generateArticles);
+    getArticles(getData);
 }
 
 getandDisplayData();
 
 
-function getMockFavoritesData(callbackFn) {
-    return Promise.resolve(mockFavorites);
-}
+// function getFavoritesData(callbackFn) {
+//     return Promise.resolve(mockFavorites);
+// }
 
-function getandDisplayFavoritesData() {
-    getMockFavoritesData(displayFavoritesMockArticles);
-}
+// function getandDisplayFavoritesData() {
+//     displayFavoriteArticles(getFavoritesData);
+// }
 
-addnote();
-
-getandDisplayFavoritesData();
+// getandDisplayFavoritesData();
 
 function addnote() {
     $('.newnote').on('click', function() {
         alert('clicked on new note button');
     })
 }
+
+addnote();
