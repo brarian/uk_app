@@ -1,5 +1,6 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
+        console.log(response);
         STORE.articles = response.articles;
         console.log(STORE);
         render();
