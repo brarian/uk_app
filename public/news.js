@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 const STORE = [];
 
-function generateArticles(articles, articleIndex, template) {
+function generateArticles(articles, articleIndex) {
     return `<div class="card" data-item-index="${articleIndex}"> 
     <div class=" name"><a target="_blank" href="${articles.url}">${articles.title}</a></div>
     <div class="writer"> ${articles.author}</div>
@@ -24,18 +24,18 @@ function generateArticles(articles, articleIndex, template) {
 }
 
 function generateArticlesString(articles) {
-    const items = STORE.articles.map((article, index) => generateArticles(article, index));
+    const items = articles.map((article, index) => generateArticles(article, index));
     return items.join();
 };
 
 function renderArticles() {
     console.log('rendering articles');
-    const articlesList = generateArticlesString(STORE);
+    const articlesList = generateArticlesString(STORE.articles);
     $('.section').html(articlesList);
 }
 
 function render() {
-    renderArticles(STORE.articles);
+    renderArticles();
 };
 
 function handleAddArticleToSaved() {
