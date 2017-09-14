@@ -124,4 +124,7 @@ function saveArticle(newArticle) {
     return Promise.resolve(retrievedArticles);
 }
 
-//need getSAved articles, which is a call from favorites to display saved articles
+//need getSaved articles, which is a call from favorites to display saved articles
+function getLSSavedArticles() {
+    return Promise.resolve(newArticle);
+};

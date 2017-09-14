@@ -1,11 +1,26 @@
-function displayFavoriteArticles(data) {
-    return `<div class="card" data-item-index=""> 
-    <div class=" name"><a target="_blank" href="${data.articles[index].url}">${data.articles[index].title}</a></div>
-    <div class="writer"> ${data.articles[index].author}</div>
-    <div class="image">
-    <a target="_blank" href="${data.articles[index].url}">
-    <img src="${data.articles[index].urlToImage}"></img></a></div>
-    <div class="desc">${data.articles[index].description}</div>
-    <button class="delete"> DELETE </button>
-    <button class = "newnote">`;
+$(document).ready(function() {
+    render();
+});
+
+// function generateLsSavedArticles(articles, articleIndex, template) {
+//     return `<div class="card" data-item-index="${articleIndex}"> 
+//     <div class=" name"><a target="_blank" href="${articles.url}">${articles.title}</a></div>
+//     <div class="writer"> ${articles.author}</div>
+//     <div class="image">
+//     <a target="_blank" href="${articles.url}">
+//     <img src="${articles.urlToImage}"></img></a></div>
+//     <div class="desc">${articles.description}</div>
+//     <button class="add"> ADD </button>
+//     <button class="delete"> delete </button>
+// </div></div>`
+// };
+
+// function renderSaved() {
+//     $('.faved').html(articlesList);
+// }
+
+function render(newArticle) {
+    data.forEach(function() {
+        console.log(data);
+    })
 }
