@@ -125,6 +125,6 @@ function saveArticle(newArticle) {
 }
 
 //need getSaved articles, which is a call from favorites to display saved articles
-function getLSSavedArticles() {
+function getSavedArticles() {
     return Promise.resolve(mockFavorites);
 };
