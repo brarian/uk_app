@@ -43,22 +43,23 @@ body {
     height: 550px;
     width: 1000px;
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 140px;
     padding-top: 45px;
     padding-left: 30px;
 }
 
-a:link {
+.name a:link {
     color: #404040;
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
+.name a:hover {
+    text-decoration: none;
 }
 
 .name a:visited {
     color: #404040;
+    text-decoration: none;
 }
 
 .section {
@@ -75,21 +76,19 @@ a:hover {
     color: black;
 }
 
-
-/* li {
+li {
     float: left;
     color: black;
-} */
+}
 
-
-/* li a {
+li a {
     display: block;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 16pt;
-    color: black;
-} */
+    color: white;
+}
 
 
 /* need to add a media query for nav bar  */
@@ -112,12 +111,15 @@ a:hover {
     display: inline-block;
     font-size: 16px;
     position: relative;
-    top: 0px;
-    left: 830px;
+    top: 7px;
+    left: 785px;
     border-radius: 25px;
     width: 125px;
     background-color: red;
-    font-weight: bold;
+}
+
+.add {
+    visibility: hidden;
 }
 
 .left {

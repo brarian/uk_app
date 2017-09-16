@@ -17,11 +17,12 @@ const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollecti
 
 function renderSaved() {
     $('.faved').html(foo);
+    console.log("fooo ", foo)
 }
 
-function deleteItemFromSaved() {
+function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
-        var key = $(this).parent();
-        localStorage.removeItem(key);
+        event.preventDefault();
+        console.log('deleting article');
     });
-}
+};
