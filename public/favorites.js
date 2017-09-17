@@ -8,21 +8,31 @@ function compose() {
 }
 
 $(document).ready(function() {
-    renderSaved(foo);
+    renderSaved();
     handleDeleteFromSaved();
 });
 
-const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
 // const foo = compose(generateArticlesString, JSON.parse);
 
 function renderSaved() {
+    const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
     $('.faved').html(foo);
     console.log("fooo ", foo)
 }
 
 function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
-        event.preventDefault();
-        console.log('deleting article');
+        const storageContainer = localStorage.getItem('savedArticlesCollection');
+        const openedContainer = JSON.parse(storageContainer);
+        const itemToBeRemoved = getIndexFromElement($(this).parent());
+        openedContainer.splice(itemToBeRemoved, 1);
+        const newlySplicedArray = JSON.stringify(openedContainer);
+        localStorage.setItem('savedArticlesCollection', newlySplicedArray);
+        renderSaved();
     });
 };
+
+function getIndexFromElement(element) {
+    const index = element.data('item-index');
+    return index;
+}

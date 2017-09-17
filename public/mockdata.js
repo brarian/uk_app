@@ -105,8 +105,3 @@ function saveArticle(newArticle) {
     localStorage.setItem('savedArticlesCollection', JSON.stringify(retrievedArticles));
     return Promise.resolve(retrievedArticles);
 }
-
-//need getSaved articles, which is a call from favorites to display saved articles
-function getSavedArticles() {
-    return Promise.resolve(mockFavorites);
-};

@@ -32,10 +32,8 @@ function getandDisplayFavoritesData() {
 
 getandDisplayFavoritesData();
 
-function addnote() {
-    $('.newnote').on('click', function() {
-        alert('clicked on new note button');
-    })
-}
 
-addnote();
+//need getSaved articles, which is a call from favorites to display saved articles
+function getSavedArticles() {
+    return Promise.resolve(mockFavorites);
+};

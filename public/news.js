@@ -39,8 +39,7 @@ function render() {
 
 function handleAddArticleToSaved() {
     $('.add').one('click', function() {
-        const index = $(this).parent().data('item-index');
-        const newArticle = STORE.articles[index];
+        const newArticle = getArticleFromElement($(this).parent());
         // put item in local storage
         localStorage.setItem('article', JSON.stringify(newArticle));
         // Retrieve the object from storage
@@ -50,6 +49,11 @@ function handleAddArticleToSaved() {
     });
 };
 
+function getArticleFromElement(element) {
+    const index = element.data('item-index');
+    const newArticle = STORE.articles[index];
+    return newArticle;
+}
 //add Engadget technology / en
 //Hacker News technology / en
 //TechRadar technology / en
