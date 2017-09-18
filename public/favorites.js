@@ -17,7 +17,6 @@ $(document).ready(function() {
 function renderSaved() {
     const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
     $('.faved').html(foo);
-    console.log("fooo ", foo)
 }
 
 function handleDeleteFromSaved() {
@@ -35,4 +34,9 @@ function handleDeleteFromSaved() {
 function getIndexFromElement(element) {
     const index = element.data('item-index');
     return index;
+}
+
+function getWords() {
+    const text = $('#words').val();
+    $(text).appendTo('#para');
 }

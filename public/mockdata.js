@@ -74,23 +74,23 @@ const mockFavorites = {
             title: "Twitter’s terms of service are making people mad — but they’re not new",
             url: "https://techcrunch.com/2017/09/02/twitters-terms-of-service-are-suddenly-making-people-freak-out-but-theyre-not-new/",
             urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/05/gettyimages-471561053.jpg"
-        },
-        {
-            author: "Megan Rose Dickey",
-            description: "Next week, GrubHub will face two of its former drivers in court, which could set a precedent for future cases around the 1099, gig economy. The trial, which..",
-            publishedAt: "2017-09-02T18:13:22Z",
-            title: "GrubHub trial could have major implications for the gig economy",
-            url: "https://techcrunch.com/2017/09/02/grubhub-trial-could-have-major-implications-for-the-gig-economy/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-634145872.jpg"
-        },
-        {
-            author: "Brian Heater",
-            description: "The September time frame positions the Berlin show perfectly as a launch pad for holiday products. As such, some of tech’s biggest names use it to debut..",
-            publishedAt: "2017-09-02T17:00:45Z",
-            title: "IFA 2017’s biggest announcements",
-            url: "https://techcrunch.com/gallery/ifa-2017s-biggest-announcements/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-841564132.jpg?w=764&h=400&crop=1"
         }
+        // {
+        //     author: "Megan Rose Dickey",
+        //     description: "Next week, GrubHub will face two of its former drivers in court, which could set a precedent for future cases around the 1099, gig economy. The trial, which..",
+        //     publishedAt: "2017-09-02T18:13:22Z",
+        //     title: "GrubHub trial could have major implications for the gig economy",
+        //     url: "https://techcrunch.com/2017/09/02/grubhub-trial-could-have-major-implications-for-the-gig-economy/",
+        //     urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-634145872.jpg"
+        // },
+        // {
+        //     author: "Brian Heater",
+        //     description: "The September time frame positions the Berlin show perfectly as a launch pad for holiday products. As such, some of tech’s biggest names use it to debut..",
+        //     publishedAt: "2017-09-02T17:00:45Z",
+        //     title: "IFA 2017’s biggest announcements",
+        //     url: "https://techcrunch.com/gallery/ifa-2017s-biggest-announcements/",
+        //     urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-841564132.jpg?w=764&h=400&crop=1"
+        // }
     ]
 };
 

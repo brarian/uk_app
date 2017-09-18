@@ -17,8 +17,17 @@ function generateArticles(articles, articleIndex) {
     <img src="${articles.urlToImage}"></img></a></div>
     <div class="desc">${articles.description}</div>
     <button class="add">ADD</button>
-    <button class="delete">delete</button>
+    <button class="delete" value="Reload Page" onClick="document.location.reload(true)">delete</button>
+    <p id="para"></p>
+    <form class="input-box">
+    <textarea id="words" rows="5" cols="45">Enter comment</textarea>
+    <input type="button" onclick="getWords()" value="Enter" /> <br>
+    </form>
 </div>`;
+}
+
+function getArticles() {
+    return Promise.resolve(mockNewsfeed);
 }
 
 function generateArticlesString(articles) {
@@ -54,6 +63,13 @@ function getArticleFromElement(element) {
     const newArticle = STORE.articles[index];
     return newArticle;
 }
+
+function getWords() {
+    const text = $('#words').val();
+    $(text).appendTo('#para');
+}
+
+
 //add Engadget technology / en
 //Hacker News technology / en
 //TechRadar technology / en
