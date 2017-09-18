@@ -16,12 +16,12 @@ function generateArticles(articles, articleIndex) {
     <a target="_blank" href="${articles.url}">
     <img src="${articles.urlToImage}"></img></a></div>
     <div class="desc">${articles.description}</div>
-    <button class="add">ADD</button>
-    <button class="delete" value="Reload Page" onClick="document.location.reload(true)">delete</button>
+    <button class="add">add to favorites</button>
+    <button class="delete" value="Reload Page" onClick="document.location.reload(true)">remove from favorites</button>
     <p id="para"></p>
     <form class="input-box">
     <textarea id="words" rows="5" cols="45">Enter comment</textarea>
-    <input type="button" onclick="getWords()" value="Enter" /> <br>
+    <input type="button" class="enter-button" onclick="getWords()" value="Enter" /> <br>
     </form>
 </div>`;
 }

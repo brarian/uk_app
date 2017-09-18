@@ -105,16 +105,16 @@ li a {
 .delete {
     border: none;
     color: black;
-    padding: 15px 32px;
+    padding: 10px 34px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     position: relative;
-    top: 7px;
-    left: 785px;
+    top: -20px;
+    left: 730px;
     border-radius: 25px;
-    width: 125px;
+    width: 154px;
     background-color: red;
 }
 
@@ -128,4 +128,14 @@ li a {
 
 .textarea-box {
     color: blue;
+}
+
+.enter-button {
+    border-radius: 5px;
+    vertical-align: top;
+}
+
+.input-box {
+    position: relative;
+    display: inline-block;
 }
