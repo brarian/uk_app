@@ -105,3 +105,8 @@ function saveArticle(newArticle) {
     localStorage.setItem('savedArticlesCollection', JSON.stringify(retrievedArticles));
     return Promise.resolve(retrievedArticles);
 }
+
+
+function saveComments() {
+    var comments = $('words')
+}

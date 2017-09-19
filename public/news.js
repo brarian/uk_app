@@ -16,13 +16,13 @@ function generateArticles(articles, articleIndex) {
     <a target="_blank" href="${articles.url}">
     <img src="${articles.urlToImage}"></img></a></div>
     <div class="desc">${articles.description}</div>
-    <button class="add">add to favorites</button>
-    <button class="delete" value="Reload Page" onClick="document.location.reload(true)">remove from favorites</button>
+    <input type="button" class="delete" value = "remove from favorites" onClick="document.location.reload(true)"/>
     <p id="para"></p>
     <form class="input-box">
-    <textarea id="words" rows="5" cols="45">Enter comment</textarea>
-    <input type="button" class="enter-button" onclick="getWords()" value="Enter" /> <br>
+    <textarea id="words" rows="3" cols="65">Enter comment</textarea>
+    <input type="button" class="notes-enter" onclick="getWords()" value="Enter" /> <br>
     </form>
+    <button class="add">add to favorites</button>
 </div>`;
 }
 
@@ -49,10 +49,6 @@ function render() {
 function handleAddArticleToSaved() {
     $('.add').one('click', function() {
         const newArticle = getArticleFromElement($(this).parent());
-        // put item in local storage
-        localStorage.setItem('article', JSON.stringify(newArticle));
-        // Retrieve the object from storage
-        var retrievedArticle = localStorage.getItem('article');
         saveArticle(newArticle);
         // handleDeleteFromSaved()
     });
@@ -64,11 +60,11 @@ function getArticleFromElement(element) {
     return newArticle;
 }
 
-function getWords() {
-    const text = $('#words').val();
-    $(text).appendTo('#para');
+function handleNewComment() {
+    $('.words').on('click', function() {
+        const newComment = $()
+    })
 }
-
 
 //add Engadget technology / en
 //Hacker News technology / en

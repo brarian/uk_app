@@ -42,7 +42,6 @@ body {
     border-width: 1px 0 0 0;
     height: 550px;
     width: 1000px;
-    display: inline-block;
     margin-left: 140px;
     padding-top: 45px;
     padding-left: 30px;
@@ -105,17 +104,30 @@ li a {
 .delete {
     border: none;
     color: black;
-    padding: 10px 34px;
+    padding: 12px 14px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 15px;
     position: relative;
-    top: -20px;
-    left: 730px;
+    top: 81px;
+    left: 810px;
     border-radius: 25px;
-    width: 154px;
+    width: 180px;
     background-color: red;
+}
+
+.notes-enter {
+    border: none;
+    color: black;
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 25px;
+    width: 180px;
+    position: relative;
+    top: -15px;
+    left: 0%;
+    background-color: green;
 }
 
 .add {
