@@ -37,6 +37,10 @@ function getIndexFromElement(element) {
 }
 
 function getWords() {
-    const text = $('#words').val();
-    $(text).appendTo('#para');
+    const newText = $('#words').val();
+    const addComment = JSON.stringify(newText);
+    localStorage.setItem('commentStorage', addComment);
+    const newCommentJSON = localStorage.getItem('commentStorage');
+    const newComment = JSON.parse(newCommentJSON);
+    saveComment(newText);
 }

@@ -17,11 +17,13 @@ function generateArticles(articles, articleIndex) {
     <img src="${articles.urlToImage}"></img></a></div>
     <div class="desc">${articles.description}</div>
     <input type="button" class="delete" value = "remove from favorites" onClick="document.location.reload(true)"/>
-    <p id="para"></p>
+    <div id="para"></div>
+    <div class="form>
     <form class="input-box">
-    <textarea id="words" rows="3" cols="65">Enter comment</textarea>
+    <textarea id="words" rows="4" cols="65">Enter comment</textarea>
     <input type="button" class="notes-enter" onclick="getWords()" value="Enter" /> <br>
     </form>
+    </div>
     <button class="add">add to favorites</button>
 </div>`;
 }
@@ -60,11 +62,7 @@ function getArticleFromElement(element) {
     return newArticle;
 }
 
-function handleNewComment() {
-    $('.words').on('click', function() {
-        const newComment = $()
-    })
-}
+
 
 //add Engadget technology / en
 //Hacker News technology / en

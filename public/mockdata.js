@@ -106,7 +106,16 @@ function saveArticle(newArticle) {
     return Promise.resolve(retrievedArticles);
 }
 
-
-function saveComments() {
-    var comments = $('words')
+function saveComment(newText) {
+    var retrievedComments = JSON.parse(localStorage.getItem('commentStorage')) || [];
+    retrievedComments.push(newText);
+    localStorage.setItem('commentStorage', JSON.stringify(retrievedComments));
+    return Promise.resolve(retrievedComments);
 }
+
+// function saveComment(text) {
+//     var retrievedComment = JSON.parse(localStorage.getItem('commentsSection')) || [];
+//     commentsSection.push(text);
+//     localStorage.setItem('commentsSection'.JSON.stringify(retrievedComment));
+//     return Promise.resolve(retrievedComment);
+// }
