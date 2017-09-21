@@ -24,9 +24,8 @@ function generateArticles(articles, articleIndex) {
   </form>
   <div class='haha'> </div>
   </div>
-    </div>
     <button class="add">add to favorites</button>
-</div>`;
+</div> </div>`;
 }
 
 function getArticles() {
