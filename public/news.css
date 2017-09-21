@@ -111,7 +111,7 @@ li a {
     display: inline-block;
     font-size: 15px;
     position: relative;
-    top: -35px;
+    top: -75px;
     left: 830px;
     border-radius: 25px;
     width: 125px;
@@ -135,6 +135,6 @@ li a {
     color: white;
 }
 
-.input-box .form-box {
+.comment-form {
     display: none;
 }

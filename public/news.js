@@ -19,9 +19,10 @@ function generateArticles(articles, articleIndex) {
     <input type="button" class="delete" value = "remove from favorites" onClick="document.location.reload(true)"/>
     <div class="form-box">
     <form class='comment-form'>
-      <input placeholder='comment' type="text" name='comment-string' class='comment-value' />
-      <button type='submit' class='comment-btn' onclick='addAComment'>Submit</button>
+    <textarea class='comment-value' rows="3" cols="65">Enter comment</textarea>
+    <input type="submit" class="notes-enter comment-btn" onclick="addAComment()" value="Enter">
   </form>
+  <div class='haha'> </div>
   </div>
     </div>
     <button class="add">add to favorites</button>
@@ -34,7 +35,7 @@ function getArticles() {
 
 function generateArticlesString(articles) {
     console.log("articles", articles);
-    const items = articles.map((article, index) => generateArticles(article, index));
+    const items = articles.map(generateArticles);
     return items.join();
 };
 
