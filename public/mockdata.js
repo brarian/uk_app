@@ -100,16 +100,16 @@ function getArticles() {
 
 function saveArticle(newArticle) {
     // Retrieve the object from storage
-    var retrievedArticles = JSON.parse(localStorage.getItem('savedArticlesCollection')) || [];
+    const retrievedArticles = JSON.parse(localStorage.getItem('savedArticlesCollection')) || [];
     retrievedArticles.push(newArticle);
     localStorage.setItem('savedArticlesCollection', JSON.stringify(retrievedArticles));
     return Promise.resolve(retrievedArticles);
 }
 
-function saveComment(newText) {
-    var retrievedComments = JSON.parse(localStorage.getItem('commentStorage')) || [];
-    retrievedComments.push(newText);
-    localStorage.setItem('commentStorage', JSON.stringify(retrievedComments));
+function saveComment(String) {
+    const retrievedComments = JSON.parse(localStorage.getItem('savedCommentCollection')) || [];
+    retrievedComments.push(String);
+    localStorage.setItem('savedCommentCollection', JSON.stringify(retrievedComments));
     return Promise.resolve(retrievedComments);
 }
 

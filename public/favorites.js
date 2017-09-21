@@ -10,6 +10,7 @@ function compose() {
 $(document).ready(function() {
     renderSaved();
     handleDeleteFromSaved();
+    addAComment();
 });
 
 // const foo = compose(generateArticlesString, JSON.parse);
@@ -36,11 +37,9 @@ function getIndexFromElement(element) {
     return index;
 }
 
-function getWords() {
-    const newText = $('#words').val();
-    const addComment = JSON.stringify(newText);
-    localStorage.setItem('commentStorage', addComment);
-    const newCommentJSON = localStorage.getItem('commentStorage');
-    const newComment = JSON.parse(newCommentJSON);
-    saveComment(newText);
+function addAComment() {
+    $('.comment-btn').click(function() {
+        const String = $('.comment-value').val();
+        saveComment(Strings);
+    });
 }

@@ -17,12 +17,12 @@ function generateArticles(articles, articleIndex) {
     <img src="${articles.urlToImage}"></img></a></div>
     <div class="desc">${articles.description}</div>
     <input type="button" class="delete" value = "remove from favorites" onClick="document.location.reload(true)"/>
-    <div id="para"></div>
-    <div class="form>
-    <form class="input-box">
-    <textarea id="words" rows="4" cols="65">Enter comment</textarea>
-    <input type="button" class="notes-enter" onclick="getWords()" value="Enter" /> <br>
-    </form>
+    <div class="form-box">
+    <form class='comment-form'>
+      <input placeholder='comment' type="text" name='comment-string' class='comment-value' />
+      <button type='submit' class='comment-btn' onclick='addAComment'>Submit</button>
+  </form>
+  </div>
     </div>
     <button class="add">add to favorites</button>
 </div>`;
