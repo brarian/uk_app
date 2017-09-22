@@ -38,7 +38,8 @@ function getIndexFromElement(element) {
 }
 
 function addAComment() {
-    $('.comment-btn').click(function() {
+    $('.comment-form').submit(function(event) {
+        event.preventDefault();
         const Strings = $('.comment-value').val();
         saveComment(Strings);
         $('.haha').append("<li>" + Strings + " </li>");

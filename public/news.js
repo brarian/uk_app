@@ -20,7 +20,7 @@ function generateArticles(articles, articleIndex) {
     <div class="form-box">
     <form class='comment-form'>
     <textarea class='comment-value' rows="3" cols="65">Enter comment</textarea>
-    <input type="submit" class="notes-enter comment-btn" onclick="addAComment()" value="Enter">
+    <input type="submit" class="notes-enter comment-btn"  value="Enter">
   </form>
   <div class='haha'> </div>
   </div>
