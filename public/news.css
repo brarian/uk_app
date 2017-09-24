@@ -50,16 +50,22 @@ section {
     margin-top: -25px;
 }
 
-.navbar {
-    height: 60px;
-    margin-bottom: 25px;
-    font-size: 30px;
-}
-
 .card-text {
     margin-top: 25px;
 }
 
 .img-thumbnail {
     width: 300px;
+}
+
+navbarText {
+    color: black;
+}
+
+element.style {
+    height: 65px;
+}
+
+.card {
+    float: left;
 }

@@ -9,7 +9,7 @@ $(document).ready(function() {
 const STORE = [];
 
 function generateArticles(articles, articleIndex) {
-    return ` <div class="row"> <div class="card col-6"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex}>
+    return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex}>
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
     <div class='writer'"> ${articles.author}</div>
     <div class='image'>
@@ -19,9 +19,9 @@ function generateArticles(articles, articleIndex) {
     </div>
     <div class="card-text">${articles.description}</div>
     <input type='button' class='delete' value='remove from favorites' onClick='document.location.reload(true)' />
-    <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:60px;height:60px;" /> </button> 
+    <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:45px;height:45px;" /> </button> 
     
-</div> </div> <div class="w-100"></div>`;
+</div> </div>`;
 }
 
 function getArticles() {
