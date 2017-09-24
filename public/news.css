@@ -1,140 +1,65 @@
-body {
-    font-family: 'Arimo', sans-serif;
-}
-
-h1 {
-    margin-top: 75px;
-    text-align: center;
-    font-size: 40pt;
-}
-
-.name {
-    font-size: 24pt;
-    color: black;
-    font-weight: bold;
-}
-
-.writer {
-    line-height: 45px;
-}
-
-.desc {
-    font-size: 16pt;
-}
-
-img {
-    width: 600px;
-    height: 330px;
-    margin-left: 0;
-    margin-bottom: 10px;
-    /* position: absolute; */
-    /* margin-top: 10px;
-    left: 26px; */
-}
-
-body {
-    font-size: 16px;
-}
-
-.card {
-    border-color: #404040;
-    border-style: solid;
-    border-width: 0 0 1px 0;
-    height: 550px;
-    width: 1000px;
-    display: inline-block;
-    margin-left: 5px;
-    padding-top: 45px;
-    padding-left: 30px;
-    padding-bottom: 20px;
-}
-
-.name a:link {
-    color: #404040;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.name a:visited {
-    color: #404040;
-}
-
-.section {
-    margin-left: 8%;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    height: 60px;
-    color: white;
-}
-
-li {
-    float: left;
-    color: white;
-}
-
-li a {
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 16pt;
-    color: white;
-}
-
-
-/* need to add a media query for nav bar  */
-
-.nav {
-    top: 0;
-    left: 0;
-    width: 100%;
-    font: white;
-    position: absolute;
-    margin-bottom: 15px;
-}
-
-.add {
-    border: none;
-    color: black;
-    padding: 6px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    position: relative;
-    top: -75px;
-    left: 830px;
-    border-radius: 25px;
-    width: 125px;
-    background-color: #0073b9;
-}
-
 .delete {
-    visibility: hidden;
-}
-
-.left {
-    float: right
-}
-
-li a {
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 16pt;
-    color: white;
+    display: none;
 }
 
 .comment-form {
     display: none;
+}
+
+.container {
+    margin-top: 75px;
+}
+
+.card-title {
+    margin-bottom: 0;
+    font-size: 24px;
+    line-height: 25px;
+    margin-bottom: -0.25rem;
+}
+
+.writer {
+    line-height: 25px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.add {
+    position: absolute;
+    right: 10px;
+    width: 75px;
+    border-radius: 58%;
+    border: none;
+    top: 35%;
+    background-color: white;
+}
+
+.card {
+    margin-bottom: 25px;
+    top: 40px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 35px;
+}
+
+section {
+    margin-top: -25px;
+}
+
+.navbar {
+    height: 60px;
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+.card-text {
+    margin-top: 25px;
+}
+
+.img-thumbnail {
+    width: 300px;
 }

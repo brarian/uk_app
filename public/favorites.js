@@ -17,7 +17,9 @@ $(document).ready(function() {
 
 function renderSaved() {
     const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
+    console.log(foo);
     $('.faved').html(foo);
+
 }
 
 function handleDeleteFromSaved() {
@@ -42,6 +44,7 @@ function addAComment() {
         event.preventDefault();
         const Strings = $('.comment-value').val();
         saveComment(Strings);
-        $('.haha').append("<li>" + Strings + " </li>");
+        const placeToAppend = $('.notes-enter[data-item-index]');
+        console.log(placeToAppend);
     });
 }

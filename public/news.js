@@ -9,23 +9,19 @@ $(document).ready(function() {
 const STORE = [];
 
 function generateArticles(articles, articleIndex) {
-    return `<div class="card" data-item-index="${articleIndex}"> 
-    <div class="name"><a target="_blank" href="${articles.url}">${articles.title}</a></div>
-    <div class="writer"> ${articles.author}</div>
-    <div class="image">
-    <a target="_blank" href="${articles.url}">
-    <img src="${articles.urlToImage}"></img></a></div>
-    <div class="desc">${articles.description}</div>
-    <input type="button" class="delete" value = "remove from favorites" onClick="document.location.reload(true)"/>
-    <div class="form-box">
-    <form class='comment-form'>
-    <textarea class='comment-value' rows="3" cols="65">Enter comment</textarea>
-    <input type="submit" class="notes-enter comment-btn"  value="Enter">
-  </form>
-  <div class='haha'> </div>
-  </div>
-    <button class="add">add to favorites</button>
-</div> </div>`;
+    return ` <div class="row"> <div class="card col-6"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex}>
+    <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
+    <div class='writer'"> ${articles.author}</div>
+    <div class='image'>
+        <a target='_blank' href='${articles.url}'>
+            <img class="img-thumbnail" src='${articles.urlToImage}' alt="Responsive Image"></img>
+        </a>
+    </div>
+    <div class="card-text">${articles.description}</div>
+    <input type='button' class='delete' value='remove from favorites' onClick='document.location.reload(true)' />
+    <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:60px;height:60px;" /> </button> 
+    
+</div> </div> <div class="w-100"></div>`;
 }
 
 function getArticles() {
@@ -35,12 +31,13 @@ function getArticles() {
 function generateArticlesString(articles) {
     console.log("articles", articles);
     const items = articles.map(generateArticles);
-    return items.join();
+    return items.join("");
 };
 
 function renderArticles() {
     console.log('rendering articles');
     const articlesList = generateArticlesString(STORE.articles);
+    console.log(articlesList);
     $('.section').html(articlesList);
 }
 
@@ -50,6 +47,7 @@ function render() {
 
 function handleAddArticleToSaved() {
     $('.add').one('click', function() {
+        console.log("added to click");
         const newArticle = getArticleFromElement($(this).parent());
         saveArticle(newArticle);
         // handleDeleteFromSaved()
