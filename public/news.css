@@ -32,13 +32,18 @@ a {
     width: 75px;
     border-radius: 58%;
     border: none;
-    top: 35%;
+    top: 16%;
     background-color: white;
+    border: 0;
+    margin: 0;
 }
 
 .card {
     margin-bottom: 25px;
     top: 40px;
+    height: 450px;
+    text-align: left;
+    padding: 20px;
 }
 
 h1 {
@@ -48,6 +53,7 @@ h1 {
 
 section {
     margin-top: -25px;
+    text-align: center;
 }
 
 .card-text {

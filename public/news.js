@@ -11,7 +11,7 @@ const STORE = [];
 function generateArticles(articles, articleIndex) {
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex}>
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
-    <div class='writer'"> ${articles.author}</div>
+    <div class='writer'"> ${articles.author}</div> <div class='source'></div>
     <div class='image'>
         <a target='_blank' href='${articles.url}'>
             <img class="img-thumbnail" src='${articles.urlToImage}' alt="Responsive Image"></img>
@@ -19,7 +19,7 @@ function generateArticles(articles, articleIndex) {
     </div>
     <div class="card-text">${articles.description}</div>
     <input type='button' class='delete' value='remove from favorites' onClick='document.location.reload(true)' />
-    <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:45px;height:45px;" /> </button> 
+    <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:30px;height:30px;" /> </button> 
     
 </div> </div>`;
 }
@@ -37,7 +37,7 @@ function generateArticlesString(articles) {
 function renderArticles() {
     console.log('rendering articles');
     const articlesList = generateArticlesString(STORE.articles);
-    console.log(articlesList);
+
     $('.section').html(articlesList);
 }
 
