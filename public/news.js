@@ -1,6 +1,7 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
         STORE.articles = response.articles;
+        console.log(STORE);
         render();
         handleAddArticleToSaved();
     });
@@ -11,7 +12,7 @@ const STORE = [];
 function generateArticles(articles, articleIndex) {
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex}>
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
-    <div class='writer'"> ${articles.author}</div> <div class='source'></div>
+    <div class='writer'"> ${articles.author} <span class='source'>${name}</span></div> 
     <div class='image'>
         <a target='_blank' href='${articles.url}'>
             <img class="img-thumbnail" src='${articles.urlToImage}' alt="Responsive Image"></img>

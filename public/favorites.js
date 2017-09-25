@@ -17,7 +17,6 @@ $(document).ready(function() {
 
 function renderSaved() {
     const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
-    console.log(foo);
     $('.faved').html(foo);
 
 }

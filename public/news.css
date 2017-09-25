@@ -75,3 +75,10 @@ element.style {
 .card {
     float: left;
 }
+
+.source {
+    background-color: #504d4d;
+    color: white;
+    padding: 4px;
+    border-radius: 5px;
+}
