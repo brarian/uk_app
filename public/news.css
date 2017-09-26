@@ -18,7 +18,8 @@
 }
 
 .writer {
-    line-height: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 a {
@@ -32,7 +33,7 @@ a {
     width: 75px;
     border-radius: 58%;
     border: none;
-    top: 16%;
+    top: 15.5%;
     background-color: white;
     border: 0;
     margin: 0;
@@ -44,6 +45,8 @@ a {
     height: 450px;
     text-align: left;
     padding: 20px;
+    float: right;
+    position: relative;
 }
 
 h1 {
@@ -70,10 +73,6 @@ navbarText {
 
 element.style {
     height: 65px;
-}
-
-.card {
-    float: left;
 }
 
 .source {

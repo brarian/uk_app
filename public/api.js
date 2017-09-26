@@ -8,13 +8,12 @@ function getArticles() {
     }
     name = params.source;
     const articlePromise = $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key));
-    console.log(articlePromise);
     return Promise.resolve(articlePromise);
 };
 
 //display data for newsfeed 
 function getData(callbackFn) {
-    return Promise.resolve();
+    return Promise.resolve(getArticles);
 }
 
 function getandDisplayData() {
@@ -27,13 +26,13 @@ function getFavoritesData(callbackFn) {
     return Promise.resolve();
 }
 
-function getandDisplayFavoritesData() {
-    getArticles(getFavoritesData);
-}
+// function getandDisplayFavoritesData() {
+//     getArticles(getFavoritesData);
+// }
 
-getandDisplayFavoritesData();
+// getandDisplayFavoritesData();
 
 
-function getSavedArticles() {
-    return Promise.resolve(mockFavorites);
-};
+// function getSavedArticles() {
+//     return Promise.resolve(mockFavorites);
+// };
