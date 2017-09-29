@@ -42,8 +42,7 @@ function addAComment() {
     $('.comment-form').submit(function(event) {
         event.preventDefault();
         const Strings = $('.comment-value').val();
+        console.log(Strings);
         saveComment(Strings);
-        const placeToAppend = $('.notes-enter[data-item-index]');
-        console.log(placeToAppend);
     });
 }

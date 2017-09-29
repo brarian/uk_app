@@ -12,17 +12,23 @@ const STORE = [];
 function generateArticles(articles, articleIndex) {
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex}>
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
-    <div class='writer'"> ${articles.author} <span class='source'>${name}</span></div> 
+    <div class='writer'"> ${articles.author} <span class='source'></span></div> 
     <div class='image'>
         <a target='_blank' href='${articles.url}'>
             <img class="img-thumbnail" src='${articles.urlToImage}' alt="Responsive Image"></img>
         </a>
     </div>
     <div class="card-text">${articles.description}</div>
-    <input type='button' class='delete' value='remove from favorites' onClick='document.location.reload(true)' />
+    <button class="delete" onClick='document.location.reload(true)' alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;"  /> </button>
     <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:30px;height:30px;" /> </button> 
-    
-</div> </div>`;
+    <div class='haha'> </div>
+    <div class="form-box">
+    <form class='comment-form'>
+        <textarea class='comment-value' rows="3" cols="45" placeholder="Add a note"></textarea>
+        <input type="submit" class="notes-enter comment-btn"  value="Enter">
+    </form>
+    </div>
+    </div>`;
 }
 
 function getArticles() {
