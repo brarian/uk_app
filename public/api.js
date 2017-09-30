@@ -8,9 +8,6 @@ function getArticles() {
     }
 
     const articlePromise = $.getJSON(service_url + 'source=' + (params.source) + "&sortBy=" + (params.sortBy) + "&apiKey=" + (params.key));
-    articlePromise.response.map(function(obj) {
-        obj.Source = params.source;
-    });
     return Promise.resolve(articlePromise);
 };
 

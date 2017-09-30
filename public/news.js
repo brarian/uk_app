@@ -1,7 +1,10 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
+        response.articles = response.articles.map(function(articles) {
+            articles.source = response;
+            return articles;
+        })
         STORE.articles = response.articles;
-        console.log(STORE);
         render();
         handleAddArticleToSaved();
     });
