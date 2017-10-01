@@ -1,10 +1,12 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
+        console.log(response);
         response.articles = response.articles.map(function(articles) {
-            articles.source = response;
+            articles.source = response.articles;
             return articles;
         })
-        STORE.articles = response.articles;
+        STORE.response = response;
+        console.log(STORE.response);
         render();
         handleAddArticleToSaved();
     });
@@ -12,10 +14,10 @@ $(document).ready(function() {
 
 const STORE = [];
 
-function generateArticles(articles, articleIndex) {
+function generateArticles(articles, articleIndex, source) {
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex}>
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
-    <div class='writer'"> ${articles.author} <span class='source'></span></div> 
+    <div class='writer'"> ${articles.author} <span class='source'>${source}</span></div> 
     <div class='image'>
         <a target='_blank' href='${articles.url}'>
             <img class="img-thumbnail" src='${articles.urlToImage}' alt="Responsive Image"></img>
@@ -35,18 +37,18 @@ function generateArticles(articles, articleIndex) {
 }
 
 function getArticles() {
-    return Promise.resolve(mockNewsfeed);
+    return Promise.resolve(response);
 }
 
-function generateArticlesString(articles) {
+function generateArticlesString(articles, source) {
     console.log("articles", articles);
-    const items = articles.map(generateArticles);
+    const items = articles.map((article, articleIndex) => generateArticles(article, articleIndex, source));
     return items.join("");
 };
 
 function renderArticles() {
     console.log('rendering articles');
-    const articlesList = generateArticlesString(STORE.articles);
+    const articlesList = generateArticlesString(STORE.response.articles, STORE.response.source);
 
     $('.section').html(articlesList);
 }
@@ -66,7 +68,7 @@ function handleAddArticleToSaved() {
 
 function getArticleFromElement(element) {
     const index = element.data('item-index');
-    const newArticle = STORE.articles[index];
+    const newArticle = STORE.response[index];
     return newArticle;
 }
 

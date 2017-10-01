@@ -1,98 +1,90 @@
 const mockNewsfeed = {
+    "status": "ok",
+    "source": "abc-news-au",
+    "sortBy": "top",
     "articles": [{
-            author: "Sarah Buhr",
-            description: "Twitter is making some minor changes to its terms of service (ToS) for users outside of the U.S. this October and a lot of people are rather upset about..",
-            publishedAt: "2017-09-02T18:47:15Z",
-            title: "Twitter’s terms of service are making people mad — but they’re not new",
-            url: "https://techcrunch.com/2017/09/02/twitters-terms-of-service-are-suddenly-making-people-freak-out-but-theyre-not-new/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/05/gettyimages-471561053.jpg",
+            "author": "http://www.abc.net.au/news/stephen-long/167162",
+            "title": "Adani's track record in India 'leaves a lot to be desired', ex-minister says",
+            "description": "India's former environment minister says the Adani Group's track record in India leaves a lot to be desired.",
+            "url": "http://www.abc.net.au/news/2017-10-02/former-minister-sounds-alarm-on-adanis-track-record-in-india/9005596",
+            "urlToImage": "http://www.abc.net.au/news/image/9005676-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T19:02:40Z"
         },
         {
-            author: "Megan Rose Dickey",
-            description: "Next week, GrubHub will face two of its former drivers in court, which could set a precedent for future cases around the 1099, gig economy. The trial, which..",
-            publishedAt: "2017-09-02T18:13:22Z",
-            title: "GrubHub trial could have major implications for the gig economy",
-            url: "https://techcrunch.com/2017/09/02/grubhub-trial-could-have-major-implications-for-the-gig-economy/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-634145872.jpg",
+            "author": null,
+            "title": "Spain defends Catalonian independence crackdown as hundreds injured",
+            "description": "The Catalonian independence referendum is a path that leads to nowhere, Prime Minister Mariano Rajoy says.",
+            "url": "http://www.abc.net.au/news/2017-10-02/spain-pm-slams-catalonia-independence-vote-as-hundreds-injured/9006442",
+            "urlToImage": "http://www.abc.net.au/news/image/9006458-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T20:03:06Z"
         },
         {
-            author: "Brian Heater",
-            description: "The September time frame positions the Berlin show perfectly as a launch pad for holiday products. As such, some of tech’s biggest names use it to debut..",
-            publishedAt: "2017-09-02T17:00:45Z",
-            title: "IFA 2017’s biggest announcements",
-            url: "https://techcrunch.com/gallery/ifa-2017s-biggest-announcements/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-841564132.jpg?w=764&h=400&crop=1"
+            "author": "http://www.abc.net.au/news/dean-bilton/5349478",
+            "title": "Melbourne masterclass delivers Storm grand final victory over Cowboys",
+            "description": "The Melbourne Storm win their third premiership with a stellar grand final performance against the North Queensland Cowboys.",
+            "url": "http://www.abc.net.au/news/2017-10-01/melbourne-masterclass-storm-grand-final-win-cowboys/9005794",
+            "urlToImage": "http://www.abc.net.au/news/image/9005954-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T12:43:19Z"
         },
         {
-            author: "Steve Gillmor",
-            description: "The Gillmor Gang — Denis Pombriant, Keith Teare, John Taschek, Frank Radice, and Steve Gillmor. Recorded live Thursday, August 31, 2017. G3: Exit..",
-            publishedAt: "2017-09-02T17:00:38Z",
-            title: "Gillmor Gang: Summer School",
-            url: "https://techcrunch.com/2017/09/02/gillmor-gang-summer-school/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2014/02/gg-test-pattern-sepia3.jpg"
+            "author": "http://www.abc.net.au/news/jon-healy/5373690",
+            "title": "Big Three deliver a perfect last hurrah in Storm's triumph",
+            "description": "There aren't many times in professional sport where it's safe to say never, but we will never see a combination like Billy Slater, Cooper Cronk and Cameron Smith again.",
+            "url": "http://www.abc.net.au/news/2017-10-01/melbourne-storm-big-three-deliver-one-more-trademark-moment/9005986",
+            "urlToImage": "http://www.abc.net.au/news/image/9006024-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T12:43:19Z"
         },
         {
-            author: "Joanna Glasner",
-            description: "The connected life is not necessarily the good life. Too often, it seems like we are squandering our time checking devices, losing touch with fellow humans..",
-            publishedAt: "2017-09-02T17:00:06Z",
-            title: "Funding your bliss: mindfulness startups scale up",
-            url: "https://techcrunch.com/2017/09/02/funding-your-bliss-mindfulness-startups-scale-up/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/istock-639794882-1024x683.jpg"
+            "author": null,
+            "title": "Macklemore declares 'equality for all' at NRL grand final",
+            "description": "US rapper Macklemore ends his controversial performance of pro-same-sex marriage song Same Love by saying equality for all, as rainbow-coloured fireworks explode behind him.",
+            "url": "http://www.abc.net.au/news/2017-10-01/macklemore-performs-same-love-at-nrl-grand-final/9005752",
+            "urlToImage": "http://www.abc.net.au/news/image/9005776-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T11:29:35Z"
         },
         {
-            author: "Sarah Buhr",
-            description: "Record-setting astronaut Peggy Whitson is coming back from space as the cumulative record holder for longest time spent floating up among the stars and you..",
-            publishedAt: "2017-09-02T20:45:50Z",
-            title: "Watch astronaut Peggy Whitson return to Earth after 288 days in space",
-            url: "https://techcrunch.com/2017/09/02/watch-astronaut-peggy-whitson-return-to-earth-after-288-days-in-space/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-617940772.jpg"
+            "author": null,
+            "title": "'Save your energy Rex': Trump tells Tillerson he is 'wasting his time' with North Korea",
+            "description": "Donald Trump says he has told his top diplomat not to waste his time trying to negotiate with Kim Jong-un.",
+            "url": "http://www.abc.net.au/news/2017-10-02/trump-says-negotiating-with-north-korea-is-a-waste-of-time/9006146",
+            "urlToImage": "http://www.abc.net.au/news/image/8368854-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T20:03:06Z"
         },
         {
-            author: "Leslie Hitchcock",
-            description: "Alright, European TechCrunch fans, time to listen up — we’ll soon be releasing our final batch of Disrupt Berlin 2017 tickets at the deeply discounted..",
-            publishedAt: "2017-09-02T08:00:52Z",
-            title: "Final 2-for-1 Disrupt Berlin ticket release happening Wednesday 9/6",
-            url: "https://techcrunch.com/2017/09/02/final-2-for-1-disrupt-berlin-ticket-release-happening-wednesday-96/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/06/berlin-wall-graffiti.jpg"
+            "author": null,
+            "title": "Two passers-by killed in knife attack at Marseille train station",
+            "description": "Two women are stabbed to death in an attack at Marseille's main train station in southern France, the country's Interior Ministry says.",
+            "url": "http://www.abc.net.au/news/2017-10-02/knife-attack-at-marseille-train-station-assailant-shot/9006040",
+            "urlToImage": "http://www.abc.net.au/news/image/9006044-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T19:56:09Z"
         },
         {
-            author: "Matt Miesnieks",
-            description: "AR is seductive. The more you think about it, the bigger you realize it is going to be, and the more great ideas you have that are completely new. The problem..",
-            publishedAt: "2017-09-02T16:00:09Z",
-            title: "The product design challenges of AR on smartphones",
-            url: "https://techcrunch.com/2017/09/02/the-product-design-challenges-of-ar-on-smartphones/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-518338307.jpg"
+            "author": "http://www.abc.net.au/news/vanessa-gorman/4974190",
+            "title": "Former Miss World's call to the wild",
+            "description": "Belinda Green, Miss World 1972, found new meaning in life when she met veterinary surgeon Dr Howard Ralph, a man with an extraordinary devotion to saving native animals.",
+            "url": "http://www.abc.net.au/news/2017-10-02/belinda-greens-call-to-the-wild-as-career/8989406",
+            "urlToImage": "http://www.abc.net.au/news/image/9002490-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T19:13:07Z"
+        },
+        {
+            "author": null,
+            "title": "Five injured in Canada 'terror' incidents",
+            "description": "One person is in custody after an Edmonton police officer was stabbed out outside a football game and four pedestrians were injured by a fleeing truck in the Western city of Edmonton",
+            "url": "http://www.abc.net.au/news/2017-10-01/canada-five-injured-in-edmonton-terror-incident/9005958",
+            "urlToImage": "http://www.abc.net.au/news/image/9005984-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T12:31:25Z"
+        },
+        {
+            "author": null,
+            "title": "India v Australia: Scores and stats from the fifth ODI in Nagpur",
+            "description": "Can Australia reduce the series arrears and take out the final ODI against India in Nagpur? Follow all the scores, stats and commentary in our cricket ScoreCentre.",
+            "url": "http://www.abc.net.au/news/2017-10-01/india-v-australia-fifth-odi-live-scorecentre/8949656",
+            "urlToImage": "http://www.abc.net.au/news/image/8999024-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T14:29:01Z"
         }
     ]
 };
 
-const mockFavorites = {
-    "articles": [{
-            author: "Sarah Buhr",
-            description: "Twitter is making some minor changes to its terms of service (ToS) for users outside of the U.S. this October and a lot of people are rather upset about..",
-            publishedAt: "2017-09-02T18:47:15Z",
-            title: "Twitter’s terms of service are making people mad — but they’re not new",
-            url: "https://techcrunch.com/2017/09/02/twitters-terms-of-service-are-suddenly-making-people-freak-out-but-theyre-not-new/",
-            urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/05/gettyimages-471561053.jpg"
-        }
-        // {
-        //     author: "Megan Rose Dickey",
-        //     description: "Next week, GrubHub will face two of its former drivers in court, which could set a precedent for future cases around the 1099, gig economy. The trial, which..",
-        //     publishedAt: "2017-09-02T18:13:22Z",
-        //     title: "GrubHub trial could have major implications for the gig economy",
-        //     url: "https://techcrunch.com/2017/09/02/grubhub-trial-could-have-major-implications-for-the-gig-economy/",
-        //     urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-634145872.jpg"
-        // },
-        // {
-        //     author: "Brian Heater",
-        //     description: "The September time frame positions the Berlin show perfectly as a launch pad for holiday products. As such, some of tech’s biggest names use it to debut..",
-        //     publishedAt: "2017-09-02T17:00:45Z",
-        //     title: "IFA 2017’s biggest announcements",
-        //     url: "https://techcrunch.com/gallery/ifa-2017s-biggest-announcements/",
-        //     urlToImage: "https://tctechcrunch2011.files.wordpress.com/2017/09/gettyimages-841564132.jpg?w=764&h=400&crop=1"
-        // }
-    ]
-};
 
 function getArticles() {
     return Promise.resolve(mockNewsfeed);
