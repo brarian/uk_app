@@ -8,7 +8,7 @@ function getArticles() {
     const vergePromise = $.getJSON(service_url + 'source=' + "the-verge" + "&sortBy=" + "top" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
     const nextPromise = $.getJSON(service_url + 'source=' + "the-next-web" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
 
-    return Promise.resolve([articlePromise, engadgetPromise, hackerPromise, recodePromise, radarPromise, vergePromise, nextPromise]);
+    return Promise.all([articlePromise, engadgetPromise, hackerPromise, recodePromise, radarPromise, vergePromise, nextPromise]);
     // return Promise.resolve([articlePromise, engadgetPromise, hackerPromise, recodePromise, radarPromise, vergePromise, nextPromise]);
 
 };
@@ -30,14 +30,3 @@ getandDisplayData();
 function getFavoritesData(callbackFn) {
     return Promise.resolve();
 }
-
-// function getandDisplayFavoritesData() {
-//     getArticles(getFavoritesData);
-// }
-
-// getandDisplayFavoritesData();
-
-
-// function getSavedArticles() {
-//     return Promise.resolve(mockFavorites);
-// };
