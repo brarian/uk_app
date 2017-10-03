@@ -9,7 +9,12 @@ function getArticles() {
     const nextPromise = $.getJSON(service_url + 'source=' + "the-next-web" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
 
     return Promise.resolve([articlePromise, engadgetPromise, hackerPromise, recodePromise, radarPromise, vergePromise, nextPromise]);
+    // return Promise.resolve([articlePromise, engadgetPromise, hackerPromise, recodePromise, radarPromise, vergePromise, nextPromise]);
+
 };
+
+
+// could export promises and require them in mockdata
 
 //display data for newsfeed 
 function getData(callbackFn) {

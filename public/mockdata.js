@@ -85,11 +85,16 @@ const mockNewsfeed = {
     ]
 };
 
-
 function getArticles() {
+    var service_url = 'https://newsapi.org/v1/articles?';
+    const articlePromise = $.getJSON(service_url + "source=" + "techcrunch" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
+    const engadgetPromise = $.getJSON(service_url + 'source=' + "engadget" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
+
     //needs to be an array of all news source promises
-    Promise.resolve([articlePromise, engadgetPromise, hackerPromise, recodePromise, radarPromise, vergePromise, nextPromise]);
+    return Promise.resolve([articlePromise, engadgetPromise]);
 }
+
+
 
 function saveArticle(newArticle) {
     // Retrieve the object from storage

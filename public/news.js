@@ -1,10 +1,10 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
         console.log(response);
-        response.articles = response.articles.map(function(articles) {
-            articles.source = response.articles;
-            return articles;
-        })
+        // response.articles = response.articles.map(function(articles) {
+        //     articles.source = response.articles;
+        //     return articles;
+        // })
         STORE.response = response;
         console.log(STORE.response);
         render();
