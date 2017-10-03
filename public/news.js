@@ -71,11 +71,3 @@ function getArticleFromElement(element) {
     const newArticle = STORE.response[index];
     return newArticle;
 }
-
-
-
-//add Engadget technology / en
-//Hacker News technology / en
-//TechRadar technology / en
-//The Next Web technology / en
-//The Verge technology / en

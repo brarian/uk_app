@@ -87,7 +87,8 @@ const mockNewsfeed = {
 
 
 function getArticles() {
-    return Promise.resolve(mockNewsfeed);
+    //needs to be an array of all news source promises
+    Promise.resolve([articlePromise, engadgetPromise, hackerPromise, recodePromise, radarPromise, vergePromise, nextPromise]);
 }
 
 function saveArticle(newArticle) {
