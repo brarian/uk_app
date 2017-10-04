@@ -1,4 +1,4 @@
-const mockNewsfeed = {
+const mockNewsfeed = [{
     "status": "ok",
     "source": "abc-news-au",
     "sortBy": "top",
@@ -83,15 +83,21 @@ const mockNewsfeed = {
             "publishedAt": "2017-10-01T14:29:01Z"
         }
     ]
-};
+}, {
+    "sortBy": "latest",
+    "source": "techcrunch",
+    "status": "ok",
+    "articles": [
+        { "author": "Ingrid Lunden", "title": "Yahoo now thinks all 3B accounts were impacted by 2013 breach, not 1B as thought", "description": "Internet giant Yahoo's massive 2013 security breach has dealt the company yet another blow. Today Yahoo sent out a notice disclosing that a further..", "url": "https://techcrunch.com/2017/10/03/yahoo-says-all-3b-accounts-were-impacted-by-2013-breach-not-1b-as-thought/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/01/gettyimages-493360993.jpg", "publishedAt": "2017-10-03T20:54:35Z" }, { "author": "Bryce Durbin, Devin Coldewey", "title": "Dropbox brand update streamlines its logo and takes aim at creatives", "description": "Today Dropbox introduced a new brand design that includes a revamped logo, a plethora of color schemes and a new typeface. The new branding aims to set..", "url": "https://techcrunch.com/2017/10/03/dropbox-brand-update-streamlines-its-logo-and-takes-aim-at-creatives/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/10/colorlogos.png", "publishedAt": "2017-10-03T20:39:25Z" }, { "author": "Anthony Ha", "title": "Jeffrey Katzenberg is looking to raise $2B for a new video startup", "description": "As tech giants like Apple and Facebook prepare to spend billions of dollars on movies and TV, longtime Hollywood executive Jeffrey Katzenberg is looking to..", "url": "https://techcrunch.com/2017/10/03/jeffrey-katzenberg-new-startup/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/10/1582495984_5a114e5df8_b.jpg", "publishedAt": "2017-10-03T20:11:58Z" }, { "author": "Darrell Etherington", "title": "Optoma’s NuForce BE Free8 wireless headphones are a smart AirPods alternative", "description": "Optoma has released new fully wireless headphones under its 'NuForce' audio sub brand, the BE Free8 earbuds. These are like Apple's AirPods, requiring no wire..", "url": "https://techcrunch.com/2017/10/03/optomas-nuforce-be-free8-wireless-headphones-are-a-smart-airpods-alternative/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/10/lifestyle6.jpg", "publishedAt": "2017-10-03T20:11:41Z" }, { "author": "Sarah Buhr", "title": "Former Equifax CEO says breach boiled down to one person not doing their job", "description": "In a continued effort to pass on any responsibility for the largest data breach in history, Equifax's recently departed CEO is blaming it all on a single..", "url": "https://techcrunch.com/2017/10/03/former-equifax-ceo-says-breach-boiled-down-to-one-person-not-doing-their-job/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/09/rtx3fbvg.jpg", "publishedAt": "2017-10-03T19:24:21Z" }, { "author": "John Mannes", "title": "Judge delays Waymo/Uber trial until December 4th", "description": "Judge William Alsup has ruled that the Waymo v. Uber trial would be delayed until December 4. The trial had been expected to start with jury selection on..", "url": "https://techcrunch.com/2017/10/03/judge-delays-waymouber-trial-until-december-4th/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/04/uber-vs-waymo.png", "publishedAt": "2017-10-03T19:16:50Z" }, { "author": "John Biggs", "title": "The Netgear ReadyNAS 524X is a data hoarder’s delight", "description": "As a member of the Data Generation, I've found that my photos, videos, and documents quickly expand to fill their containers. A standard USB drive is quickly..", "url": "https://techcrunch.com/2017/10/03/the-netgear-readynas-524x-is-a-data-hoarders-delight/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/10/img_3731.png", "publishedAt": "2017-10-03T19:14:33Z" }, { "author": "Natasha Lomas, Jordan Crook", "title": "Amazon has acquired 3D body model startup, Body Labs, for $50M-$70M", "description": "TechCrunch has learned that Amazon has acquired Body Labs, a company with a stated aim of creating true-to-life 3D body models to support various b2b software..", "url": "https://techcrunch.com/2017/10/03/amazon-has-acquired-3d-body-model-startup-body-labs-for-50m-70m/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/10/screen-shot-2017-10-03-at-7-01-33-pm.png", "publishedAt": "2017-10-03T18:54:10Z" }, { "author": "Ingrid Lunden", "title": "Elements, Stripe’s new check-out toolkit, aims to boost e-commerce sales completions", "description": "Stripe, the payments startup is now valued at $9 billion, is today taking the wraps off its latest effort to help its customers -- which now number in the..", "url": "https://techcrunch.com/2017/10/03/elements-stripes-new-check-out-toolkit-aims-to-boost-e-commerce-sales-completions/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/10/elements-sample-images.png", "publishedAt": "2017-10-03T18:09:13Z" }, { "author": "Josh Constine", "title": "Instagram Stories mimics Polly with new polls", "description": "Polly blew up with teens last month by tacking multiple-choice polling onto Snapchat. Instagram is following suit with its own polling feature within Stories...", "url": "https://techcrunch.com/2017/10/03/instagram-stories-mimic-polly-with-new-polls/", "urlToImage": "https://tctechcrunch2011.files.wordpress.com/2017/10/img_2080.jpg", "publishedAt": "2017-10-03T18:08:06Z" }
+    ]
+
+
+}]
 
 function getArticles() {
-    var service_url = 'https://newsapi.org/v1/articles?';
-    const articlePromise = $.getJSON(service_url + "source=" + "techcrunch" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
-    const engadgetPromise = $.getJSON(service_url + 'source=' + "engadget" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
 
     //needs to be an array of all news source promises
-    return Promise.resolve([articlePromise, engadgetPromise]);
+    return Promise.resolve(mockNewsfeed);
 }
 
 

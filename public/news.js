@@ -48,8 +48,7 @@ function generateArticlesString(articles, source) {
 
 function renderArticles() {
     console.log('rendering articles');
-    const articlesList = generateArticlesString(STORE.response.articles, STORE.response.source);
-
+    const articlesList = STORE.response.map(response => generateArticlesString(response.articles, response.source)).join("");
     $('.section').html(articlesList);
 }
 
