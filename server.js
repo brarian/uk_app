@@ -18,10 +18,8 @@ const env = {
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 }
 
-//connect database 
-// mongoose.connect(process.env.DATABASE);
-// mongoose.Promise = global.Promise;
-// require('./models/Article');
+
+
 
 
 app.listen(process.env.PORT || 3000)

@@ -94,6 +94,29 @@ const mockNewsfeed = [{
 
 }]
 
+const mockFavorites = [{
+    "status": "ok",
+    "source": "abc-news-au",
+    "sortBy": "top",
+    "articles": [{
+            "author": "http://www.abc.net.au/news/stephen-long/167162",
+            "title": "Adani's track record in India 'leaves a lot to be desired', ex-minister says",
+            "description": "India's former environment minister says the Adani Group's track record in India leaves a lot to be desired.",
+            "url": "http://www.abc.net.au/news/2017-10-02/former-minister-sounds-alarm-on-adanis-track-record-in-india/9005596",
+            "urlToImage": "http://www.abc.net.au/news/image/9005676-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T19:02:40Z"
+        },
+        {
+            "author": null,
+            "title": "Spain defends Catalonian independence crackdown as hundreds injured",
+            "description": "The Catalonian independence referendum is a path that leads to nowhere, Prime Minister Mariano Rajoy says.",
+            "url": "http://www.abc.net.au/news/2017-10-02/spain-pm-slams-catalonia-independence-vote-as-hundreds-injured/9006442",
+            "urlToImage": "http://www.abc.net.au/news/image/9006458-1x1-700x700.jpg",
+            "publishedAt": "2017-10-01T20:03:06Z"
+        }
+    ]
+}];
+
 function getArticles() {
 
     //needs to be an array of all news source promises

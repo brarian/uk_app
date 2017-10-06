@@ -43,6 +43,7 @@ function addAComment() {
         event.preventDefault();
         const Strings = $('.comment-value').val();
         console.log(Strings);
+        $('.haha').append("<li>" + Strings + " </li>");
         saveComment(Strings);
     });
 }

@@ -36,13 +36,12 @@ function generateArticles(articles, articleIndex, source) {
     </div>`;
 }
 
-function getArticles() {
-    return Promise.resolve(response);
-}
+// function getArticles() {
+//     return Promise.resolve(response);
+// }
 
 function generateArticlesString(articles, source) {
-    console.log("articles", articles);
-    const items = articles.map((article, articleIndex) => generateArticles(article, articleIndex, source));
+    const items = STORE.response.map((articles, articleIndex) => generateArticles(articles, articleIndex, source));
     return items.join("");
 };
 

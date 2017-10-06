@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 
 const newsfeedSchema = new mongoose.Schema({
-    article: {},
-    comments: {
-        type: String,
-        trim: true,
-    }
+    author: { type: String, required: false },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    url: { required: true },
+    urlToImage: { required: true }
 });
 
 module.exports = mongoose.model('Article', newsfeedSchema);
