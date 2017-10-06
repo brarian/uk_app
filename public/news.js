@@ -41,7 +41,7 @@ function generateArticles(articles, articleIndex, source) {
 // }
 
 function generateArticlesString(articles, source) {
-    const items = STORE.response.map((articles, articleIndex) => generateArticles(articles, articleIndex, source));
+    const items = articles.map((articles, articleIndex) => generateArticles(articles, articleIndex, source));
     return items.join("");
 };
 

@@ -1,7 +1,7 @@
 function getArticles() {
     var service_url = 'https://newsapi.org/v1/articles?';
-    const articlePromise = $.getJSON(service_url + "source=" + "techcrunch" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
-    const engadgetPromise = $.getJSON(service_url + 'source=' + "engadget" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
+    const articleJSON = $.getJSON(service_url + "source=" + "techcrunch" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
+    const engadgetJSON = $.getJSON(service_url + 'source=' + "engadget" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
     // const hackerPromise = $.getJSON(service_url + 'source=' + "hacker-news" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
     // const recodePromise = $.getJSON(service_url + 'source=' + "recode" + "&sortBy=" + "top" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
     // const radarPromise = $.getJSON(service_url + 'source=' + "techradar" + "&sortBy=" + "top" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
@@ -9,26 +9,12 @@ function getArticles() {
     // const nextPromise = $.getJSON(service_url + 'source=' + "the-next-web" + "&sortBy=" + "latest" + "&apiKey=" + "3abe22b4968b4610833e2fdff4e3e47b");
 
     // return Promise.resolve(articlePromise);
-    return Promise.resolve([articlePromise, engadgetPromise]);
-    $.when(articlePromise, engadgetPromise).then(showResponse);
-
+    const articlePromise = Promise.resolve(articleJSON);
+    const engadgetPromise = Promise.resolve(engadgetJSON);
+    return Promise.all([articlePromise, engadgetPromise]);
 };
 
 
-
-
-// could export promises and require them in mockdata
-
-//display data for newsfeed 
-function getData(callbackFn) {
-    return Promise.resolve(getArticles);
-}
-
-function getandDisplayData() {
-    getArticles(getData);
-}
-
-getandDisplayData();
 
 function getFavoritesData(callbackFn) {
     return Promise.resolve(mockFavorites);
