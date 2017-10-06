@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const newsfeedSchema = new mongoose.Schema({
+const articleModelSchema = new mongoose.Schema({
     author: { type: String, required: false },
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -9,4 +9,7 @@ const newsfeedSchema = new mongoose.Schema({
     urlToImage: { required: true }
 });
 
-module.exports = mongoose.model('Article', newsfeedSchema);
+
+
+const articleModel = mongoose.model('articleModel', articleModelSchema);
+module.exports = { articleModel };

@@ -19,8 +19,10 @@ const env = {
 }
 
 
+const { DATABASE_URL, PORT } = require('./config');
+const { articleModel } = require('./models');
 
-
+mongoose.Promise = global.Promise;
 
 app.listen(process.env.PORT || 3000)
 app.use(express.static(path.join(__dirname, 'public')))
@@ -198,8 +200,7 @@ app.get('/failure', function(req, res) {
 
 let server;
 
-function runServer() {
-    const port = process.env.PORT || 8080;
+function runServer(databaseUrl = DATABASE, port = 3000) {
     return new Promise((resolve, reject) => {
         server = app.listen(port, () => {
             console.log(`Your app is listening on port ${port}`);
