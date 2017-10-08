@@ -30,6 +30,38 @@ app.set('views', path.join(__dirname, 'public'))
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'ejs')
 
+//endpoints 
+app.get('/favorites', (req, res) => {
+    articleModel
+        .find()
+        .then(articles => {
+            res.json(articles)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: 'could not retrieve saved articles' });
+        });
+});
+
+
+app.post('/newsfeed', (req, res) => {
+    //need to add articles to the database from clicking the add button
+})
+
+app.delete('/favorites/:id', (req, res) => {
+    articleModel
+        .findByIdAndRemove(req.params.id)
+        .then(() => {
+            res.status(204).json({ message: 'removed article from favorites' });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'could not completed delete from favorties' });
+        });
+});
+
+
+
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
         domain: process.env.AUTH0_DOMAIN,
