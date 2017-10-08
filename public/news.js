@@ -15,7 +15,7 @@ $(document).ready(function() {
 const STORE = [];
 
 function generateArticles(articles, articleIndex, source) {
-    return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex}>
+    return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source}>
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
     <div class='writer'"> ${articles.author} <span class='source'>${source}</span></div> 
     <div class='image'>
@@ -57,7 +57,6 @@ function render() {
 
 function handleAddArticleToSaved() {
     $('.add').one('click', function() {
-        console.log("added to click");
         const newArticle = getArticleFromElement($(this).parent());
         saveArticle(newArticle);
         // handleDeleteFromSaved()
@@ -65,7 +64,9 @@ function handleAddArticleToSaved() {
 };
 
 function getArticleFromElement(element) {
+    const source = element.data('item-source');
     const index = element.data('item-index');
-    const newArticle = STORE.response[index];
-    return newArticle;
+    const newArticle = STORE.response.find((promiseResponse) => promiseResponse.source === source);
+    const newArticleIndex = newArticle.articles[index];
+    return newArticleIndex;
 }

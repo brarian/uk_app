@@ -17,5 +17,21 @@ function getArticles() {
 
 
 function getFavoritesData(callbackFn) {
-    return Promise.resolve(mockFavorites);
+    return Promise.resolve(newArticle);
+}
+
+
+function saveArticle(newArticle) {
+    // Retrieve the object from storage
+    const retrievedArticles = JSON.parse(localStorage.getItem('savedArticlesCollection')) || [];
+    retrievedArticles.push(newArticle);
+    localStorage.setItem('savedArticlesCollection', JSON.stringify(retrievedArticles));
+    return Promise.resolve(retrievedArticles);
+}
+
+function saveComment(String) {
+    const retrievedComments = JSON.parse(localStorage.getItem('savedCommentCollection')) || [];
+    retrievedComments.push(String);
+    localStorage.setItem('savedCommentCollection', JSON.stringify(retrievedComments));
+    return Promise.resolve(retrievedComments);
 }
