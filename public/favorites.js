@@ -29,6 +29,15 @@ function handleDeleteFromSaved() {
         openedContainer.splice(itemToBeRemoved, 1);
         const newlySplicedArray = JSON.stringify(openedContainer);
         localStorage.setItem('savedArticlesCollection', newlySplicedArray);
+        $.ajax({
+            url: '/favorites/',
+            type: "delete",
+            dataType: jsonp,
+            data: newlySplicedArray,
+            success: function(result) {
+                console.log(`deleted from database`);
+            }
+        });
         renderSaved();
     });
 };

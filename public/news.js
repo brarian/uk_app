@@ -59,7 +59,18 @@ function handleAddArticleToSaved() {
     $('.add').one('click', function() {
         const newArticle = getArticleFromElement($(this).parent());
         saveArticle(newArticle);
-        // handleDeleteFromSaved()
+        $.ajax({
+            url: '/favorites',
+            type: "post",
+            dataType: 'json',
+            data: {},
+            success: function(result) {
+                console.log(`saved to database`)
+            },
+            error: function(xhr, textStatus, error) {
+                debugger
+            }
+        });
     });
 };
 

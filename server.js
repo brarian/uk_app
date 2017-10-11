@@ -11,31 +11,41 @@ const Auth0Strategy = require('passport-auth0');
 const flash = require('connect-flash')
 const app = express()
 const mongoose = require('mongoose');
-
+const config = require('./config')
 dotenv.load()
 
 const env = {
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
 }
 
+const { PORT } = require('./config');
+const { articleModel } = require('./articleModels');
 
-const { DATABASE_URL, PORT } = require('./config');
-const { articleModel } = require('./models');
+// const apiRouter = require('./apiRouter');
 
 mongoose.Promise = global.Promise;
+mongoose.connect(config.DATABASE_URL);
 
 app.listen(process.env.PORT || 3000)
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'public'))
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'ejs')
+app.use(logger('dev'));
+
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use('/api', apiRouter);
 
 //endpoints 
 app.get('/favorites', (req, res) => {
     articleModel
         .find()
         .then(articles => {
-            res.json(articles)
+            console.log("get req", articles);
+            res.json(articles);
+
         })
         .catch(err => {
             console.log(err);
@@ -43,9 +53,18 @@ app.get('/favorites', (req, res) => {
         });
 });
 
-
-app.post('/newsfeed', (req, res) => {
-    //need to add articles to the database from clicking the add button
+app.post('/favorites', (req, res) => {
+    console.log("req", req.body);
+    articleModel
+        .create(req.body)
+        .then(article => {
+            res.json(article);
+            console.log("article after then", article);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: 'could not save articles in database' });
+        });
 })
 
 app.delete('/favorites/:id', (req, res) => {
@@ -59,8 +78,6 @@ app.delete('/favorites/:id', (req, res) => {
             res.status(500).json({ error: 'could not completed delete from favorties' });
         });
 });
-
-
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
@@ -97,10 +114,7 @@ passport.deserializeUser(function(user, done) {
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+
 app.use(
     session({
         secret: 'shhhhhhhhh',
@@ -137,7 +151,7 @@ app.use(function(req, res, next) {
 // app.use('/user', user);
 // need to move when making my routes
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
-app.get('/', ensureLoggedIn, function(req, res, next) {
+app.get('/newsfeed', ensureLoggedIn, function(req, res, next) {
     console.log(req.user);
     res.redirect('./newsfeed');
 });
@@ -152,11 +166,7 @@ app.get('/favorites', (req, res) => {
     res.render('favorites.html');
 });
 
-//post to favorites on click add 
-app.post('/favorites', (req, res, next) => {
-    const article = req.body.article;
 
-})
 
 //delete from favorites on post 
 
@@ -232,7 +242,7 @@ app.get('/failure', function(req, res) {
 
 let server;
 
-function runServer(databaseUrl = DATABASE, port = 3000) {
+function runServer(port = 8080) {
     return new Promise((resolve, reject) => {
         server = app.listen(port, () => {
             console.log(`Your app is listening on port ${port}`);
