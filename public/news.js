@@ -1,6 +1,6 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
-        console.log(response);
+
         // response.articles = response.articles.map(function(articles) {
         //     articles.source = response.articles;
         //     return articles;
@@ -41,7 +41,7 @@ function generateArticles(articles, articleIndex, source) {
 // }
 
 function generateArticlesString(articles, source) {
-    const items = articles.map((articles, articleIndex) => generateArticles(articles, articleIndex, source));
+    const items = articles.map((article, articleIndex) => generateArticles(article, articleIndex, source));
     return items.join("");
 };
 
@@ -59,18 +59,25 @@ function handleAddArticleToSaved() {
     $('.add').one('click', function() {
         const newArticle = getArticleFromElement($(this).parent());
         saveArticle(newArticle);
-        $.ajax({
-            url: '/favorites',
-            type: "post",
-            dataType: 'json',
-            data: {},
-            success: function(result) {
-                console.log(`saved to database`)
+        console.log(newArticle);
+        // const mongoURL = 'mongodb://localhost:8080/newsfeedban';
+        // const item = newArticle;
+        // mongo.connect(mongoURL, function(err, db) {
+        //     db.collection('articlemodels').insertOne(item => (err, db))
+        //     console.log('item inserted');
+        //     db.close;
+        // });
+        fetch('https://localhost:8080/favorites', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
             },
-            error: function(xhr, textStatus, error) {
-                debugger
-            }
-        });
+            body: JSON.stringify(newArticle),
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log('request failed', error)
+        })
     });
 };
 

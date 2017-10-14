@@ -18,8 +18,16 @@ $(document).ready(function() {
 function renderSaved() {
     const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
     $('.faved').html(foo);
-
 }
+
+
+
+// function renderSaved() {
+//     // const foo = localStorage.savedArticlesCollection.map(articles => (article, index, source));
+//     // // return items.join("");
+//     const foo = generateArticlesJSON.parse(localStorage.savedArticlesCollection);
+//     $('.faved').html(foo);
+// }
 
 function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
@@ -29,15 +37,6 @@ function handleDeleteFromSaved() {
         openedContainer.splice(itemToBeRemoved, 1);
         const newlySplicedArray = JSON.stringify(openedContainer);
         localStorage.setItem('savedArticlesCollection', newlySplicedArray);
-        $.ajax({
-            url: '/favorites/',
-            type: "delete",
-            dataType: jsonp,
-            data: newlySplicedArray,
-            success: function(result) {
-                console.log(`deleted from database`);
-            }
-        });
         renderSaved();
     });
 };

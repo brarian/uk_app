@@ -11,7 +11,8 @@ const Auth0Strategy = require('passport-auth0');
 const flash = require('connect-flash')
 const app = express()
 const mongoose = require('mongoose');
-const config = require('./config')
+const config = require('./config');
+const mongo = require('mongodb');
 dotenv.load()
 
 const env = {
@@ -37,47 +38,6 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use('/api', apiRouter);
-
-//endpoints 
-app.get('/favorites', (req, res) => {
-    articleModel
-        .find()
-        .then(articles => {
-            console.log("get req", articles);
-            res.json(articles);
-
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: 'could not retrieve saved articles' });
-        });
-});
-
-app.post('/favorites', (req, res) => {
-    console.log("req", req.body);
-    articleModel
-        .create(req.body)
-        .then(article => {
-            res.json(article);
-            console.log("article after then", article);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: 'could not save articles in database' });
-        });
-})
-
-app.delete('/favorites/:id', (req, res) => {
-    articleModel
-        .findByIdAndRemove(req.params.id)
-        .then(() => {
-            res.status(204).json({ message: 'removed article from favorites' });
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({ error: 'could not completed delete from favorties' });
-        });
-});
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
@@ -151,7 +111,7 @@ app.use(function(req, res, next) {
 // app.use('/user', user);
 // need to move when making my routes
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
-app.get('/newsfeed', ensureLoggedIn, function(req, res, next) {
+app.get('/', ensureLoggedIn, function(req, res, next) {
     console.log(req.user);
     res.redirect('./newsfeed');
 });
@@ -272,5 +232,46 @@ if (require.main === module) {
 };
 
 
+
+//endpoints 
+app.get('/favorites', (req, res) => {
+    articleModel
+        .find()
+        .then(articles => {
+            console.log("get req", articles);
+            res.json(articles);
+
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: 'could not retrieve saved articles' });
+        });
+});
+
+app.post('/favorites', (req, res) => {
+    console.log("req", req.body);
+    articleModel
+        .create(req.body)
+        .then(article => {
+            res.json(article);
+            console.log("article after then", article);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: 'could not save articles in database' });
+        });
+})
+
+app.delete('/favorites/:id', (req, res) => {
+    articleModel
+        .findByIdAndRemove(req.params.id)
+        .then(() => {
+            res.status(204).json({ message: 'removed article from favorites' });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'could not completed delete from favorties' });
+        });
+});
 
 module.exports = { app, runServer, closeServer };
