@@ -94,7 +94,7 @@ const mockNewsfeed = [{
 
 }]
 
-const mockFavorites = [{
+/*const mockFavorites = [{
     "status": "ok",
     "source": "abc-news-au",
     "sortBy": "top",
@@ -115,7 +115,7 @@ const mockFavorites = [{
             "publishedAt": "2017-10-01T20:03:06Z"
         }
     ]
-}];
+}];*/
 
 function getArticles() {
 

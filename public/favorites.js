@@ -13,22 +13,6 @@ $(document).ready(function() {
     addAComment();
 });
 
-// const foo = compose(generateArticlesString, JSON.parse);
-
-function renderSaved() {
-    const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
-    $('.faved').html(foo);
-}
-
-
-
-// function renderSaved() {
-//     // const foo = localStorage.savedArticlesCollection.map(articles => (article, index, source));
-//     // // return items.join("");
-//     const foo = generateArticlesJSON.parse(localStorage.savedArticlesCollection);
-//     $('.faved').html(foo);
-// }
-
 function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
         const storageContainer = localStorage.getItem('savedArticlesCollection');
@@ -37,6 +21,15 @@ function handleDeleteFromSaved() {
         openedContainer.splice(itemToBeRemoved, 1);
         const newlySplicedArray = JSON.stringify(openedContainer);
         localStorage.setItem('savedArticlesCollection', newlySplicedArray);
+        fetch('/favorites/' + _id, {
+                method: 'delete',
+                mode: 'CORS',
+                headers: {
+                    Accept: 'application/JSON',
+                    'Content-Type': 'application/JSON'
+                },
+            })
+            .then(response => response.json());
         renderSaved();
     });
 };
@@ -54,4 +47,14 @@ function addAComment() {
         $('.haha').append("<li>" + Strings + " </li>");
         saveComment(Strings);
     });
+}
+
+function renderSaved(source) {
+    const favoritesArray = JSON.parse(localStorage.savedArticlesCollection);
+    const foo = favoritesArray.map((articleAndSource, index) => generateArticles(articleAndSource.article, index, articleAndSource.source));
+
+    // const foo = favoritesArray.map(articles =>
+    //     generateArticlesString(articles, source));
+    // const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
+    $('.faved').html(foo);
 }

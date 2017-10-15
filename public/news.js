@@ -1,10 +1,5 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
-
-        // response.articles = response.articles.map(function(articles) {
-        //     articles.source = response.articles;
-        //     return articles;
-        // })
         STORE.response = response;
         console.log(STORE.response);
         render();
@@ -14,8 +9,14 @@ $(document).ready(function() {
 
 const STORE = [];
 
+function generateArticlesString(articles, source) {
+    const items = articles.map((article, articleIndex) => generateArticles(article, articleIndex, source));
+    return items.join("");
+};
+
+
 function generateArticles(articles, articleIndex, source) {
-    return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source}>
+    return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source} >
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
     <div class='writer'"> ${articles.author} <span class='source'>${source}</span></div> 
     <div class='image'>
@@ -36,14 +37,6 @@ function generateArticles(articles, articleIndex, source) {
     </div>`;
 }
 
-// function getArticles() {
-//     return Promise.resolve(response);
-// }
-
-function generateArticlesString(articles, source) {
-    const items = articles.map((article, articleIndex) => generateArticles(article, articleIndex, source));
-    return items.join("");
-};
 
 function renderArticles() {
     console.log('rendering articles');
@@ -59,15 +52,7 @@ function handleAddArticleToSaved() {
     $('.add').one('click', function() {
         const newArticle = getArticleFromElement($(this).parent());
         saveArticle(newArticle);
-        console.log(newArticle);
-        // const mongoURL = 'mongodb://localhost:8080/newsfeedban';
-        // const item = newArticle;
-        // mongo.connect(mongoURL, function(err, db) {
-        //     db.collection('articlemodels').insertOne(item => (err, db))
-        //     console.log('item inserted');
-        //     db.close;
-        // });
-        fetch('https://localhost:8080/favorites', {
+        fetch('/favorites', {
             method: 'post',
             headers: {
                 'content-type': 'application/json'
@@ -84,7 +69,8 @@ function handleAddArticleToSaved() {
 function getArticleFromElement(element) {
     const source = element.data('item-source');
     const index = element.data('item-index');
-    const newArticle = STORE.response.find((promiseResponse) => promiseResponse.source === source);
-    const newArticleIndex = newArticle.articles[index];
-    return newArticleIndex;
+    const newArticleSource = STORE.response.find((promiseResponse) => promiseResponse.source === source);
+    const article = newArticleSource.articles[index];
+    const articleAndSource = { source, article };
+    return articleAndSource;
 }
