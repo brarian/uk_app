@@ -16,6 +16,9 @@ function generateArticlesString(articles, source) {
 
 
 function generateArticles(articles, articleIndex, source) {
+    // console.log(articles.url);
+    // console.log(articleIndex);
+    // console.log(source);
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source} >
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
     <div class='writer'"> ${articles.author} <span class='source'>${source}</span></div> 
@@ -51,19 +54,34 @@ function render() {
 function handleAddArticleToSaved() {
     $('.add').one('click', function() {
         const newArticle = getArticleFromElement($(this).parent());
-        saveArticle(newArticle);
-        fetch('/favorites', {
+        fetch('http://localhost:8080/favorites', {
             method: 'post',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'Content-Type:application/json; charset=UTF-8'
             },
-            body: JSON.stringify(newArticle),
+
+            body: JSON.stringify(newArticle.article),
         }).then(response => {
+            saveArticle(newArticle);
             return response.json();
         }).catch(error => {
             console.log('request failed', error)
         })
     });
+
+
+    // fetch('', {
+    //     method: 'post',
+    //     headers: {
+    //         'content-type': 'application/json'
+    //     },
+    //     body: JSON.stringify(newArticle),
+    // }).then(response => {
+    //     return response.json();
+    // }).catch(error => {
+    //     console.log('request failed', error)
+    // })
+    // });
 };
 
 function getArticleFromElement(element) {

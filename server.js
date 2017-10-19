@@ -9,11 +9,11 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const flash = require('connect-flash')
-const app = express()
+const app = express();
 const mongoose = require('mongoose');
 const config = require('./config');
 const mongo = require('mongodb');
-dotenv.load()
+dotenv.load();
 
 const env = {
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
@@ -126,10 +126,6 @@ app.get('/favorites', (req, res) => {
     res.render('favorites.html');
 });
 
-
-
-//delete from favorites on post 
-
 app.get('/login', passport.authenticate('auth0', {
         responseType: 'code',
         audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
@@ -231,8 +227,6 @@ if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
 
-
-
 //endpoints 
 app.get('/favorites', (req, res) => {
     articleModel
@@ -240,7 +234,6 @@ app.get('/favorites', (req, res) => {
         .then(articles => {
             console.log("get req", articles);
             res.json(articles);
-
         })
         .catch(err => {
             console.log(err);
@@ -249,12 +242,13 @@ app.get('/favorites', (req, res) => {
 });
 
 app.post('/favorites', (req, res) => {
-    console.log("req", req.body);
     articleModel
         .create(req.body)
         .then(article => {
-            res.json(article);
-            console.log("article after then", article);
+            //use delete to remove _v and _id keys 
+            const { author, description, title, url, urlToImage } = article;
+            res.status(201).json({ author, title, description, url, urlToImage });
+            console.log({ author, title, description, url, urlToImage });
         })
         .catch(err => {
             console.log(err);

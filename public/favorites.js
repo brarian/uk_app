@@ -13,6 +13,16 @@ $(document).ready(function() {
     addAComment();
 });
 
+function renderSaved(source) {
+    const favoritesArray = JSON.parse(localStorage.savedArticlesCollection);
+    const foo = favoritesArray.map((articleAndSource, index) => generateArticles(articleAndSource.article, index, articleAndSource.source));
+
+    // const foo = favoritesArray.map(articles =>
+    //     generateArticlesString(articles, source));
+    // const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
+    $('.faved').html(foo);
+}
+
 function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
         const storageContainer = localStorage.getItem('savedArticlesCollection');
@@ -21,15 +31,23 @@ function handleDeleteFromSaved() {
         openedContainer.splice(itemToBeRemoved, 1);
         const newlySplicedArray = JSON.stringify(openedContainer);
         localStorage.setItem('savedArticlesCollection', newlySplicedArray);
-        fetch('/favorites/' + _id, {
-                method: 'delete',
-                mode: 'CORS',
-                headers: {
-                    Accept: 'application/JSON',
-                    'Content-Type': 'application/JSON'
-                },
-            })
-            .then(response => response.json());
+        $.ajax({
+            type: 'delete',
+            url: 'https://localhost:8080/favorites',
+            data: 'json',
+            success: function(response) {
+                console.log('deleted this id', itemToBeRemoved);
+            }
+        });
+        // fetch('/favorites/' + _id, {
+        //         method: 'delete',
+        //         mode: 'CORS',
+        //         headers: {
+        //             Accept: 'application/JSON',
+        //             'Content-Type': 'application/JSON'
+        //         },
+        //     })
+        //     .then(response => response.json());
         renderSaved();
     });
 };
@@ -47,14 +65,4 @@ function addAComment() {
         $('.haha').append("<li>" + Strings + " </li>");
         saveComment(Strings);
     });
-}
-
-function renderSaved(source) {
-    const favoritesArray = JSON.parse(localStorage.savedArticlesCollection);
-    const foo = favoritesArray.map((articleAndSource, index) => generateArticles(articleAndSource.article, index, articleAndSource.source));
-
-    // const foo = favoritesArray.map(articles =>
-    //     generateArticlesString(articles, source));
-    // const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
-    $('.faved').html(foo);
 }
