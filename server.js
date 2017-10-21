@@ -245,10 +245,8 @@ app.post('/favorites', (req, res) => {
     articleModel
         .create(req.body)
         .then(article => {
-            //use delete to remove _v and _id keys 
-            const { author, description, title, url, urlToImage } = article;
-            res.status(201).json({ author, title, description, url, urlToImage });
-            console.log({ author, title, description, url, urlToImage });
+            const { author, description, title, url, urlToImage, _id } = article;
+            res.status(201).json({ author, title, description, url, urlToImage, id: _id });
         })
         .catch(err => {
             console.log(err);
@@ -257,15 +255,17 @@ app.post('/favorites', (req, res) => {
 })
 
 app.delete('/favorites/:id', (req, res) => {
-    articleModel
-        .findByIdAndRemove(req.params.id)
-        .then(() => {
-            res.status(204).json({ message: 'removed article from favorites' });
-        })
-        .catch(err => {
-            console.error(err);
-            res.status(500).json({ error: 'could not completed delete from favorties' });
-        });
+    console.log(req.params.id);
+    res.send('next');
+    // articleModelsdfd
+    // .findByIdAndRemove(req.params.id)
+    // .then(() => {
+    //     res.status(204).json({ message: 'removed article from favorites' });
+    // })
+    // .catch(err => {
+    //     console.error(err);
+    //     res.status(500).json({ error: 'could not completed delete from favorties' });
+    // });
 });
 
 module.exports = { app, runServer, closeServer };

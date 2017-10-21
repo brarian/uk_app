@@ -10,15 +10,13 @@ $(document).ready(function() {
 const STORE = [];
 
 function generateArticlesString(articles, source) {
-    const items = articles.map((article, articleIndex) => generateArticles(article, articleIndex, source));
+    console.log(source, articles);
+    const items = articles.map((article, articleIndex) => console.log(article, articleIndex) || generateArticles(article, articleIndex, source));
     return items.join("");
 };
 
 
 function generateArticles(articles, articleIndex, source) {
-    // console.log(articles.url);
-    // console.log(articleIndex);
-    // console.log(source);
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source} >
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
     <div class='writer'"> ${articles.author} <span class='source'>${source}</span></div> 
@@ -42,7 +40,6 @@ function generateArticles(articles, articleIndex, source) {
 
 
 function renderArticles() {
-    console.log('rendering articles');
     const articlesList = STORE.response.map(response => generateArticlesString(response.articles, response.source)).join("");
     $('.section').html(articlesList);
 }

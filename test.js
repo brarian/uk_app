@@ -7,6 +7,12 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
+describe("Testing mongoose", () => {
+    it('does something', () => {
+        const model = require('./articleModels');
+    })
+})
+
 describe('/newsfeed', () => {
     before(function() {
         return runServer();
@@ -60,7 +66,7 @@ describe('POST /favorites', () => {
                 res.should.have.status(201);
                 res.type.should.equal('application/json');
                 res.body.should.include.keys(
-                    'author', 'description', 'title', 'urlToImage', 'url'
+                    'author', 'description', 'title', 'urlToImage', 'url', 'id'
                 );
             });
     });
