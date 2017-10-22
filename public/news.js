@@ -10,8 +10,7 @@ $(document).ready(function() {
 const STORE = [];
 
 function generateArticlesString(articles, source) {
-    console.log(source, articles);
-    const items = articles.map((article, articleIndex) => console.log(article, articleIndex) || generateArticles(article, articleIndex, source));
+    const items = articles.map((article, articleIndex) => generateArticles(article, articleIndex, source));
     return items.join("");
 };
 
@@ -52,34 +51,32 @@ function handleAddArticleToSaved() {
     $('.add').one('click', function() {
         const newArticle = getArticleFromElement($(this).parent());
         fetch('http://localhost:8080/favorites', {
-            method: 'post',
+            method: 'POST',
             headers: {
-                'content-type': 'Content-Type:application/json; charset=UTF-8'
+                'Content-Type': 'application/json'
             },
-
-            body: JSON.stringify(newArticle.article),
+            body: JSON.stringify(newArticle),
         }).then(response => {
-            saveArticle(newArticle);
+            console.log(response);
             return response.json();
         }).catch(error => {
             console.log('request failed', error)
         })
     });
+}
 
-
-    // fetch('', {
-    //     method: 'post',
-    //     headers: {
-    //         'content-type': 'application/json'
-    //     },
-    //     body: JSON.stringify(newArticle),
-    // }).then(response => {
-    //     return response.json();
-    // }).catch(error => {
-    //     console.log('request failed', error)
-    // })
-    // });
-};
+// fetch('', {
+//     method: 'post',
+//     headers: {
+//         'content-type': 'application/json'
+//     },
+//     body: JSON.stringify(newArticle),
+// }).then(response => {
+//     return response.json();
+// }).catch(error => {
+//     console.log('request failed', error)
+// })
+// });
 
 function getArticleFromElement(element) {
     const source = element.data('item-source');

@@ -39,6 +39,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use('/api', apiRouter);
 
+//cors set up 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    if (req.method === 'OPTIONS') { return res.sendStatus(204); }
+    next();
+});
+
+
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
         domain: process.env.AUTH0_DOMAIN,
@@ -243,29 +253,19 @@ app.get('/favorites', (req, res) => {
 
 app.post('/favorites', (req, res) => {
     articleModel
-        .create(req.body)
+        .create(req.body.article)
         .then(article => {
-            const { author, description, title, url, urlToImage, _id } = article;
+            const { author, title, description, url, urlToImage, _id } = article;
             res.status(201).json({ author, title, description, url, urlToImage, id: _id });
         })
         .catch(err => {
-            console.log(err);
             res.status(500).json({ error: 'could not save articles in database' });
         });
 })
 
 app.delete('/favorites/:id', (req, res) => {
-    console.log(req.params.id);
+    console.log(req.params.article);
     res.send('next');
-    // articleModelsdfd
-    // .findByIdAndRemove(req.params.id)
-    // .then(() => {
-    //     res.status(204).json({ message: 'removed article from favorites' });
-    // })
-    // .catch(err => {
-    //     console.error(err);
-    //     res.status(500).json({ error: 'could not completed delete from favorties' });
-    // });
 });
 
 module.exports = { app, runServer, closeServer };

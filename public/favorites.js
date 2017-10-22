@@ -25,21 +25,21 @@ function renderSaved(source) {
 
 function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
-        console.log(this.id);
-        const storageContainer = localStorage.getItem('savedArticlesCollection');
-        const openedContainer = JSON.parse(storageContainer);
-        const itemToBeRemoved = getIndexFromElement($(this).parent());
-        openedContainer.splice(itemToBeRemoved, 1);
-        const newlySplicedArray = JSON.stringify(openedContainer);
-        localStorage.setItem('savedArticlesCollection', newlySplicedArray);
+        // console.log(storageContainer);
+        // const storageContainer = localStorage.getItem('savedArticlesCollection');
+        // const openedContainer = JSON.parse(storageContainer);
+        // const itemToBeRemoved = getIndexFromElement($(this).parent());
+        // openedContainer.splice(itemToBeRemoved, 1);
+        // const newlySplicedArray = JSON.stringify(openedContainer);
+        // localStorage.setItem('savedArticlesCollection', newlySplicedArray);
         $.ajax({
-            url: 'https://localhost:8080/favorites:id',
+            url: 'https://localhost:8080/favorites/' + id,
             type: 'DELETE',
             dataType: 'json',
-            data: this.id,
+            data: {},
             contentType: 'application/json',
             success: function(response) {
-                console.log('deleted this id ', itemToBeRemoved);
+                console.log('deleted this id ', id);
             },
             error: function(response) {
                 console.log('could not delete ', itemToBeRemoved);
