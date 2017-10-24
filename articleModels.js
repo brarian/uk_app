@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const articleModelSchema = new mongoose.Schema({
     author: { type: String, required: false },

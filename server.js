@@ -24,8 +24,8 @@ const { articleModel } = require('./articleModels');
 
 // const apiRouter = require('./apiRouter');
 
-mongoose.Promise = global.Promise;
 mongoose.connect(config.DATABASE_URL);
+mongoose.Promise = global.Promise;
 
 app.listen(process.env.PORT || 3000)
 app.use(express.static(path.join(__dirname, 'public')))
@@ -239,16 +239,20 @@ if (require.main === module) {
 
 //endpoints 
 app.get('/favorites', (req, res) => {
-    articleModel
-        .find()
-        .then(articles => {
-            console.log("get req", articles);
-            res.json(articles);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: 'could not retrieve saved articles' });
-        });
+    res.send({ type: "GET" });
+    // articleModel.find({}, function(err, articleModel) {
+    //         articleModelDisplay = {};
+    //         articleModel.forEach(function(articleModel) {
+    //             articleModel[article.id] = article;
+    //         });
+    //     })
+    //     .then(articles => {
+    //         res.render(articles);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         res.status(500).json({ error: 'could not retrieve saved articles' });
+    //     });
 });
 
 app.post('/favorites', (req, res) => {
@@ -257,15 +261,29 @@ app.post('/favorites', (req, res) => {
         .then(article => {
             const { author, title, description, url, urlToImage, _id } = article;
             res.status(201).json({ author, title, description, url, urlToImage, id: _id });
+            res.send(article)
         })
         .catch(err => {
             res.status(500).json({ error: 'could not save articles in database' });
         });
 })
 
-app.delete('/favorites/:id', (req, res) => {
-    console.log(req.params.article);
-    res.send('next');
+app.put('/favorites/:id', (req, res) => {
+    res.send({ type: "UPDATE" });
+});
+
+app.delete('/favorites/:id', (req, res, next) => {
+    articleModel.findByIdAndRemove({ _id: req.params.id })
+        .then(function(article) {
+            res.send(article);
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'could not delete' });
+        });
+    // articleModel
+    //     .findByIdAndRemove(req.body.article.id, function(req, res) {
+    //         res.status(202).redirect('/favorites')
+    //     });
 });
 
 module.exports = { app, runServer, closeServer };
