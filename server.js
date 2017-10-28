@@ -13,6 +13,7 @@ const app = express();
 const mongoose = require('mongoose');
 const config = require('./config');
 const mongo = require('mongodb');
+MongoClient = require('mongodb').MongoClient;
 dotenv.load();
 
 const env = {
@@ -24,12 +25,11 @@ const { articleModel } = require('./articleModels');
 
 // const apiRouter = require('./apiRouter');
 
-mongoose.connect(config.DATABASE_URL);
 mongoose.Promise = global.Promise;
 
 app.listen(process.env.PORT || 3000)
 app.use(express.static(path.join(__dirname, 'public')))
-app.set('views', path.join(__dirname, 'public'))
+app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'ejs')
 app.use(logger('dev'));
@@ -37,7 +37,6 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use('/api', apiRouter);
 
 //cors set up 
 app.use(function(req, res, next) {
@@ -47,6 +46,7 @@ app.use(function(req, res, next) {
     if (req.method === 'OPTIONS') { return res.sendStatus(204); }
     next();
 });
+
 
 
 // This will configure Passport to use Auth0
@@ -132,9 +132,9 @@ app.get('/newsfeed', (req, res) => {
 });
 
 //route to the user's personal feed page
-app.get('/favorites', (req, res) => {
-    res.render('favorites.html');
-});
+// app.get('/staticfavorites', (req, res) => {
+//     res.render('favorites.html');
+// });
 
 app.get('/login', passport.authenticate('auth0', {
         responseType: 'code',
@@ -208,27 +208,38 @@ app.get('/failure', function(req, res) {
 
 let server;
 
-function runServer(port = 8080) {
+// this function connects to our database, then starts the server
+function runServer(databaseUrl = config.DATABASE_URL, port = 8080) {
+
     return new Promise((resolve, reject) => {
-        server = app.listen(port, () => {
-            console.log(`Your app is listening on port ${port}`);
-            resolve(server);
-        }).on('error', err => {
-            reject(err)
+        mongoose.connect(databaseUrl, err => {
+            if (err) {
+                return reject(err);
+            }
+            server = app.listen(port, () => {
+                    console.log(`Your app is listening on port ${port}`);
+                    resolve();
+                })
+                .on('error', err => {
+                    mongoose.disconnect();
+                    reject(err);
+                });
         });
     });
 }
 
+// this function closes the server, and returns a promise. we'll
+// use it in our integration tests later.
 function closeServer() {
-    return new Promise((resolve, reject) => {
-        console.log('Closing server');
-        server.close(err => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve();
-
+    return mongoose.disconnect().then(() => {
+        return new Promise((resolve, reject) => {
+            console.log('Closing server');
+            server.close(err => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve();
+            });
         });
     });
 }
@@ -236,54 +247,50 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
+//move endpoints to router folder 
+//move not static files out of public 
+
 
 //endpoints 
 app.get('/favorites', (req, res) => {
-    res.send({ type: "GET" });
-    // articleModel.find({}, function(err, articleModel) {
-    //         articleModelDisplay = {};
-    //         articleModel.forEach(function(articleModel) {
-    //             articleModel[article.id] = article;
-    //         });
-    //     })
-    //     .then(articles => {
-    //         res.render(articles);
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         res.status(500).json({ error: 'could not retrieve saved articles' });
-    //     });
+    articleModel
+        .find({})
+        .then(articles => {
+            res.render("favorites", { articles });
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'could not retrieve articles in database' });
+        })
 });
 
 app.post('/favorites', (req, res) => {
+    const newSourceToDB = req.body.source;
+    const newArticleToDb = req.body.article;
+    const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb)
     articleModel
-        .create(req.body.article)
+        .create(mergedArticle)
         .then(article => {
             const { author, title, description, url, urlToImage, _id } = article;
             res.status(201).json({ author, title, description, url, urlToImage, id: _id });
-            res.send(article)
+            res.send(body);
         })
         .catch(err => {
             res.status(500).json({ error: 'could not save articles in database' });
         });
 })
 
-app.put('/favorites/:id', (req, res) => {
-    res.send({ type: "UPDATE" });
-});
+// app.put('/favorites/:id', (req, res) => {
+//     articleModel.findByIdAndUpdate({ _id: req.params.id })
+// });
 
 app.delete('/favorites/:id', (req, res, next) => {
     articleModel.findByIdAndRemove({ _id: req.params.id })
         .then(function(article) {
-            res.send(article);
+            res.send(article).status(204);
         })
         .catch(err => {
             res.status(500).json({ error: 'could not delete' });
         });
-    // articleModel
-    //     .findByIdAndRemove(req.body.article.id, function(req, res) {
-    //         res.status(202).redirect('/favorites')
-    //     });
 });
 
 module.exports = { app, runServer, closeServer };

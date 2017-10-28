@@ -1,7 +1,6 @@
 $(document).ready(function() {
     getArticles().then(function(response) {
         STORE.response = response;
-        console.log(STORE.response);
         render();
         handleAddArticleToSaved();
     });
@@ -25,7 +24,7 @@ function generateArticles(articles, articleIndex, source) {
         </a>
     </div>
     <div class="card-text">${articles.description}</div>
-    <button class="delete" onClick='document.location.reload(true)' alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;"  /> </button>
+    <button class="delete" onClick='document.location.reload(true)' alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;" /> </button>
     <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:30px;height:30px;" /> </button> 
     <div class='haha'> </div>
     <div class="form-box">
@@ -57,7 +56,6 @@ function handleAddArticleToSaved() {
             },
             body: JSON.stringify(newArticle),
         }).then(response => {
-            console.log(response);
             return response.json();
         }).catch(error => {
             console.log('request failed', error)
@@ -65,18 +63,6 @@ function handleAddArticleToSaved() {
     });
 }
 
-// fetch('', {
-//     method: 'post',
-//     headers: {
-//         'content-type': 'application/json'
-//     },
-//     body: JSON.stringify(newArticle),
-// }).then(response => {
-//     return response.json();
-// }).catch(error => {
-//     console.log('request failed', error)
-// })
-// });
 
 function getArticleFromElement(element) {
     const source = element.data('item-source');

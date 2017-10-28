@@ -7,7 +7,8 @@ const articleModelSchema = new mongoose.Schema({
     description: { type: String, required: false },
     url: { type: String, required: true },
     urlToImage: { type: String, required: false },
-    notes: { type: String, required: false }
+    notes: { type: String, required: false },
+    source: { type: String, required: true }
 });
 
 

@@ -16,22 +16,18 @@ $(document).ready(function() {
 function renderSaved(source) {
     const favoritesArray = JSON.parse(localStorage.savedArticlesCollection);
     const foo = favoritesArray.map((articleAndSource, index) => generateArticles(articleAndSource.article, index, articleAndSource.source));
-
-    // const foo = favoritesArray.map(articles =>
-    //     generateArticlesString(articles, source));
-    // const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
     $('.faved').html(foo);
 }
 
 function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
-        // console.log(storageContainer);
-        // const storageContainer = localStorage.getItem('savedArticlesCollection');
-        // const openedContainer = JSON.parse(storageContainer);
-        // const itemToBeRemoved = getIndexFromElement($(this).parent());
-        // openedContainer.splice(itemToBeRemoved, 1);
-        // const newlySplicedArray = JSON.stringify(openedContainer);
-        // localStorage.setItem('savedArticlesCollection', newlySplicedArray);
+        console.log(storageContainer);
+        const storageContainer = localStorage.getItem('savedArticlesCollection');
+        const openedContainer = JSON.parse(storageContainer);
+        const itemToBeRemoved = getIndexFromElement($(this).parent());
+        openedContainer.splice(itemToBeRemoved, 1);
+        const newlySplicedArray = JSON.stringify(openedContainer);
+        localStorage.setItem('savedArticlesCollection', newlySplicedArray);
         $.ajax({
             url: 'https://localhost:8080/favorites/' + id,
             type: 'DELETE',
