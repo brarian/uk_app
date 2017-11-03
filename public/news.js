@@ -26,12 +26,10 @@ function generateArticles(articles, articleIndex, source) {
     <div class="card-text">${articles.description}</div>
     <button class="delete" onClick='document.location.reload(true)' alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;" /> </button>
     <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:30px;height:30px;" /> </button> 
-    <div class='haha'> </div>
-    <div class="form-box">
     <form class='comment-form'>
-        <textarea class='comment-value' rows="3" cols="45" placeholder="Add a note"></textarea>
-        <input type="submit" class="notes-enter comment-btn"  value="Enter">
-    </form>
+    <textarea class='comment-value' rows="3" cols="65">Enter comment</textarea>
+    <input type="submit" class="notes-enter comment-btn"  value="Enter">
+  </form>
     </div>
     </div>`;
 }
