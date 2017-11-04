@@ -23,20 +23,46 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="newsfeed.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/newsfeed">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="favorites.html">Favorites</a>
+                    <a class="nav-link" href="/favorites">Favorites</a>
                 </li>
             </ul>
         </div>
     </nav>
     <h1>NOTED! <br> favorites</h1>
-    <section class="faved"></section>
-    <script type="text/javascript" src="favorites.js"></script>
-    <script type="text/javascript" src="api.js"></script>
-    <script type="text/javascript" src="news.js"></script>
-    <!-- <script type="text/javascript" src="mockdata.js"></script> -->
+    <section class="faved">
+        <% articles.forEach(function(article) { %>
+            <div class="card" style="max-width: 35rem; top:40px;">
+                <div class="card-title" style="margin-bottom: -0.25rem;">
+                    <a target="_blank" href="<%=article.url%>">
+                        <%=article.title%>
+                    </a>
+                </div>
+                <div class="writer ">
+                    <%=article.author%> <span class="source"><%=article.source%><span></div>
+                <div class="image">
+                    <a target="_blank" href="<%=article.url%>">
+                    <img class="img-thumbnail " src="<%=article.urlToImage%>" alt="Responsive Image "></img>
+                    </a>
+                </div>
+                <div class="card-text ">
+                    <%=articles.description%>
+                </div>
+                <button class="delete" onClick="document.location.reload(true)" alt="delete from favorites "> <img src="minus.png " style="width:30px;height:30px;"> <div id=articleID><%=article.id%></div> </button>
+                        <button class="add "> <img src="plus.png " alt="add to favorites button " style="width:30px;height:30px; " /> </button>
+                        <div class="haha"> </div>
+                        <div class="form-box ">
+                            <form class='comment-form'>
+                                <textarea class='comment-value' rows="3 " cols="45 " placeholder="Add a note "></textarea>
+                                <input type="submit " class="notes-enter comment-btn " value="Enter ">
+                            </form>
+                        </div>
+                </div>
+                <% }); %>
+    </section>
+    <script type="text/javascript " src="favorites.js "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js " integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb " crossorigin="anonymous "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js " integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn " crossorigin="anonymous "></script>
 

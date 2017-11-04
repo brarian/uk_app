@@ -11,32 +11,35 @@ $(document).ready(function() {
     renderSaved();
     handleDeleteFromSaved();
     addAComment();
+    showID();
 });
 
 function renderSaved(source) {
     const favoritesArray = JSON.parse(localStorage.savedArticlesCollection);
     const foo = favoritesArray.map((articleAndSource, index) => generateArticles(articleAndSource.article, index, articleAndSource.source));
-
-    // const foo = favoritesArray.map(articles =>
-    //     generateArticlesString(articles, source));
-    // const foo = generateArticlesString(JSON.parse(localStorage.savedArticlesCollection));
     $('.faved').html(foo);
 }
 
 function handleDeleteFromSaved() {
     $('.delete').on('click', function() {
-        // console.log(storageContainer);
-        // const storageContainer = localStorage.getItem('savedArticlesCollection');
-        // const openedContainer = JSON.parse(storageContainer);
-        // const itemToBeRemoved = getIndexFromElement($(this).parent());
-        // openedContainer.splice(itemToBeRemoved, 1);
-        // const newlySplicedArray = JSON.stringify(openedContainer);
-        // localStorage.setItem('savedArticlesCollection', newlySplicedArray);
+        return fetch('http://localhost:8080/favorites/' + article.id, {
+            method: 'DELETE'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log('request failed', error);
+        })
+        const storageContainer = localStorage.getItem('savedArticlesCollection');
+        const openedContainer = JSON.parse(storageContainer);
+        const itemToBeRemoved = getIndexFromElement($(this).parent());
+        openedContainer.splice(itemToBeRemoved, 1);
+        const newlySplicedArray = JSON.stringify(openedContainer);
+        localStorage.setItem('savedArticlesCollection', newlySplicedArray);
         $.ajax({
-            url: 'https://localhost:8080/favorites/' + id,
+            url: 'https://localhost:8080/favorites/',
             type: 'DELETE',
             dataType: 'json',
-            data: {},
+            data: 'ajax=1&delete=' + parent.data("item-id").replace('record-', ''),
             contentType: 'application/json',
             success: function(response) {
                 console.log('deleted this id ', id);
@@ -45,15 +48,6 @@ function handleDeleteFromSaved() {
                 console.log('could not delete ', itemToBeRemoved);
             }
         });
-        // fetch('/favorites/' + _id, {
-        //         method: 'delete',
-        //         mode: 'CORS',
-        //         headers: {
-        //             Accept: 'application/JSON',
-        //             'Content-Type': 'application/JSON'
-        //         },
-        //     })
-        //     .then(response => response.json());
         renderSaved();
     });
 };
@@ -67,8 +61,7 @@ function addAComment() {
     $('.comment-form').submit(function(event) {
         event.preventDefault();
         const Strings = $('.comment-value').val();
-        console.log(Strings);
-        $('.haha').append("<li>" + Strings + " </li>");
         saveComment(Strings);
+        $('.haha').append("<li>" + Strings + " </li>");
     });
 }
