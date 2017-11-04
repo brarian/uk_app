@@ -210,7 +210,6 @@ let server;
 
 // this function connects to our database, then starts the server
 function runServer(databaseUrl = config.DATABASE_URL, port = 8080) {
-
     return new Promise((resolve, reject) => {
         mongoose.connect(databaseUrl, err => {
             if (err) {
@@ -252,8 +251,7 @@ if (require.main === module) {
 
 
 //endpoints 
-app.get('/favorites', (req, res) => { <<
-    << << < HEAD
+app.get('/favorites', (req, res) => {
     articleModel.find({})
         .then(articles => {
             res.send(articles);
@@ -261,56 +259,51 @@ app.get('/favorites', (req, res) => { <<
         .catch(err => {
             console.log(err);
             res.status(500).json({ error: 'could not retrieve saved articles' });
-        }); ===
-    === =
-    articleModel
-        .find({})
-        .then(articles => {
-            res.render("favorites", { articles });
-        })
-        .catch(err => {
-            res.status(500).json({ error: 'could not retrieve articles in database' });
-        }) >>>
-        >>> > e5b7b4b0c0b8ff05ce0bc1d0c9104b51184ced64
+        });
+    //     articleModel
+    //         .find({})
+    //         .then(articles => {
+    //             res.render("favorites", { articles });
+    //         })
+    //         .catch(err => {
+    //             res.status(500).json({ error: 'could not retrieve articles in database' });
+    //         })
 });
 
 app.post('/favorites', (req, res) => {
-            const newSourceToDB = req.body.source;
-            const newArticleToDb = req.body.article; <<
-            << << < HEAD
-            const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb);
-            console.log(mergedArticle);
+    const newSourceToDB = req.body.source;
+    const newArticleToDb = req.body.article;
+    const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb);
+    articleModel
+        .create(mergedArticle)
+        .then(article => {
+            res.status(201).json({ article });
+            const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb)
             articleModel
                 .create(mergedArticle)
                 .then(article => {
-                    res.status(201).json({ article }); ===
-                    === =
-                    const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb)
-                    articleModel
-                        .create(mergedArticle)
-                        .then(article => {
-                            const { author, title, description, url, urlToImage, _id } = article;
-                            res.status(201).json({ author, title, description, url, urlToImage, id: _id });
-                            res.send(body); >>>
-                            >>> > e5b7b4b0c0b8ff05ce0bc1d0c9104b51184ced64
-                        })
-                        .catch(err => {
-                            res.status(500).json({ error: 'could not save articles in database' });
-                        });
+                    const { author, title, description, url, urlToImage, _id } = article;
+                    res.status(201).json({ author, title, description, url, urlToImage, id: _id });
+                    res.send(body);
+                    e5b7b4b0c0b8ff05ce0bc1d0c9104b51184ced64
                 })
+                .catch(err => {
+                    res.status(500).json({ error: 'could not save articles in database' });
+                });
+        })
 
-            // app.put('/favorites/:id', (req, res) => {
-            //     articleModel.findByIdAndUpdate({ _id: req.params.id })
-            // });
+    // app.put('/favorites/:id', (req, res) => {
+    //     articleModel.findByIdAndUpdate({ _id: req.params.id })
+});
 
-            app.delete('/favorites/:id', (req, res, next) => {
-                articleModel.findByIdAndRemove({ _id: req.params.id })
-                    .then(function(article) {
-                        res.send(article).status(204);
-                    })
-                    .catch(err => {
-                        res.status(500).json({ error: 'could not delete' });
-                    });
-            });
+app.delete('/favorites/:id', (req, res, next) => {
+    articleModel.findByIdAndRemove({ _id: req.params.id })
+        .then(function(article) {
+            res.send(article).status(204);
+        })
+        .catch(err => {
+            res.status(500).json({ error: 'could not delete' });
+        });
+});
 
-            module.exports = { app, runServer, closeServer };
+module.exports = { app, runServer, closeServer };
