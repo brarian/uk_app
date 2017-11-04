@@ -132,9 +132,9 @@ app.get('/newsfeed', (req, res) => {
 });
 
 //route to the user's personal feed page
-app.get('/favorites', (req, res) => {
-    res.render('favorites.html');
-});
+// app.get('/favorites', (req, res) => {
+//     // res.render('favorites.html');
+// });
 
 app.get('/login', passport.authenticate('auth0', {
         responseType: 'code',
@@ -239,29 +239,25 @@ if (require.main === module) {
 
 //endpoints 
 app.get('/favorites', (req, res) => {
-    res.send({ type: "GET" });
-    // articleModel.find({}, function(err, articleModel) {
-    //         articleModelDisplay = {};
-    //         articleModel.forEach(function(articleModel) {
-    //             articleModel[article.id] = article;
-    //         });
-    //     })
-    //     .then(articles => {
-    //         res.render(articles);
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         res.status(500).json({ error: 'could not retrieve saved articles' });
-    //     });
+    articleModel.find({})
+        .then(articles => {
+            res.send(articles);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: 'could not retrieve saved articles' });
+        });
 });
 
 app.post('/favorites', (req, res) => {
+    const newSourceToDB = req.body.source;
+    const newArticleToDb = req.body.article;
+    const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb);
+    console.log(mergedArticle);
     articleModel
-        .create(req.body.article)
+        .create(mergedArticle)
         .then(article => {
-            const { author, title, description, url, urlToImage, _id } = article;
-            res.status(201).json({ author, title, description, url, urlToImage, id: _id });
-            res.send(article)
+            res.status(201).json({ article });
         })
         .catch(err => {
             res.status(500).json({ error: 'could not save articles in database' });

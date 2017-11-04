@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const articleModelSchema = new mongoose.Schema({
+    source: { type: String, required: false },
     author: { type: String, required: false },
     title: { type: String, required: false },
     description: { type: String, required: false },
