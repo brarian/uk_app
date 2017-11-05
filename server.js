@@ -132,9 +132,9 @@ app.get('/newsfeed', (req, res) => {
 });
 
 //route to the user's personal feed page
-// app.get('/favorites', (req, res) => {
-//     // res.render('favorites.html');
-// });
+app.get('/favorites', (req, res) => {
+    res.render('favorites.html');
+});
 
 app.get('/login', passport.authenticate('auth0', {
         responseType: 'code',
@@ -251,10 +251,10 @@ if (require.main === module) {
 
 
 //endpoints 
-app.get('/favorites', (req, res) => {
+app.get('/api/favorites', (req, res) => {
     articleModel.find({})
         .then(articles => {
-            res.send(articles);
+            res.json(articles);
         })
         .catch(err => {
             console.log(err);
@@ -277,29 +277,24 @@ app.post('/favorites', (req, res) => {
     articleModel
         .create(mergedArticle)
         .then(article => {
-            res.status(201).json({ article });
-            const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb)
-            articleModel
-                .create(mergedArticle)
-                .then(article => {
-                    const { author, title, description, url, urlToImage, _id } = article;
-                    res.status(201).json({ author, title, description, url, urlToImage, id: _id });
-                    res.send(body);
-                    e5b7b4b0c0b8ff05ce0bc1d0c9104b51184ced64
-                })
-                .catch(err => {
-                    res.status(500).json({ error: 'could not save articles in database' });
-                });
+            const { author, title, description, url, urlToImage, _id } = article;
+            res.status(201).json({ author, title, description, url, urlToImage, id: _id });
+            res.send(article);
         })
+        .catch(err => {
+            res.status(500).json({ error: 'could not save articles in database' });
+        });
+})
 
-    // app.put('/favorites/:id', (req, res) => {
-    //     articleModel.findByIdAndUpdate({ _id: req.params.id })
-});
+// app.put('/favorites/:id', (req, res) => {
+//     articleModel.findByIdAndUpdate({ _id: req.params.id })
 
-app.delete('/favorites/:id', (req, res, next) => {
+
+app.delete('/api/favorites/:id', (req, res, next) => {
+    console.log(req.params);
     articleModel.findByIdAndRemove({ _id: req.params.id })
         .then(function(article) {
-            res.send(article).status(204);
+            res.json({ message: "deleted!!" }).status(204);
         })
         .catch(err => {
             res.status(500).json({ error: 'could not delete' });

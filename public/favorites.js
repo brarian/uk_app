@@ -8,47 +8,71 @@ function compose() {
 }
 
 $(document).ready(function() {
-    renderSaved();
+    returnJSONData();
     handleDeleteFromSaved();
     addAComment();
-    showID();
 });
 
-function renderSaved(source) {
-    const favoritesArray = JSON.parse(localStorage.savedArticlesCollection);
-    const foo = favoritesArray.map((articleAndSource, index) => generateArticles(articleAndSource.article, index, articleAndSource.source));
-    $('.faved').html(foo);
+// function renderSaved(source) {
+//     const favoritesArray = JSON.parse(localStorage.savedArticlesCollection);
+//     const foo = favoritesArray.map((articleAndSource, index) => generateArticles(articleAndSource.article, index, articleAndSource.source));
+//     $('.faved').html(foo);
+// }
+
+function returnJSONData() {
+    $.ajax({
+        url: '/api/favorites',
+        type: 'GET',
+        // dataType: 'json',
+        contentType: 'application/json',
+        success: function(response) {
+            var template = response.map(function(article) {
+                return ` <div class="card" id="${article._id}">
+                  <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${article.url}'>${article.title}</a></div>
+                  <div class='writer'"> ${article.author} <span class='source'>${article.source}</span></div> 
+                  <div class='image'>
+                      <a target='_blank' href='${article.url}'>
+                          <img class="img-thumbnail" src='${article.urlToImage}' alt="Responsive Image"></img>
+                      </a>
+                  </div>
+                  <div class="card-text">${article.description}</div>
+                  <button class="delete"  alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;" /> </button>
+                  <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:30px;height:30px;" /> </button> 
+                  <form class='comment-form'>
+                  <textarea class='comment-value' rows="3" cols="65">Enter comment</textarea>
+                  <input type="submit" class="notes-enter comment-btn"  value="Enter">
+                </form>
+                  </div>
+                  </div>`;
+            }).join('');
+            $('.faved').append(template);
+        },
+        error: function(response) {
+            console.log('could not delete ', itemToBeRemoved);
+        }
+    })
 }
 
 function handleDeleteFromSaved() {
-    $('.delete').on('click', function() {
-        return fetch('http://localhost:8080/favorites/' + article.id, {
-            method: 'DELETE'
-        }).then(response => {
-            return response.json();
-        }).catch(error => {
-            console.log('request failed', error);
-        })
-        const storageContainer = localStorage.getItem('savedArticlesCollection');
-        const openedContainer = JSON.parse(storageContainer);
-        const itemToBeRemoved = getIndexFromElement($(this).parent());
-        openedContainer.splice(itemToBeRemoved, 1);
-        const newlySplicedArray = JSON.stringify(openedContainer);
-        localStorage.setItem('savedArticlesCollection', newlySplicedArray);
+    $('.faved').on('click', '.delete', function(event) {
+        const articleCard = $(event.target).closest('div.card');
+        const id = articleCard.attr('id');
+        console.log(id);
         $.ajax({
-            url: 'https://localhost:8080/favorites/',
+            url: '/api/favorites/' + id,
             type: 'DELETE',
-            dataType: 'json',
-            data: 'ajax=1&delete=' + parent.data("item-id").replace('record-', ''),
             contentType: 'application/json',
             success: function(response) {
-                console.log('deleted this id ', id);
+                articleCard.remove();
             },
-            error: function(response) {
-                console.log('could not delete ', itemToBeRemoved);
-            }
         });
-        renderSaved();
+        // const storageContainer = localStorage.getItem('savedArticlesCollection');
+        // const openedContainer = JSON.parse(storageContainer);
+        // const itemToBeRemoved = getIndexFromElement($(this).parent());
+        // openedContainer.splice(itemToBeRemoved, 1);
+        // const newlySplicedArray = JSON.stringify(openedContainer);
+        // localStorage.setItem('savedArticlesCollection', newlySplicedArray);
+        // renderSaved();
     });
 };
 
