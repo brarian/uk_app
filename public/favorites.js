@@ -10,14 +10,15 @@ function compose() {
 $(document).ready(function() {
     returnJSONData();
     handleDeleteFromSaved();
-    addAComment();
+    addNote();
+    Add();
 });
 
-// function renderSaved(source) {
-//     const favoritesArray = JSON.parse(localStorage.savedArticlesCollection);
-//     const foo = favoritesArray.map((articleAndSource, index) => generateArticles(articleAndSource.article, index, articleAndSource.source));
-//     $('.faved').html(foo);
-// }
+function Add() {
+    $('#notes').click(function() {
+        alert('addClicked');
+    })
+}
 
 function returnJSONData() {
     $.ajax({
@@ -27,7 +28,7 @@ function returnJSONData() {
         contentType: 'application/json',
         success: function(response) {
             var template = response.map(function(article) {
-                return ` <div class="card" id="${article._id}">
+                return ` <div class="card"> <div id="mongoId">${article._id}</div> 
                   <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${article.url}'>${article.title}</a></div>
                   <div class='writer'"> ${article.author} <span class='source'>${article.source}</span></div> 
                   <div class='image'>
@@ -38,10 +39,9 @@ function returnJSONData() {
                   <div class="card-text">${article.description}</div>
                   <button class="delete"  alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;" /> </button>
                   <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:30px;height:30px;" /> </button> 
-                  <form class='comment-form'>
-                  <textarea class='comment-value' rows="3" cols="65">Enter comment</textarea>
-                  <input type="submit" class="notes-enter comment-btn"  value="Enter">
-                </form>
+                  <input type="text" id="note" />
+                  <button  class="addNote"> Add </button>
+                  <ul id="note-items"></ul>
                   </div>
                   </div>`;
             }).join('');
@@ -57,7 +57,6 @@ function handleDeleteFromSaved() {
     $('.faved').on('click', '.delete', function(event) {
         const articleCard = $(event.target).closest('div.card');
         const id = articleCard.attr('id');
-        console.log(id);
         $.ajax({
             url: '/api/favorites/' + id,
             type: 'DELETE',
@@ -66,26 +65,30 @@ function handleDeleteFromSaved() {
                 articleCard.remove();
             },
         });
-        // const storageContainer = localStorage.getItem('savedArticlesCollection');
-        // const openedContainer = JSON.parse(storageContainer);
-        // const itemToBeRemoved = getIndexFromElement($(this).parent());
-        // openedContainer.splice(itemToBeRemoved, 1);
-        // const newlySplicedArray = JSON.stringify(openedContainer);
-        // localStorage.setItem('savedArticlesCollection', newlySplicedArray);
-        // renderSaved();
     });
 };
 
-function getIndexFromElement(element) {
-    const index = element.data('item-index');
-    return index;
-}
-
-function addAComment() {
-    $('.comment-form').submit(function(event) {
-        event.preventDefault();
-        const Strings = $('.comment-value').val();
-        saveComment(Strings);
-        $('.haha').append("<li>" + Strings + " </li>");
+function addNote() {
+    $('.faved').on('click', '.addNote', function(event) {
+        const noteCard = $(event.target).closest('div.card');
+        const ids = noteCard.attr('#mongoId');
+        const noteText = ('<li><span>' + $("#note").val() + '</span> <small><a href="#edit">Edit</a> ; <a href="#delete">Delete</a></small></li>')
+        console.log($("#note").val());
+        noteCard.append(noteText);
+        $("#note").val("");
     });
 }
+
+$("#add").click(addNote);
+
+$(document).on("click", 'a[href="#edit"]', function() {
+    $(this).closest("li").find("span").prop("contenteditable", true).focus();
+    return false;
+});
+
+$(document).on("click", 'a[href="#delete"]', function() {
+    $(this).closest("li").fadeOut(function() {
+        $(this).remove();
+    });
+    return false;
+});
