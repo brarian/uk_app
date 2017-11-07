@@ -139,10 +139,3 @@ function saveComment(String) {
     localStorage.setItem('savedCommentCollection', JSON.stringify(retrievedComments));
     return Promise.resolve(retrievedComments);
 }
-
-// function saveComment(text) {
-//     var retrievedComment = JSON.parse(localStorage.getItem('commentsSection')) || [];
-//     commentsSection.push(text);
-//     localStorage.setItem('commentsSection'.JSON.stringify(retrievedComment));
-//     return Promise.resolve(retrievedComment);
-// }

@@ -31,6 +31,14 @@ a {
     margin: 0;
 }
 
+.question {
+    width: 80px;
+    height: 60px;
+    position: absolute;
+    right: 9px;
+    top: 21.5%;
+}
+
 .card {
     margin-bottom: 25px;
     top: 40px;
@@ -38,7 +46,7 @@ a {
     text-align: left;
     padding: 20px;
     height: 650px;
-    float: right;
+    float: left;
     margin-right: 45px;
 }
 
@@ -61,8 +69,21 @@ section {
     max-height: 225px;
 }
 
-navbarText {
-    color: black;
+.navbar {
+    background-color: grey;
+    text-decoration-color: white;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+.nav .li {
+    color: white;
 }
 
 element.style {
@@ -78,4 +99,13 @@ element.style {
 
 .add {
     display: none;
+}
+
+.selectedButton {
+    border-color: red;
+    border-width: 7px;
+}
+
+.question.highlight {
+    background: yellow;
 }

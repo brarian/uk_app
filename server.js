@@ -275,9 +275,10 @@ app.post('/favorites', (req, res) => {
     const newArticleToDb = req.body.article;
     const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb);
     articleModel
+    // update mergedArticle, upsert = true 
         .create(mergedArticle)
         .then(article => {
-            const { author, title, description, url, urlToImage, _id } = article;
+            const { author, title, description, url, urlToImage, _id, notes } = article;
             res.status(201).json({ author, title, description, url, urlToImage, id: _id });
             res.send(article);
         })
@@ -293,7 +294,7 @@ app.post('/favorites', (req, res) => {
 app.delete('/api/favorites/:id', (req, res, next) => {
     console.log(req.params);
     articleModel.findByIdAndRemove({ _id: req.params.id })
-        .then(function(article) {
+        .then(article => {
             res.json({ message: "deleted!!" }).status(204);
         })
         .catch(err => {
@@ -301,4 +302,18 @@ app.delete('/api/favorites/:id', (req, res, next) => {
         });
 });
 
+// notes part of project
+app.put('/api/favorites/:id', (req, res) => {
+    const note = req.body.note;
+    console.log(note);
+    console.log("id", req.params.id);
+    articleModel
+        .findByIdAndUpdate(req.params.id, { notes: note })
+        .then(article => {
+            res.status(200).json({ message: "updated note" });
+        })
+        .catch(error => {
+            res.statusMessage(500).json({ error: 'could not update note' })
+        })
+})
 module.exports = { app, runServer, closeServer };
