@@ -25,7 +25,7 @@ function returnJSONData() {
         .then((response) => response.json())
         .then(function(response) {
             var template = response.map(function(article) {
-                return ` <div class="card container-fluid" id=${article._id} style="max-width: 35rem; top:40px;"> 
+                return ` <div class="card container-fluid" style="max-width: 60rem; top:55px;"  id=${article._id} "> 
                   <div class="card-title" ><a target='_blank' href='${article.url}'>${article.title}</a></div>
                   <div class='writer'"> ${article.author} <span class='source'>${article.source}</span></div> 
                   <div class='image'>
@@ -35,13 +35,12 @@ function returnJSONData() {
                   </div>
                   <div class="card-text">${article.description}</div>
                   <button class="delete"  alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;" /> </button>
-                  <button class="add"> <img src="plus.png" alt="add to favorites button" style="width:30px;height:30px;" /> </button> 
                  <div> 
                     <input type="text" style= "width: 406px;" class="note" /> 
                       <button style="width: 56px;"class="addNote"> Add 
                       </button> 
                 </div>
-                  <ul id="note-items"></ul>
+                  <ul class= "notes">${article.notes}</ul>
                   </div>
                   </div>`;
             }).join('');
@@ -77,6 +76,7 @@ function addNote() {
                 "Content-Type": "application/json"
             },
         }).then(function(response) {
+            saveComment(noteTextVal);
             articleCard.append(noteText);
             $("#note").val("");
         });

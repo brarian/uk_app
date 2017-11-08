@@ -312,11 +312,12 @@ app.put('/api/favorites/:id', (req, res) => {
     console.log(note);
     console.log("id", req.params.id);
     articleModel
-        .update({ _id: req.params.id }, { $push: { note: note } })
+        .findByIdAndUpdate(req.params.id, { $push: { notes: note } })
         .then(article => {
             res.status(200).json({ message: "updated note" });
         })
         .catch(error => {
+            console.log(error);
             res.status(500).json({ error: 'could not update note' })
         })
 });
