@@ -47,7 +47,7 @@ function render() {
 function handleAddArticleToSaved() {
     $('.add').one('click', function() {
         const newArticle = getArticleFromElement($(this).parent());
-        fetch('http://localhost:8080/favorites', {
+        fetch('/favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

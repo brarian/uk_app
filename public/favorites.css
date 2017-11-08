@@ -69,20 +69,7 @@ section {
     max-height: 225px;
 }
 
-.navbar {
-    background-color: grey;
-    text-decoration-color: white;
-}
-
-.navbar-brand {
-    color: white;
-}
-
 a {
-    color: white;
-}
-
-.nav .li {
     color: white;
 }
 
@@ -99,13 +86,4 @@ element.style {
 
 .add {
     display: none;
-}
-
-.selectedButton {
-    border-color: red;
-    border-width: 7px;
-}
-
-.question.highlight {
-    background: yellow;
 }

@@ -77,7 +77,6 @@ function addNote() {
                 "Content-Type": "application/json"
             },
         }).then(function(response) {
-            saveComment(noteTextVal);
             articleCard.append(noteText);
             $("#note").val("");
         });

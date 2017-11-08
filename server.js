@@ -48,6 +48,10 @@ app.use(function(req, res, next) {
 });
 
 
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    // application specific logging, throwing an error, or other logic here
+});
 
 // This will configure Passport to use Auth0
 const strategy = new Auth0Strategy({
@@ -308,12 +312,14 @@ app.put('/api/favorites/:id', (req, res) => {
     console.log(note);
     console.log("id", req.params.id);
     articleModel
-        .findByIdAndUpdate(req.params.id, { notes: note })
+        .update({ _id: req.params.id }, { $push: { note: note } })
         .then(article => {
             res.status(200).json({ message: "updated note" });
         })
         .catch(error => {
-            res.statusMessage(500).json({ error: 'could not update note' })
+            res.status(500).json({ error: 'could not update note' })
         })
-})
+});
+
+
 module.exports = { app, runServer, closeServer };
