@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .container {
     margin-top: 75px;
 }
@@ -21,36 +25,25 @@ a {
 
 .delete {
     position: absolute;
-    /* right: 89px;
+    right: 10px;
     width: 75px;
     border-radius: 58%;
     border: none;
-    top: 56.5%;
+    top: 15.5%;
     background-color: white;
     border: 0;
-    margin: 0; */
-}
-
-.question {
-    width: 80px;
-    height: 60px;
-    position: absolute;
-    right: 9px;
-    top: 21.5%;
+    margin: 0;
 }
 
 .card {
     margin-bottom: 25px;
-    top: 30px;
-    bottom: 60px;
-    height: 520px;
+    top: 40px;
+    height: 450px;
     text-align: left;
     padding: 20px;
     height: 650px;
-    float: left;
+    float: right;
     margin-right: 45px;
-    border: 1px grey solid;
-    border-radius: 2%;
 }
 
 h1 {
@@ -72,8 +65,8 @@ section {
     max-height: 225px;
 }
 
-a {
-    color: white;
+navbarText {
+    color: black;
 }
 
 element.style {
@@ -89,4 +82,8 @@ element.style {
 
 .add {
     display: none;
+}
+
+.title {
+    margin-top: 60px;
 }

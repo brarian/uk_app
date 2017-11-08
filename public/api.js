@@ -9,9 +9,14 @@ function getArticles() {
 
     const queryParams = [Object.assign({ "source": "techcrunch", "sortBy": "latest" }, params),
         Object.assign({ "source": "engadget", "sortBy": "latest" }, params),
-        Object.assign({ "source": "hacker-news", "sortBy": "latest" }, params),
         Object.assign({ "source": "recode", "sortBy": "top" }, params),
-        Object.assign({ "source": "techradar", "sortBy": "top" }, params)
+        Object.assign({ "source": "techradar", "sortBy": "top" }, params),
+        Object.assign({ "source": "ars-technica", "sortBy": "top" }, params),
+        Object.assign({ "source": "the-next-web", "sortBy": "latest" }, params),
+        Object.assign({ "source": "the-verge", "sortBy": "latest" }, params)
+
+
+
     ];
 
     const allQueries = queryParams.map(queryString =>
