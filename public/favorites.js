@@ -25,7 +25,9 @@ function returnJSONData() {
         .then((response) => response.json())
         .then(function(response) {
             var template = response.map(function(article) {
-                return ` <div class="card container-fluid" style="max-width: 35rem; top:40px; margin-right: 1%;" id=${article._id} "> 
+                return `
+                <div class="col-sm-6">
+                <div class="card container-fluid" style="top:40px; " id=${article._id} "> 
                   <div class="card-title" ><a target='_blank' href='${article.url}'>${article.title}</a></div>
                   <div class='writer'"> ${article.author} <span class='source'>${article.source}</span></div> 
                   <div class='image'>
@@ -35,14 +37,16 @@ function returnJSONData() {
                   </div>
                   <button class="delete"  alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;" /> </button>
                   <div class="card-text">${article.description}</div>
-                 <div> 
+                 <div class="noteInput"> 
                     <input type="text" style= "width: 406px;" class="note" /> 
                       <button style="width: 56px;"class="addNote"> Add 
                       </button> 
                 </div>
+                <div class=noteBox>
                   <ul class= "notes">${article.notes}</ul>
+                </div>
                   </div>
-                  </div>`;
+                  </div> </div> `;
             }).join('');
             $('.faved').append(template);
         }).catch(function(error) {

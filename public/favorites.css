@@ -42,8 +42,8 @@ a {
     text-align: left;
     padding: 20px;
     height: 650px;
-    float: right;
-    margin-right: 45px;
+    float: left;
+    
 }
 
 h1 {
@@ -76,7 +76,7 @@ element.style {
 .source {
     background-color: #504d4d;
     color: white;
-    padding: 4px;
+    padding: 6px;
     border-radius: 5px;
 }
 
@@ -86,4 +86,21 @@ element.style {
 
 .title {
     margin-top: 60px;
+}
+
+.noteBox{
+    margin-top: 20px;
+}
+
+.input {
+    margin-top: 25px;
+}
+
+.noteInput{
+    margin-top: 20px;  
+}
+
+ul.notes{
+    padding: 0;
+    list-style-type: none;
 }
