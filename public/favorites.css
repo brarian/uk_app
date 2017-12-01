@@ -143,10 +143,11 @@ ul.notes{
          width: 150px;
      }
 }
+
 .navigationbar {
     overflow: hidden;
     background-color: black;
-    width: 100%;
+    width: 150%;
     position: absolute;
     top: 0; 
 }
@@ -165,4 +166,31 @@ ul.notes{
     margin: -5px;
     width: 130px;
     height: 40px;
+}
+
+
+@media screen and (max-width: 450px){
+    .navigationbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 7px 10px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .title {
+        margin-top: 49px;
+    }
+    .delete {
+        position: absolute;
+        right: 0px;
+        width: 75px;
+        border-radius: 58%;
+        border: none;
+        top: 9.5%;
+        background-color: white;
+        border: 0;
+        margin: 0;
+    }
 }

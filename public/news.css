@@ -267,13 +267,12 @@ code {
 
 }
 
-@media (max-width: 600px) 
-{
+@media (max-width: 600px) {
   #alertBox {
 	position:relative;
 	width:90%;
   top:30%;
-}
+    }
 }
 
 @media screen and (max-width: 1151px){
@@ -293,6 +292,7 @@ code {
      }
 
 }
+
 
 .navigationbar {
     overflow: overlay;
@@ -346,7 +346,32 @@ code {
         top: 18.5%;
     }
     .add {
-        width: 25px;
-        height: 25px;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .card{
+    max-width: 32rem;
+    }
+
+}
+
+@media screen and (max-width: 394px){
+    .card{
+    max-width: 32rem;
+    }
+    .navigationbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 7px 10px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .title {
+        margin-top: 49px;
     }
 }
