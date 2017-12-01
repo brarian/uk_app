@@ -3,7 +3,8 @@
 }
 
 .container {
-    margin-top: 75px;
+    width: 34em;
+    display: flex;
 }
 
 .card-title {
@@ -42,13 +43,14 @@ a {
     text-align: left;
     padding: 20px;
     height: 650px;
-    float: left;
-    
+    width: 37em;
+    margin-left: 2.5%;
 }
-
+    
 h1 {
     text-align: center;
-    padding-top: 35px;}
+    padding-top: 35px;
+}
 
 section {
     margin-top: -25px;
@@ -84,7 +86,8 @@ element.style {
 }
 
 .title {
-    margin-top: 60px;
+    margin-top: 70px;
+    margin-bottom: 30px;
 }
 
 .noteBox{
@@ -102,4 +105,64 @@ element.style {
 ul.notes{
     padding: 0;
     list-style-type: none;
+}
+
+/* .container-pack {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+} */
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1245px){
+    .card {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+     }
+     .note{
+         width: 200px;
+     }
+}
+
+@media screen and (max-width: 760px){
+    .card {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+     }
+    .note{
+         width: 150px;
+     }
+}
+.navigationbar {
+    overflow: hidden;
+    background-color: black;
+    width: 100%;
+    position: absolute;
+    top: 0; 
+}
+
+.navigationbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.logo {
+    margin: -5px;
+    width: 130px;
+    height: 40px;
 }
