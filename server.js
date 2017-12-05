@@ -126,6 +126,7 @@ app.get('/', (req, res) => {
     res.render('newsfeed.ejs', {user: req.user} )
 });
 
+
 // app.use('/', routes);
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 app.get('/', ensureLoggedIn, function(req, res, next) {
@@ -134,8 +135,6 @@ app.get('/', ensureLoggedIn, function(req, res, next) {
         userProfile: JSON.stringify(req.user, null, '  ')
     });
 });
-
-
 
 //route to the user's personal feed page
 app.get('/favorites', (req, res) => {
