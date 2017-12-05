@@ -121,33 +121,41 @@ app.use(function(req, res, next) {
     next();
 });
 
-// app.use('/', routes);
-// app.use('/user', user);
-// need to move when making my routes
-const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
-app.get('/', ensureLoggedIn, function(req, res, next) {
-    console.log(req.user);
-    res.redirect('./newsfeed');
+//route to newsfeed
+app.get('/', (req, res) => {
+    res.render('newsfeed.ejs', {user: req.user} )
 });
 
-//route to newsfeed
-app.get('/newsfeed', (req, res) => {
-    res.render('newsfeed.html')
+// app.use('/', routes);
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+app.get('/', ensureLoggedIn, function(req, res, next) {
+    res.render('user', {
+        user: req.user,
+        userProfile: JSON.stringify(req.user, null, '  ')
+    });
 });
+
+
 
 //route to the user's personal feed page
 app.get('/favorites', (req, res) => {
     res.render('favorites.html');
 });
 
-app.get('/login', passport.authenticate('auth0', {
-        responseType: 'code',
+app.get('/login', 
+    passport.authenticate('auth0', {
+        clientID: env.AUTH0_CLIENT_ID,
+        domain: env.AUTH0_DOMAIN,
+        redirectUri: env.AUTH0_CALLBACK_URL,
         audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
+        responseType: 'code',
         scope: 'openid profile'
-    }),
+    }), 
     function(req, res) {
-        res.redirect("/");
-    });
+        res.redirect('/');
+    }
+);
+
 
 app.get('/logout', function(req, res) {
     req.logout();
@@ -159,7 +167,7 @@ app.get('/callback',
         failureRedirect: '/failure'
     }),
     function(req, res) {
-        res.redirect(req.session.returnTo || '/user');
+        res.redirect(req.session.returnTo || '/');
     }
 );
 
