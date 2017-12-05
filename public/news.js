@@ -14,7 +14,6 @@ function generateArticlesString(articles, source) {
 };
 
 
-{/* <input type="button" value="add" class="add" onclick="alert('');"> */}
 function generateArticles(articles, articleIndex, source) {
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source} >
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>

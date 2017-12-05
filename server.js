@@ -121,6 +121,11 @@ app.use(function(req, res, next) {
     next();
 });
 
+
+//route to newsfeed
+app.get('/', (req, res) => {
+    res.render('newsfeed.html')
+});
 // app.use('/', routes);
 // app.use('/user', user);
 // need to move when making my routes
@@ -128,11 +133,6 @@ const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 app.get('/', ensureLoggedIn, function(req, res, next) {
     console.log(req.user);
     res.redirect('./newsfeed');
-});
-
-//route to newsfeed
-app.get('/newsfeed', (req, res) => {
-    res.render('newsfeed.html')
 });
 
 //route to the user's personal feed page
