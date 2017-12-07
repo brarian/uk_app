@@ -23,8 +23,6 @@ const env = {
 const { PORT } = require('./config');
 const { articleModel } = require('./articleModels');
 
-// const apiRouter = require('./apiRouter');
-
 mongoose.Promise = global.Promise;
 
 app.listen(process.env.PORT || 3000)
@@ -121,17 +119,17 @@ app.use(function(req, res, next) {
     next();
 });
 
-//route to newsfeed
+
 app.get('/', (req, res) => {
-    res.render('newsfeed.ejs', {user: req.user} )
+    if (req.user) {
+        const user = req.user._json.sub;
+    } 
+    res.render('newsfeed.ejs', {user: req.user});
 });
 
-
-// app.use('/', routes);
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 app.get('/', ensureLoggedIn, function(req, res, next) {
     res.render('user', {
-        user: req.user,
         userProfile: JSON.stringify(req.user, null, '  ')
     });
 });
@@ -148,13 +146,12 @@ app.get('/login',
         redirectUri: env.AUTH0_CALLBACK_URL,
         audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
         responseType: 'code',
-        scope: 'openid profile'
+        scope: 'id_token'
     }), 
     function(req, res) {
         res.redirect('/');
     }
 );
-
 
 app.get('/logout', function(req, res) {
     req.logout();
@@ -181,45 +178,8 @@ app.get('/failure', function(req, res) {
 });
 
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//     const err = new Error('Not Found');
-//     err.status = 404;
-//     next(err);
-// });
-
-// // error handlers
-
-
-// // development error handler
-// // will print stacktrace
-
-// if (app.get('env') === 'development') {
-//     app.use(function(err, req, res, next) {
-//         res.status(err.status || 500);
-//         res.render('error', {
-//             message: err.message,
-//             error: err
-//         });
-//     });
-// }
-
-
-
-// production error handler
-// no stacktraces leaked to user
-
-// app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//         message: err.message,
-//         error: {}
-//     });
-// });
-
 let server;
 
-// this function connects to our database, then starts the server
 function runServer(databaseUrl = config.DATABASE_URL, port = 8080) {
     return new Promise((resolve, reject) => {
         mongoose.connect(databaseUrl, err => {
@@ -238,8 +198,6 @@ function runServer(databaseUrl = config.DATABASE_URL, port = 8080) {
     });
 }
 
-// this function closes the server, and returns a promise. we'll
-// use it in our integration tests later.
 function closeServer() {
     return mongoose.disconnect().then(() => {
         return new Promise((resolve, reject) => {
@@ -257,11 +215,7 @@ function closeServer() {
 if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
-//move endpoints to router folder 
-//move not static files out of public 
 
-
-//endpoints 
 app.get('/api/favorites', (req, res) => {
     articleModel.find({})
         .then(articles => {
@@ -271,36 +225,24 @@ app.get('/api/favorites', (req, res) => {
             console.log(err);
             res.status(500).json({ error: 'could not retrieve saved articles' });
         });
-    //     articleModel
-    //         .find({})
-    //         .then(articles => {
-    //             res.render("favorites", { articles });
-    //         })
-    //         .catch(err => {
-    //             res.status(500).json({ error: 'could not retrieve articles in database' });
-    //         })
 });
 
 app.post('/favorites', (req, res) => {
+    console.log(req.user);
     const newSourceToDB = req.body.source;
     const newArticleToDb = req.body.article;
     const mergedArticle = Object.assign({ source: newSourceToDB }, newArticleToDb);
-    articleModel
-    // update mergedArticle, upsert = true 
+    articleModel 
         .create(mergedArticle)
         .then(article => {
             const { author, title, description, url, urlToImage, _id, notes } = article;
             res.status(201).json({ author, title, description, url, urlToImage, id: _id });
-            res.send(article);
+            res.send(article);   
         })
         .catch(err => {
             res.status(500).json({ error: 'could not save articles in database' });
         });
 })
-
-// app.put('/favorites/:id', (req, res) => {
-//     articleModel.findByIdAndUpdate({ _id: req.params.id })
-
 
 app.delete('/api/favorites/:id', (req, res, next) => {
     console.log(req.params);
@@ -313,7 +255,6 @@ app.delete('/api/favorites/:id', (req, res, next) => {
         });
 });
 
-// notes part of project
 app.put('/api/favorites/:id', (req, res) => {
     const note = req.body.note;
     console.log(note);

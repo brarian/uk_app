@@ -15,6 +15,11 @@ function generateArticlesString(articles, source) {
 
 
 function generateArticles(articles, articleIndex, source) {
+    if (!user) {
+        $('.add').on('click', function() {
+            alert("please log in or you will no be able to use this")
+        });
+    }
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source} >
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
     <div class='writer'"> ${articles.author} <span class='source'>${source}</span></div> 
