@@ -13,13 +13,7 @@ function generateArticlesString(articles, source) {
     return items.join("");
 };
 
-
 function generateArticles(articles, articleIndex, source) {
-    if (!user) {
-        $('.add').on('click', function() {
-            alert("please log in or you will no be able to use this")
-        });
-    }
     return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source} >
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
     <div class='writer'"> ${articles.author} <span class='source'>${source}</span></div> 
@@ -29,7 +23,7 @@ function generateArticles(articles, articleIndex, source) {
         </a>
     </div>
     <div class="card-text">${articles.description}</div>
-    <button class="add" onclick="alert('');"> <img src="plus.png" alt="add to favorites button" style="width:20px;height:20px;" /><a href="#ex1" rel="modal:open"></a> </button> 
+    <button class="add" id ="addbutton" onclick="alert('');"> <img src="plus.png" alt="add to favorites button" style="width:20px;height:20px;" /><a href="#ex1" rel="modal:open"></a> </button> 
     
     </div>
     </div>`;
