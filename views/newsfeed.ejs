@@ -21,7 +21,16 @@
     <div class="navigationbar">
         <a class="navigationbar-brand" href="/newsfeed"><img class="logo" src="notedLogo.png"> </a>
         <a href="/">newsfeed</a>
-        <a href="/favorites">favorites</a>
+        <% if (loggedIn){ %>
+            <a href="/favorites">favorites</a>
+            <a href="/signout">Sign Out</a>
+            <% }else{ %>
+                <a href="/login">Sign In</a>
+        <% } %>
+        <% if (email){ %>
+            <p style="color:#fff;"> Email : <%= email %></p>
+        <% } %>
+        
     </div>
     <div class="title">
         <h1> newsfeed
