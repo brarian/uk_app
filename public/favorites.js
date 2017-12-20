@@ -13,45 +13,45 @@ $(document).ready(function() {
     addNote();
 });
 
-
 function returnJSONData() {
     fetch('/api/favorites', {
             method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            // headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            // }
         })
         .then((response) => response.json())
         .then(function(response) {
             var template = response.map(function(article) {
-                return `
-                <div class ="card" id="${article._id}">
-                  <div class="card-title" ><a target='_blank' href='${article.url}'>${article.title}</a></div>
+                return `<div class="card container-fluid"  id=${article._id} "> 
+                  <div class="card-title"><a target='_blank' href='${article.url}'>${article.title}</a></div>
                   <div class='writer'"> ${article.author} <span class='source'>${article.source}</span></div> 
                   <div class='image'>
-                  <a target='_blank' href='${article.url}'>
-                  <img class="img-thumbnail" src='${article.urlToImage}' alt="Responsive Image"></img>
-                  </a>
+                      <a target='_blank' href='${article.url}'>
+                          <img class="img-thumbnail" src='${article.urlToImage}' alt="Responsive Image"></img>
+                      </a>
                   </div>
-                  <button class="delete"  alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;" /> </button>
                   <div class="card-text">${article.description}</div>
-                 <div class="noteInput"> 
+                  <button class="delete"  alt="delete from favorites" > <img src="minus.png" style="width:30px;height:30px;" /> </button>
+                 <div> 
                     <input type="text" style= "width: 406px;" class="note" /> 
                       <button style="width: 56px;"class="addNote"> Add 
                       </button> 
                 </div>
-                <div class=noteBox>
-                  <ul class= "notes">${article.notes}</ul>
-                </div>
+                  <ul class= "notes">
+
+                  ${article.notes.map(note => `<li> ${note} </li>`).join('')}
+              
+                </ul>
+                  </div>
                   </div>`;
             }).join('');
             $('.faved').append(template);
         }).catch(function(error) {
-            console.log('could not delete ', error);
+            console.log(error);
         });
 }
-
 
 function handleDeleteFromSaved() {
     $('.faved').on('click', '.delete', function(event) {

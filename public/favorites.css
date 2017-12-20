@@ -38,13 +38,14 @@ a {
 
 .card {
     margin-bottom: 25px;
+    margin-right: 10px !important;
     top: 40px;
     height: 450px;
     text-align: left;
     padding: 20px;
     height: 650px;
     width: 37em;
-    margin-left: 2.5%;
+    float: left;
 }
     
 h1 {
@@ -59,6 +60,7 @@ section {
 
 .card-text {
     margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 .img-thumbnail {
@@ -86,8 +88,8 @@ element.style {
 }
 
 .title {
-    margin-top: 70px;
-    margin-bottom: 30px;
+    margin-top: 85px;
+    margin-bottom: 26px;
 }
 
 .noteBox{
@@ -103,8 +105,8 @@ element.style {
 }
 
 ul.notes{
-    padding: 0;
-    list-style-type: none;
+  margin-top: 10px;
+    /* list-style-type: none; */
 }
 
 /* .container-pack {
@@ -193,4 +195,9 @@ ul.notes{
         border: 0;
         margin: 0;
     }
+}
+
+.faved{
+    margin-left: 33px !important;
+
 }

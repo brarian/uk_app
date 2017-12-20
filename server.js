@@ -120,7 +120,6 @@ app.post('/register', (req, res) => {
 });
 
 app.get('/api/users', (req, res) => {
-    // User.collection.drop();
     User.find({})
         .then(users => {
             res.json(users);
@@ -238,9 +237,9 @@ app.get('/signup', (req, res) => {
 //route to the user's personal feed page
 app.get('/favorites', (req, res) => {
     if(req.user){
-        res.render('favorites.html');
-    }else{
-        res.redirect('/');
+        res.render('favorites.ejs');
+    // }else{
+    //     res.redirect('/');
     }
 });
 
@@ -282,12 +281,10 @@ if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
 
-app.get('/api/favorites', passport.authenticate('jwt', {
-    session: false
-}), (req, res) => {
+app.get('/api/favorites', (req, res) => {
     articleModel.find({})
         .then(articles => {
-            res.json(articles + req.user._id);
+            res.json(articles);
         })
         .catch(err => {
             console.log(err);
@@ -299,7 +296,6 @@ app.get('/api/favorites', passport.authenticate('jwt', {
 
 
 app.post('/favorites', (req, res) => {
-    console.log(req.user);
     const newSourceToDB = req.body.source;
     const newArticleToDb = req.body.article;
     const mergedArticle = Object.assign({
