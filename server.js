@@ -23,13 +23,8 @@ app.use(morgan('dev'));
 
 app.use(passport.initialize());
 
-const {
-    PORT
-} = process.env.DATABASE_URL;
-const {
-    articleModel
-} = require('./articleModels');
-const secret =   process.env.secret;
+const { PORT} = require('./config');
+const { articleModel } = require('./articleModels');
 
 mongoose.Promise = global.Promise;
 
@@ -67,7 +62,7 @@ app.use(function (req, res, next) {
     } else {
         let token = req.cookies['APPLOGIN'];
         try {
-            let data = jwt.verify(token, secret);
+            let data = jwt.verify(token, config.secret);
             if (data && data.id) {
                 User
                     .findById(data.id)
@@ -151,7 +146,7 @@ app.post('/authenticate', (req, res) => {
             //check if passowrd matches 
             user.comparePassword(req.body.password, (err, isMatch) => {
                 if (isMatch && !err) {
-                    const token = jwt.sign(user.toObject(), secret, {
+                    const token = jwt.sign(user.toObject(), config.secret, {
                         expiresIn: 10000
                     });
                     res.json({
@@ -208,7 +203,7 @@ app.post('/login', (req, res) => {
                     let usr = {
                         id: user._id
                     };
-                    const token = jwt.sign(usr, secret, {
+                    const token = jwt.sign(usr, config.secret, {
                         expiresIn: 10000
                     });
                     res.cookie('APPLOGIN', token, {
@@ -239,14 +234,12 @@ app.get('/signup', (req, res) => {
 app.get('/favorites', (req, res) => {
     if(req.user){
         res.render('favorites.ejs');
-    // }else{
-    //     res.redirect('/');
     }
 });
 
 let server;
 
-function runServer(database = DATABASE_URL, port = 8080) {
+function runServer(database = config.DATABASE_URL, port = 8080) {
     return new Promise((resolve, reject) => {
         mongoose.connect(database, err => {
             if (err) {
