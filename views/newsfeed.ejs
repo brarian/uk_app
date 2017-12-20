@@ -19,18 +19,13 @@
 
 <body>
     <div class="navigationbar">
-        <a class="navigationbar-brand" href="/newsfeed"><img class="logo" src="notedLogo.png"> </a>
-        <a href="/">newsfeed</a>
+        <a class="navigationbar-brand" href="/"><img class="logo" src="notedLogo.png"> </a>
         <% if (loggedIn){ %>
             <a href="/favorites">favorites</a>
-            <a href="/signout">Sign Out</a>
+            <a href="/signout">sign out</a>
             <% }else{ %>
-                <a href="/login">Sign In</a>
+                <a href="/login">sign in</a>
         <% } %>
-        <% if (email){ %>
-            <p style="color:#fff;"> Email : <%= email %></p>
-        <% } %>
-        
     </div>
     <div class="title">
         <h1> newsfeed

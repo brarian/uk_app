@@ -1,0 +1,370 @@
+body{ background-image: url('/crossword.jpg')}
+
+.delete {
+    display: none;
+}
+
+.comment-form {
+    display: none;
+}
+
+.container {
+    margin-top: 75px;
+}
+
+.card-title {
+    margin-bottom: 0;
+    font-size: 24px;
+    line-height: 25px;
+    margin-bottom: -0.25rem;
+}
+
+.writer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.add {
+    position: absolute;
+    right: 9px;
+    background-color: white;
+    border: 0;
+    margin: 0;
+    width: 27px;
+    border-radius: 58%;
+    border: none;
+    top: 12.5%;
+}
+
+
+.card {
+    margin-bottom: 25px;
+    top: 40px;
+    height: 450px;
+    text-align: left;
+    padding: 20px;
+    float: right;
+    position: relative;
+    margin-right: 25px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 35px;
+}
+
+section {
+    margin-top: -25px;
+    text-align: center;
+    margin-right: 28px;
+}
+
+.card-text {
+    margin-top: 25px;
+}
+
+.img-thumbnail {
+    width: 300px;
+    max-height: 225px;
+}
+
+element.style {
+    height: 65px;
+}
+
+.source {
+    background-color: #504d4d;
+    color: white;
+    padding: 6px;
+    border-radius: 5px;
+}
+
+.comment-form {
+    display: none;
+}
+
+.title {
+    margin-top: 30px;
+}
+
+.explanation {
+    margin-top: 70px;
+    font-size: 12pt;
+    color: white;
+    line-height: 1.3em;
+    text-align: center;
+}
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+#alertBox {
+	position:relative;
+	width:33%;
+	min-height:100px;
+  max-height:400px;
+	margin-top:50px;
+	border:1px solid white;
+	background-color:gray;
+	background-repeat:no-repeat;
+  top:30%;
+}
+
+#modalContainer > #alertBox {
+	position:fixed;
+}
+
+#alertBox h1 {
+	margin:0;
+	font:bold 1em Raleway,arial;
+	background-color: gray;
+	color: black;
+	border-bottom:0px solid green;
+	padding:10px 0 10px 5px;
+}
+
+Box p {
+	height:50px;
+	padding-left:5px;
+  padding-top:30px;
+  text-align:center;
+  vertical-align:middle;
+}
+
+#alertBox #closeBtn {
+	display:block;
+	position:relative;
+	margin:10px auto 10px auto;
+	padding:7px;
+	border:0 none;
+	width:70px;
+	text-transform:uppercase;
+	text-align:center;
+	color:#FFF;
+	background-color: green;
+	border-radius: 0px;
+	text-decoration:none;
+  outline:0!important;
+}
+
+/* unrelated styles */
+
+#mContainer {
+	position:relative;
+	width:600px;
+	margin:auto;
+	padding:5px;
+	border-top:2px solid #fff;
+	border-bottom:2px solid #fff;
+}
+
+h1,h2 {
+	margin:0;
+	padding:4px;
+}
+
+code {
+	font-size:1.2em;
+	color:#069;
+}
+
+#credits {
+	position:relative;
+	margin:25px auto 0px auto;
+	width:350px; 
+	font:0.7em verdana;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	height:90px;
+	padding-top:4px;
+}
+
+#credits img {
+	float:left;
+	margin:5px 10px 5px 0px;
+	border:1px solid #000000;
+	width:80px;
+	height:79px;
+}
+
+.important {
+	background-color: grey;
+	padding:2px;
+
+}
+
+@media (max-width: 600px) {
+  #alertBox {
+	position:relative;
+	width:90%;
+  top:30%;
+    }
+}
+
+@media screen and (max-width: 1151px){
+    .section {
+   
+        margin-left: 15%;
+        margin-right: 15%;
+     }
+
+}
+
+@media screen and (max-width: 1151px){
+    .section {
+   
+        margin-left: 15%;
+        margin-right: 18%;
+     }
+
+}
+
+
+.navigationbar {
+    overflow: overlay;
+        background-color: black;
+    top: 0;
+    width: 100%; 
+    position: absolute;
+    top: 0;
+}
+
+.navigationbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.logo {
+    margin: -5px;
+    width: 130px;
+    height: 40px;
+}
+
+@media screen and (max-width: 1151px) {
+    .section {
+        margin-left: 15%;
+        margin-right: 3%;
+    }
+    .card {
+        margin-bottom: 25px;
+        top: 40px;
+        height: 450px;
+        text-align: left;
+        padding: 24px;
+        height: 410px;
+        width: 37em;
+        float: left;
+    }
+    .add {
+        position: absolute;
+        right: 9px;
+        background-color: white;
+        border: 0;
+        margin: 0px;
+        width: 49px;
+        border-radius: 58%;
+        border: none;
+        top: 18.5%;
+    }
+    .add {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .card{
+    max-width: 32rem;
+    }
+
+}
+
+@media screen and (max-width: 394px){
+    .card{
+    max-width: 32rem;
+    }
+    .navigationbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 7px 10px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .title {
+        margin-top: 49px;
+    }
+}
+
+.loginform{
+    margin-top: 70px;
+}
+
+.boxed {
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 350px;
+    height: 350px;
+    margin-top: 75px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: lightgray;
+}
+
+form.input{
+    font-size: 18px;
+}
+
+#email{
+    width: 75%
+}
+
+#password{
+    margin-top: 15px;
+    width: 75%;
+    margin-bottom: 30px;
+}
+
+button{
+    width: 76%;
+    height: 40px;
+    margin-top: 35px;
+    background-color: green;
+    border-radius: 5px;
+    font-size: 25px !important;
+    color: black;
+
+}
+
+.signinTitle{
+    font-size: 35pt;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.soTitle{
+    color: white;
+    font-size: 40px;
+text-align: center;
+    margin-top: 75px;
+    font-family: Times;
+}

@@ -1,20 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>login</title>
+    <title>Noted!</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <link href="https://fonts.googleapis.com/css?family=Condiment" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
+    <script src="https://www.promisejs.org/polyfills/promise-7.0.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
+
 <body>
-    <div id="alert"></div>
-  <form class="input" method="POST">
-    <label for="emal">email:</label>
-    <input id="email" name="email" type="text">
-    <label for="password">password:</label>
-    <input id="password" name="password" type="password">
-    <button>login</button>
-  </form>
-  <div id="token"></div>
-  <div id="result"></div>
+    <div class="navigationbar">
+        <a class="navigationbar-brand" href="/"><img class="logo" src="notedLogo.png"> </a>
+    </div>
+    <div class="title">
+            <div class="explanation">You can't remember everything! <br> Add an article to your favorites by clicking the green plus <br> Then navigate to favorites page where you can take notes on what interests you, confuses you, and what you have questions about! </div>
+    </div>
+
+    <section>
+        
+<body>
+  <div class="boxed">
+    <div class="loginform">
+      <form class="input" method="POST">
+        <div>
+          <section class="signinTitle">Sign In </section>
+          <label for="emal">     </label>
+          <input id="email" name="email" type="text" placeholder="email">
+        </div>
+        <div>
+          <label for="password">    </label>
+          <input id="password" name="password" type="password" placeholder="password">
+        </div>
+       <button >signin</button>
+      </form>
+      <div id="token"></div>
+      <div id="result"></div>
+    </div>
+  </div>
   <script type="text/javascript" src="./jwt-vanilla.js"></script>
+
+    </section>
+
+    <script type="text/javascript " src="news.js "></script>
+    <script type="text/javascript " src="api.js "></script>
+    <!-- <script type="text/javascript " src="mockdata.js "></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js " integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </div>
 </body>
+
 </html>
