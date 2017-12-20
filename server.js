@@ -246,7 +246,7 @@ app.get('/favorites', (req, res) => {
 
 let server;
 
-function runServer(database = config.DATABASE_URL, port = 8080) {
+function runServer(database = DATABASE_URL, port = 8080) {
     return new Promise((resolve, reject) => {
         mongoose.connect(database, err => {
             if (err) {
