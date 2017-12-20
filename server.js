@@ -18,7 +18,7 @@ const morgan = require('morgan');
 const jwt = require('jsonwebtoken');
 
 MongoClient = require('mongodb').MongoClient;
-dotenv.load();
+dotenv.config();
 app.use(morgan('dev'));
 
 app.use(passport.initialize());
@@ -220,9 +220,6 @@ app.post('/login', (req, res) => {
         }
         console.log('done!!!');
     }).catch(error => console.log(error));
-    // User.findAll({
-    //     attributes: { exclude: ['password'] }
-    //   }).then(users => console.log(users));
     return true;
 });
 
