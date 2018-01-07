@@ -368,3 +368,17 @@ text-align: center;
     margin-top: 75px;
     font-family: Times;
 }
+
+.small-boxed {
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 350px;
+    height:100px;
+    margin-top: 10px;
+    padding-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: lightgray;
+    font-size: 18px;
+    color: black;
+}
