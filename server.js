@@ -118,15 +118,9 @@ app.post('/register', (req, res) => {
         //save new user 
         newUser.save(function (err) {
             if (err) {
-                return res.json({
-                    success: false,
-                    message: err
-                })
+                return res.render('error.ejs');
             }
-            res.json({
-                sucess: true,
-                message: 'successfully created new user'
-            })
+            res.render('newUser.ejs');
         });
     }
 });
@@ -170,10 +164,7 @@ app.post('/authenticate', (req, res) => {
                         token: token
                     })
                 } else {
-                    res.send({
-                        success: false,
-                        message: 'authentication failed, Password did not match.'
-                    })
+                    res.render('error.ejs');
                 }
             });
         }
@@ -213,10 +204,7 @@ app.post('/login', (req, res) => {
         email
     }).then((user) => {
         if (!user) {
-            return res.send({
-                success: false,
-                message: 'authentication failed, user not found.'
-            })
+            return res.render('error.ejs');
         } else {
             //check if passowrd matches 
             user.comparePassword(req.body.password, (err, isMatch) => {
@@ -232,10 +220,7 @@ app.post('/login', (req, res) => {
            
                     //res.redirect('/');
                  } else {
-                    return res.send({
-                        success: false,
-                        message: 'authentication failed, Password did not match.'
-                    })
+                    return res.render('error.ejs');
                 }
             });
         }
@@ -251,7 +236,6 @@ app.get('/signup', (req, res) => {
 //route to the user's personal feed page
 app.get('/favorites' , (req, res) => {
    // console.log("favorites" + req.user);
-   
         res.render('favorites.ejs');
 });
 
@@ -310,7 +294,6 @@ app.get('/api/favorites', isAuthenticated, (req, res) => {
 
 
 app.post('/favorites',  isAuthenticated, (req, res) => {
-    
     const newSourceToDB = req.body.source;
     const newArticleToDb = req.body.article;
     const mergedArticle = Object.assign({
