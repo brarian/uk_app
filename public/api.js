@@ -14,9 +14,6 @@ function getArticles() {
         Object.assign({ "source": "ars-technica", "sortBy": "top" }, params),
         Object.assign({ "source": "the-next-web", "sortBy": "latest" }, params),
         Object.assign({ "source": "the-verge", "sortBy": "latest" }, params)
-
-
-
     ];
 
     const allQueries = queryParams.map(queryString =>

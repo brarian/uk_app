@@ -56,42 +56,59 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(function (req, res, next) {
-    if (!req.cookies['APPLOGIN']) {
-        return next();
-    } else {
-        let token = req.cookies['APPLOGIN'];
-        try {
-            let data = jwt.verify(token, config.secret);
-            if (data && data.id) {
-                User
-                    .findById(data.id)
-                    .lean()
-                    .then(user => {
-                        if (user) {
-                            req.user = user;
-                            return next();
-                        }
-                    })
-                    .catch(err => {
-                        return next();
-                    })
-            } else {
-                return next();
+isAuthenticated = function(req, res, next) {
+   
+    var token;
+
+    if (req.headers && req.headers.authorization) {
+        var parts = req.headers.authorization.split(' ');
+
+        if (parts.length == 2) {
+            var scheme = parts[0],
+                credentials = parts[1];
+
+            if (/^Bearer$/i.test(scheme)) {
+                token = credentials;
+                  
             }
-        } catch (e) {
-            return next();
+        } else {
+            return res.status(401).json({message: 'Format is Authorization: Bearer [token]'});
         }
+    } else if (req.params.token) {
+        token = req.params.token;
+
+        // We delete the token from query and body to not mess with blueprints
+        delete req.query.token;
+        delete req.body.token;
+    } else {
+        return res.status(401).json({message: 'No Authorization header was found'});
     }
-});
+        try {
+            let user = jwt.verify(token, config.secret);
+            
+            if(user) {
+               
+                 req.user = user;
+                 /*res.cookie('APPLOGIN', token, {
+                        httpOnly: true
+                  });*/
+                 return next(); 
+            } else {
+                return res.status(401).json({message: 'User is not logged in'});
+            }
+           
+            
+        } catch (e) {
+              return res.status(401).json({"message": e.message});
+        } 
+    };
 
 
 app.post('/register', (req, res) => {
-
     if (!req.body.email || !req.body.password) {
         res.json({
             success: false,
-            message: 'please enter email and password to register'
+            message: 'please enter email and password to sign up'
         });
     } else {
         const newUser = new User({
@@ -100,7 +117,6 @@ app.post('/register', (req, res) => {
         });
         //save new user 
         newUser.save(function (err) {
-
             if (err) {
                 return res.json({
                     success: false,
@@ -164,31 +180,36 @@ app.post('/authenticate', (req, res) => {
     });
 });
 
-app.get('/', (req, res) => {
+app.get('/',  (req, res) => {
+
+
     res.render('newsfeed.ejs', {
-        loggedIn: req.user ? true : false,
+        loggedIn: (req.cookies['APPLOGIN']) ? true : false,
         email: req.user ? req.user.email : null
     });
 });
 
+app.get('/register', (req, res) => {
+    res.render('signup.ejs');
+})
 
 app.get('/login', (req, res) => {
     res.render('login.ejs');
 });
 
 app.get('/signout', (req, res) => {
-    res.cookie('APPLOGIN', null, {
+     res.cookie('APPLOGIN', null, {
         maxAge: 0
     });
     res.render('signout.ejs');
 });
 
 app.post('/login', (req, res) => {
-    const {
+     const {
         email,
         password
     } = req.body;
-    return User.findOne({
+    User.findOne({
         email
     }).then((user) => {
         if (!user) {
@@ -200,17 +221,17 @@ app.post('/login', (req, res) => {
             //check if passowrd matches 
             user.comparePassword(req.body.password, (err, isMatch) => {
                 if (isMatch && !err) {
-                    let usr = {
-                        id: user._id
-                    };
-                    const token = jwt.sign(usr, config.secret, {
+                    
+                    const token = jwt.sign(user.toObject(), config.secret, {
                         expiresIn: 10000
                     });
                     res.cookie('APPLOGIN', token, {
                         httpOnly: true
                     });
-                    return res.redirect('/');
-                } else {
+                    return res.jsonp({user: user, token: token });
+           
+                    //res.redirect('/');
+                 } else {
                     return res.send({
                         success: false,
                         message: 'authentication failed, Password did not match.'
@@ -228,10 +249,10 @@ app.get('/signup', (req, res) => {
 });
 
 //route to the user's personal feed page
-app.get('/favorites', (req, res) => {
-    if(req.user){
+app.get('/favorites' , (req, res) => {
+   // console.log("favorites" + req.user);
+   
         res.render('favorites.ejs');
-    }
 });
 
 let server;
@@ -272,9 +293,11 @@ if (require.main === module) {
     runServer().catch(err => console.error(err));
 };
 
-app.get('/api/favorites', (req, res) => {
-    articleModel.find({})
+app.get('/api/favorites', isAuthenticated, (req, res) => {
+    console.log("user id" + req.user._id);
+    articleModel.find({"createdBy" : mongoose.Types.ObjectId(req.user._id) })
         .then(articles => {
+            console.log(articles.length);
             res.json(articles);
         })
         .catch(err => {
@@ -286,45 +309,49 @@ app.get('/api/favorites', (req, res) => {
 });
 
 
-app.post('/favorites', (req, res) => {
+app.post('/favorites',  isAuthenticated, (req, res) => {
+    
     const newSourceToDB = req.body.source;
     const newArticleToDb = req.body.article;
     const mergedArticle = Object.assign({
-        source: newSourceToDB
+        source: newSourceToDB,
+        createdBy: req.user._id
     }, newArticleToDb);
-    articleModel
+    console.log(newArticleToDb._id);
+   articleModel.findOne({
+      "_id":mongoose.Types.ObjectId(newArticleToDb._id)
+   }).then(article => {
+     if(article) {
+        console.log("article already present");
+           res.send(article);
+     } else {
+        console.log("article new");
+          articleModel
         .create(mergedArticle)
         .then(article => {
-            const {
-                author,
-                title,
-                description,
-                url,
-                urlToImage,
-                _id,
-                notes
-            } = article;
-            res.status(201).json({
-                author,
-                title,
-                description,
-                url,
-                urlToImage,
-                id: _id
-            });
             res.send(article);
         })
         .catch(err => {
             res.status(500).json({
-                error: 'could not save articles in database'
+                error: 'Could not save articles in database'+ err
             });
         });
+     }
+
+   })
+    .catch(err => {
+            res.status(500).json({
+                error: 'Could not find article you are trying to save.'
+            });
+        });
+
+  
 })
 
-app.delete('/api/favorites/:id', (req, res, next) => {
-    console.log(req.params);
+app.delete('/api/favorites/:id', isAuthenticated, (req, res, next) => {
     articleModel.findByIdAndRemove({
-            _id: req.params.id
+            _id: req.params.id,
+            createdBy: req.user._id
         })
         .then(article => {
             res.json({

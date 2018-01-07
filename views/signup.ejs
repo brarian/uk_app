@@ -2,23 +2,8 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Sign Up</title>
-</head>
-
-<body>
-
-</body>
-
-</html>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Noted!</title>
-    <link rel="stylesheet" type="text/css" href="news.css">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
     <link href="https://fonts.googleapis.com/css?family=Condiment" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arimo:400,700" rel="stylesheet">
     <script src="https://www.promisejs.org/polyfills/promise-7.0.4.min.js"></script>
@@ -34,31 +19,26 @@
 
 <body>
     <div class="navigationbar">
-        <a class="navigationbar-brand" href="/newsfeed"><img class="logo" src="notedLogo.png"> </a>
-        <% if (loggedIn){ %>
-            <a href="/favorites">favorites</a>
-            <a href="/signout">sign out</a>
-            <% }else{ %>
-                <a href="/login">sign in</a>
-        <% } %>
+        <a class="navigationbar-brand" href="/"><img class="logo" src="notedLogo.png"> </a>
     </div>
     <div class="title">
-        <h1> newsfeed
+        <h1>
             <div class="explanation">You can't remember everything! <br> Add an article to your favorites by clicking the green plus <br> Then navigate to favorites page where you can take notes on what interests you, confuses you, and what you have questions about! </div>
 
         </h1>
     </div>
 
     <section>
+      <div class="boxed">
       <h1>Sign Up</h1>
         <form class="input" method="POST" action="/register">
-          <label for="emal">email:</label>
-          <input id="email" name="email" type="text">
-          <label for="password">password:</label>
-          <input id="password" name="password" type="text">
-          <button>signup</button>
+          <label for="emal"></label>
+          <input id="email" name="email" type="email" placeholder="email" required />
+          <label for="password"></label>
+          <input id="password" name="password" type="password" placeholder="password">
+          <button>sign up</button>
         </form>
-        
+        </div>
     </section>
 
     <script type="text/javascript " src="news.js "></script>

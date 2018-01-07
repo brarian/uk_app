@@ -16,10 +16,11 @@ $(document).ready(function() {
 function returnJSONData() {
     fetch('/api/favorites', {
             method: 'get',
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            // }
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + sessionStorage.token
+            }
         })
         .then((response) => response.json())
         .then(function(response) {
@@ -59,6 +60,11 @@ function handleDeleteFromSaved() {
         const id = articleCard.attr('id');
         fetch('/api/favorites/' + id, {
             method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + sessionStorage.token
+            }
         }).then(function(response) {
             articleCard.remove();
         });
@@ -75,10 +81,12 @@ function addNote() {
             method: 'PUT',
             body: JSON.stringify({ "note": noteTextVal }),
             headers: {
-                "Content-Type": "application/json"
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + sessionStorage.token
             },
         }).then(function(response) {
-            saveComment(noteTextVal);
+          //  saveComment(noteTextVal);
             articleCard.append(noteText);
             $("#note").val("");
         });

@@ -6,15 +6,15 @@ $(document).ready(function() {
     });
 });
 
-const STORE = [];
+const STORE = {};
 
-function generateArticlesString(articles, source) {
-    const items = articles.map((article, articleIndex) => generateArticles(article, articleIndex, source));
+function generateArticlesString(index,articles, source) {
+    const items = articles.map((article, articleIndex) => generateArticles(index, article, articleIndex, source));
     return items.join("");
 };
 
-function generateArticles(articles, articleIndex, source) {
-    return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-index=${articleIndex} data-item-source=${source} >
+function generateArticles(index,articles, articleIndex, source) {
+    return ` <div class="card"  style="max-width: 35rem; top:40px;" data-item-rootindex=${index} data-item-index=${articleIndex} data-item-source=${source} >
     <div class="card-title" style="margin-bottom: -0.25rem;"><a target='_blank' href='${articles.url}'>${articles.title}</a></div>
     <div class='writer'"> ${articles.author} <span class='source'>${source}</span></div> 
     <div> 
@@ -33,7 +33,7 @@ function generateArticles(articles, articleIndex, source) {
 
 
 function renderArticles() {
-    const articlesList = STORE.response.map(response => generateArticlesString(response.articles, response.source)).join("");
+    const articlesList = STORE.response.map((response,index) => generateArticlesString(index,response.articles, response.source)).join("");
     $('.section').html(articlesList);
 }
 
@@ -43,11 +43,13 @@ function render() {
 
 function handleAddArticleToSaved() {
     $('.add').one('click', function() {
-        const newArticle = getArticleFromElement($(this).parent());
+        const newArticle = getArticleFromElement($(this).parent().parent());
         fetch('/favorites', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + sessionStorage.token
             },
             body: JSON.stringify(newArticle),
         }).then(response => {
@@ -60,10 +62,12 @@ function handleAddArticleToSaved() {
 
 
 function getArticleFromElement(element) {
-    const source = element.data('item-source');
-    const index = element.data('item-index');
-    const newArticleSource = STORE.response.find((promiseResponse) => promiseResponse.source === source);
-    const article = newArticleSource.articles[index];
+    const source = element.data('itemSource');
+    const index = element.data('itemIndex');
+    const rootIndex = element.data('itemRootindex');
+   // const newArticleSource = STORE.response.find((promiseResponse) => promiseResponse.source === source);
+    const article = STORE.response[rootIndex].articles[index];
+
     const articleAndSource = { source, article };
     return articleAndSource;
 }
@@ -114,5 +118,5 @@ function removeCustomAlert() {
 	document.getElementsByTagName("body")[0].removeChild(document.getElementById("modalContainer"));
 }
 function ful(){
-alert('Alert this pages');
+alert('Alert this page');
 }

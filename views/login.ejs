@@ -30,7 +30,7 @@
 <body>
   <div class="boxed">
     <div class="loginform">
-      <form class="input" method="POST">
+      <form id="myForm">
         <div>
           <section class="signinTitle">Sign In </section>
           <label for="emal">     </label>
@@ -40,7 +40,7 @@
           <label for="password">    </label>
           <input id="password" name="password" type="password" placeholder="password">
         </div>
-       <button >sign in</button>
+       <button id="submitButton">sign in</button>
       </form>
       <div id="token"></div>
       <div id="result"></div>
@@ -52,6 +52,7 @@
 
     <script type="text/javascript " src="news.js "></script>
     <script type="text/javascript " src="api.js "></script>
+     <script type="text/javascript" src="login.js" > </script>
     <!-- <script type="text/javascript " src="mockdata.js "></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js " integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb " crossorigin="anonymous "></script>

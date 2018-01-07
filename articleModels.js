@@ -9,6 +9,7 @@ const articleModelSchema = new mongoose.Schema({
     url: { type: String, required: true },
     urlToImage: { type: String, required: false },
     notes: { type: Array, required: false },
+    createdBy : { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 
